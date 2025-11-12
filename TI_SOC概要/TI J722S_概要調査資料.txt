@@ -1,0 +1,146 @@
+TI J722S / Jacinto系 SoC 起動・構成・機能まとめ
+________________________________________
+1. SoC全体構成概要
+TI Jacinto系 SoC（J722S, J721S2 など）は、複数の異なる種類のコアとハードウェアアクセラレータで構成されるヘテロジニアスマルチコアSoCである。
+主な構成は以下の通り。
+コア / ブロック	役割	実行環境
+A72 (MPU)	Linuxアプリ層・制御層	Linux
+MCU1_0 (R5F)	SBL (ブート制御)・安全管理	RTOS (SBL)
+MCU2_0 (R5F)	Visionパイプライン制御・Camera/Display管理	RTOS (vision_apps_mcu2_0.xer5f)
+MCU3_0 (R5F)	周辺センサ制御（LiDAR/Radar/CAN/Ethernet）	RTOS (vision_apps_mcu3_0.xer5f)
+C7x DSP	画像・AI演算処理 (VISS/LDC/TIDL)	RTOS (vision_apps_c7x_1.xe64T)
+VPAC / DSS (HW)	ISP/スケーラ/ディスプレイなどのHWアクセラ	固定ハードウェア（ファーム不要）
+________________________________________
+2. 起動シーケンス全体
+SoC起動からLinuxおよびRTOS各コアが立ち上がるまでの流れは次の通り。
+電源ON
+ ↓
+[ROM Bootloader (SoC内蔵ROM)]
+   └─ SBL (tiboot3.bin) をロード
+        ↓
+[SBL (MCU1_0)]
+   ├─ DDR初期化 / クロック設定
+   ├─ A72 (Linux) 用 Kernel, DTBをロード
+   └─ A72起動
+        ↓
+[Linux (A72)]
+   ├─ Kernel起動
+   ├─ /lib/firmware/ から RTOS/DSP ファームをロード
+   ├─ MCU2_0 RTOS (vision_apps_mcu2_0.xer5f) 起動
+   ├─ MCU3_0 RTOS (vision_apps_mcu3_0.xer5f) 起動
+   └─ C7x DSP (vision_apps_c7x_1.xe64T) 起動
+        ↓
+[RTOS/DSP 各コア稼働開始]
+   ├─ MCU2_0 : Vision Pipeline制御
+   ├─ MCU3_0 : センサ / 通信制御
+   ├─ C7x DSP : 画像/AI演算
+   └─ VPAC / DSS : HWアクセラ処理
+________________________________________
+3. ストレージ構成と各ファイルの役割
+TI SDK標準のSD/eMMC構成例：
+/boot パーティション (FAT形式)
+ファイル	内容 / 役割	実行コア
+tiboot3.bin	SBL (Secondary Bootloader)。ROM Bootが最初に読み込む	MCU1_0
+tispl.bin	SPL (第2段ブートローダ)。A72初期化	A72
+u-boot.img	U-Boot (第3段ブートローダ)。Linuxカーネルロード	A72
+Image	Linux Kernel本体	A72
+k3-j722s-evm.dtb	Device Tree (ハード構成情報)	A72
+sysfw.itb	System Firmware（電源/PMIC/セキュリティ管理）	MCU1_0
+/rootfs パーティション (ext4)
+ディレクトリ	内容
+/lib/modules/	カーネルモジュール (.koファイル) 各種ドライバ
+/lib/firmware/	RTOS/DSPファームウェア (.xer5f, .xe64T)
+/opt/vision_apps/	Visionアプリ関連実行ファイル
+/usr, /bin, /etc/	一般Linuxユーザ空間
+________________________________________
+4. 起動フロー詳細
+1.	ROM Boot (内蔵ROM)
+o	Bootモードピンからデバイス種別(SD, eMMC, OSPIなど)を判定。
+o	tiboot3.bin をロードし、MCU1_0で実行。
+2.	SBL (tiboot3.bin)
+o	DDR初期化、クロック設定。
+o	A72起動用のLinux Kernel (Image) と DTBをロード。
+o	A72をリリースして実行開始。
+3.	Linux Kernel (Image)
+o	RAM上に展開されて起動。
+o	/dev/mmcblk0p2 の rootfs(ext4) をマウント。
+4.	rootfsマウント後
+o	/lib/modules/ からハードウェアドライバ (.ko) をロード。
+o	/lib/firmware/ から RTOS/DSP ファームウェアをロード。
+o	VisionApps が起動し、MCU2_0, MCU3_0, C7x DSP をリモート起動。
+________________________________________
+5. ファームウェアロードの仕組み
+RTOS/DSPファームウェアは毎回RAMへロード
+•	/lib/firmware/vision_apps_mcu2_0.xer5f 等を Linuxの remoteproc ドライバ が読み込む。
+•	各コアのDDR領域に展開し、リセット解除して起動。
+•	ファームはRAM上で動作。SD/eMMCへの書き込みは行わない。
+•	電源OFFで消えるが、起動時に毎回再ロードされる。
+________________________________________
+6. 通信構造（Linux ↔ RTOS ↔ DSP）
+経路	通信手段	主なAPI / 内容
+Linux ↔ MCU2_0	RPMsg (virtio_rpmsg)	appIpcInit, RPMessage_send/recv
+MCU2_0 ↔ MCU3_0	TI IPC (Mailbox + SharedMemory)	センサ同期・通信制御
+MCU2_0 ↔ C7x DSP	RPMsg (OpenVXノード経由)	画像・AI処理要求
+MCU2_0 ↔ VPAC / DSS	ドライバAPI	Vhwa_vissControl, Dss_displayBuffer
+MCU3_0 ↔ 外部センサ	I2C / SPI / Ethernet / CAN	センサデータ取得・通信
+________________________________________
+7. 各コアの役割と関係性
+コア	主な機能	通信相手
+A72 (Linux)	アプリ/UI/制御層、VisionApps実行	MCU2_0 (RPMsg)
+MCU2_0 (RTOS)	Vision制御、VPAC/DSS管理、DSP制御	A72, MCU3_0, C7x
+MCU3_0 (RTOS)	センサ同期、CAN/Ethernet/LiDAR制御	MCU2_0, A72
+C7x DSP	ISP処理(VISS/LDC) / AI推論(TIDL)	MCU2_0
+VPAC/DSS (HW)	画像入力/出力アクセラ	MCU2_0制御下
+________________________________________
+8. 主な機能例
+機能分類	説明	関連コア
+カメラ入力	MIPI CSI経由で映像取得	MCU2_0
+画像処理	ISP / 歪み補正 / スケーリング	C7x + VPAC
+AI推論	物体検出・分類・認識 (TIDL)	C7x
+ディスプレイ出力	HDMI / LVDS 出力制御	MCU2_0 + DSS
+通信制御	CAN, Ethernet, TSN通信	MCU3_0
+センサ同期	LiDAR / Radar / Camera統合	MCU3_0 + MCU2_0
+UI・ログ出力	Linux GUI, SSHログ	A72
+電源・PMIC制御	電源管理、安全監視	MCU1_0 (SBL)
+________________________________________
+9. メモリ構成イメージ
+DDR Memory
+ ├── Linux Kernel
+ ├── RootFS (ext4)
+ ├── RTOS Firmware (MCU2_0, MCU3_0)
+ ├── DSP Firmware (C7x)
+ └── Shared Memory (IPC Buffers)
+________________________________________
+10. システム構成のまとめ
+•	/boot (FAT) … BootloaderとLinux Kernelを格納
+o	tiboot3.bin, tispl.bin, u-boot.img, Image, k3-j722s-evm.dtb, sysfw.itb
+•	/rootfs (ext4) … Linuxユーザ空間とファームウェア格納
+o	/lib/modules/ … カーネルモジュール (.ko)
+o	/lib/firmware/ … RTOS/DSPファーム (.xer5f, .xe64T)
+•	RTOS/DSPファームウェア はLinux起動後にRAMへロードされる（書き込み不要）
+•	VPAC/DSS は固定ハードウェアで、MCU2_0 RTOSが制御
+________________________________________
+11. 全体構成の要約図（テキスト）
+ROM Boot → SBL(tiboot3.bin) → SPL(tispl.bin)
+ → U-Boot(u-boot.img)
+   → Linux Kernel(Image)
+     → RootFSマウント
+       → RTOS/DSPファームロード (/lib/firmware/)
+         → MCU2_0, MCU3_0, C7x 起動
+           → VPAC / DSS ハード制御
+________________________________________
+12. 開発・拡張のポイント
+•	/boot/Image と /lib/modules/ のバージョンを一致させることが重要。
+•	RTOS/DSPファームを更新する際は /lib/firmware/ 内のバイナリ差し替えでOK。
+•	カーネル構成や起動先デバイス（SD, eMMC, NFS）はSBLとU-Boot設定で切り替え可能。
+________________________________________
+✅ 要約
+TI J722S SoCは、
+Linux (A72) が制御層、
+RTOS (MCU2_0/3_0) がリアルタイム制御層、
+C7x DSP が高性能演算層、
+VPAC/DSS がハードウェア処理層を担う統合システム。
+ファームウェアはすべてLinuxが起動後にRAMへロードされ、
+SD/eMMCへの書き込みや再構成は不要。
+カメラ入力・AI推論・通信・表示までを完全に統合制御できる組込みプラットフォーム。
+
