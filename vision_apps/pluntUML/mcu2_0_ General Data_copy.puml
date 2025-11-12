@@ -1,0 +1,61 @@
+@startuml
+title J722S Vision Apps: MCU2_0 (R5F) General Flow Comparison
+skinparam participantPadding 30
+skinparam noteBackgroundColor #fefce8
+skinparam noteBorderColor #e0c000
+
+' ==== 参加者宣言 ====
+actor "SBL / BootROM" as SBL
+participant "MCU2_0 (RTOS)" as MCU2
+participant "C7x DSP (RTOS)" as C7X
+participant "Display SubSystem (DSS)" as DSS
+actor "汎用Linux (A72)" as LNX
+participant "MCU2_0 (RTOS: Hybrid)" as MCU2H
+participant "C7x DSP (Hybrid)" as C7XH
+participant "Display SubSystem (DSS, Hybrid)" as DSS2
+
+' ==== RTOS単独モード ====
+== RTOS単独モード ==
+SBL -> MCU2 : RTOSファーム起動 (no Linux)
+MCU2 -> MCU2 : Board_init(), tivxInit(), appModulesCreate()
+note right of MCU2 : RTOS単体で環境初期化\n(OpenVX Contextを自前で構築)
+
+MCU2 -> MCU2 : vxCreateGraph()\n(tivxCaptureNode, VISS, MSC, Mosaic, Display)
+MCU2 -> C7X : 画像処理要求 (TIDL, VISS等)
+C7X --> MCU2 : 処理結果バッファ
+
+loop 各フレーム
+  MCU2 -> C7X : 画像加工 / AI推論処理
+  C7X --> MCU2 : 処理結果受取
+  MCU2 -> DSS : フレーム出力 (DMA転送)
+end
+MCU2 -> MCU2 : vxReleaseGraph(), appModulesDelete()
+note right of MCU2 : Linuxを介さず完結。\nリアルタイム性最優先構成
+
+' ==== LINUX＋RTOS協調モード ====
+== Linux＋RTOS協調モード ==
+LNX -> MCU2H : remoteprocでRTOS FWロード
+LNX -> MCU2H : appIpcSendNotify(INIT)
+MCU2H -> MCU2H : tivxInit() / ターゲット登録
+note right of LNX : A72が司令塔として起動・初期化を制御
+
+LNX -> LNX : vxCreateGraph() / tivxNode生成
+LNX -> MCU2H : RPC: create node\n(capture/viss/display)
+MCU2H -> C7XH : 処理ノード割当 (TIDL)
+C7XH --> MCU2H : 結果バッファ返却
+
+LNX -> MCU2H : vxProcessGraph() (RPC)
+loop 各フレーム
+  MCU2H -> C7XH : 画像加工 / AI推論
+  C7XH --> MCU2H : 結果受取
+  MCU2H -> DSS2 : 映像出力
+  LNX <-- MCU2H : IPCイベント (status / perf)
+end
+
+LNX -> MCU2H : appIpcSendNotify(レイアウト切替)
+MCU2H -> DSS2 : Display再設定
+LNX -> MCU2H : vxGraphStop() / vxReleaseGraph()
+MCU2H -> MCU2H : appModulesDelete()
+note right of MCU2H : RTOS側で後処理を実施し終了
+
+@enduml

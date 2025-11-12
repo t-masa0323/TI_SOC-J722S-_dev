@@ -1,0 +1,116 @@
+﻿レベル,関数,カテゴリ,起点,処理概要,コメント(英語),コメント(日本語),参照データ,ファイル,実行形態
+,add_graph_parameter_by_node_index(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: * Utility API used to add a グラフ parameter from a ノード, ノード parameter index）","* Utility API used to add a graph parameter from a node, node parameter index","* Utility API used to add a グラフ parameter from a ノード, ノード parameter index",Draw2D_Handle,apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_default_param_set(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"sensorObj, displayObj, set_img_mosaic_params, ImgMosaicObj, imgMosaicObj, ObjArrSplitObj, objArrSplitObj, AppObj, appIssGetResizeParams, Draw2D_Handle",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_deinit(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"sensorObj, captureObj, objArrSplitObj, vissObj, aewbObj, ldcObj, imgMosaicObj, displayObj, AppObj, VISSObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_delete_graph(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"captureObj, objArrSplitObj, vissObj, aewbObj, sensorObj, ldcObj, imgMosaicObj, displayObj, VISSObj, AppObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_draw_graphics(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: * Utility API used to add a グラフ parameter from a ノード, ノード parameter index）","* Utility API used to add a graph parameter from a node, node parameter index","* Utility API used to add a グラフ parameter from a ノード, ノード parameter index",,apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_parse_cfg_file(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"sensorObj, captureObj, vissObj, ldcObj, displayObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_parse_cmd_line_args(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, sensorObj, AppObj, gAppObj, sensor_obj, capture_obj, objArrSplitObj, objArrSplit_obj, vissObj, viss_obj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_pipeline_params_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"SensorObj, sensorObj, AppObj, displayObj, set_img_mosaic_params, ImgMosaicObj, imgMosaicObj, ObjArrSplitObj, objArrSplitObj, appIssGetResizeParams",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_screen_task(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_screen_task_delete(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_task(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_task_delete(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_set_cfg_default(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, vissObj, ldcObj, objArrSplitObj, AppObj, sensorObj, displayObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_show_usage(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_update_param_set(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"appIssGetResizeParams, sensorObj, objArrSplitObj, set_img_mosaic_params, imgMosaicObj, Draw2D_Handle",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,set_display_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"displayObj, AppObj, SensorObj, sensorObj, set_img_mosaic_params, ImgMosaicObj, imgMosaicObj, ObjArrSplitObj, objArrSplitObj, appIssGetResizeParams",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,set_img_mosaic_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, objArrSplitObj, AppObj, appIssGetResizeParams, sensorObj, set_img_mosaic_params, Draw2D_Handle",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,set_sensor_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"sensorObj, AppObj, displayObj, set_img_mosaic_params, ImgMosaicObj, imgMosaicObj, ObjArrSplitObj, objArrSplitObj, appIssGetResizeParams, Draw2D_Handle",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+0,main(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う,,,tskParams,platform/j722s/rtos/mcu2_0/main.c,RTOS(MCU2_0)
+1,Board_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/mcu2_0/generated/ti_board_config.c,RTOS(MCU2_0)
+1,System_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: finally we initialize all peripheral drivers）,finally we initialize all peripheral drivers,finally we initialize all peripheral drivers,,platform/j722s/rtos/mcu2_0/generated/ti_drivers_config.c,RTOS(MCU2_0)
+1,StartupEmulatorWaitFxn(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: extern globals that are specific to this core）,extern globals that are specific to this core,extern globals that are specific to this core,tskParams,platform/j722s/rtos/mcu2_0/main.c,RTOS(MCU2_0)
+1,appGetDdrSharedHeapSize(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: The following line should never be reached because vTaskStartScheduler()
+  will only return if there was not enough FreeRTOS heap memory available to
+  生成する the Idle and (if configured) Timer tasks. Heap management, and
+  techniques for trapping heap exhaustion, are described in the book text.）","The following line should never be reached because vTaskStartScheduler()
+    will only return if there was not enough FreeRTOS heap memory available to
+    create the Idle and (if configured) Timer tasks.  Heap management, and
+    techniques for trapping heap exhaustion, are described in the book text.","The following line should never be reached because vTaskStartScheduler()
+  will only return if there was not enough FreeRTOS heap memory available to
+  生成する the Idle and (if configured) Timer tasks. Heap management, and
+  techniques for trapping heap exhaustion, are described in the book text.",,platform/j722s/rtos/mcu2_0/main.c,RTOS(MCU2_0)
+2,Board_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/mcu2_0/generated/ti_board_config.c,RTOS(MCU2_0)
+2,Dpl_deinit(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: Enable 割り込み handling）,Enable interrupt handling,Enable 割り込み handling,,platform/j722s/rtos/mcu2_0/generated/ti_dpl_config.c,RTOS(MCU2_0)
+2,Dpl_init(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: This function is called by _c_int00）,This function is called by _c_int00,This function is called by _c_int00,"AddrTranslateP_Params, addrTranslateParams",platform/j722s/rtos/mcu2_0/generated/ti_dpl_config.c,RTOS(MCU2_0)
+2,System_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: finally we initialize all peripheral drivers）,finally we initialize all peripheral drivers,finally we initialize all peripheral drivers,,platform/j722s/rtos/mcu2_0/generated/ti_drivers_config.c,RTOS(MCU2_0)
+2,Pinmux_init(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: * Pinmux）,* Pinmux,* Pinmux,"gPinMuxMainDomainCfg, gPinMuxMcuDomainCfg",platform/j722s/rtos/mcu2_0/generated/ti_pinmux_config.c,RTOS(MCU2_0)
+2,PowerClock_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c,RTOS(MCU2_0)
+2,PowerClock_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c,RTOS(MCU2_0)
+3,Module_clockDisable(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c,RTOS(MCU2_0)
+3,Module_clockEnable(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c,RTOS(MCU2_0)
+3,Module_clockSetFrequency(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c,RTOS(MCU2_0)
+,Board_driversClose(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/mcu2_0/generated/ti_board_open_close.c,RTOS(MCU2_0)
+,putchar_(),フレーム取得,HW割り込み,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: ----------- DebugP -----------）,----------- DebugP -----------,----------- DebugP -----------,"AddrTranslateP_Params, addrTranslateParams",platform/j722s/rtos/mcu2_0/generated/ti_dpl_config.c,RTOS(MCU2_0)
+,System_lateInit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Common Functions）,* Common Functions,* Common Functions,,platform/j722s/rtos/mcu2_0/generated/ti_drivers_config.c,RTOS(MCU2_0)
+,Drivers_close(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,"I2C_Handle, gI2cHandle, I2C_Params, gI2cParams",platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+,Drivers_i2cClose(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Exit gracefully）,Exit gracefully,Exit gracefully,gI2cHandle,platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+,Drivers_i2cOpen(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: I2C Driver Parameters）,I2C Driver Parameters,I2C Driver Parameters,"gI2cHandle, gI2cParams",platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+,Drivers_open(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,"I2C_Handle, gI2cHandle, I2C_Params, gI2cParams",platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+,IpcNotify_getConfig(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する,,,tskParams,platform/j722s/rtos/mcu2_0/main.c,RTOS(MCU2_0)
+,appMain(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: extern globals that are specific to this core）,extern globals that are specific to this core,extern globals that are specific to this core,tskParams,platform/j722s/rtos/mcu2_0/main.c,RTOS(MCU2_0)
+,app_deinit_aewb(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"aewbObj, AEWBObj",modules/src/app_aewb_module.c,共通/その他
+,app_delete_aewb(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"aewbObj, AEWBObj",modules/src/app_aewb_module.c,共通/その他
+,app_deinit_capture(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, CaptureObj, start_frame, app_send_error_frame, tivxCaptureRegisterErrorFrame",modules/src/app_capture_module.c,共通/その他
+,app_delete_capture(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, CaptureObj, start_frame, app_send_error_frame, tivxCaptureRegisterErrorFrame",modules/src/app_capture_module.c,共通/その他
+,app_deinit_display(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, disp_params_obj, DisplayObj",modules/src/app_display_module.c,共通/その他
+,app_delete_display(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj, disp_params_obj",modules/src/app_display_module.c,共通/その他
+,app_deinit_img_mosaic(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, ImgMosaicObj",modules/src/app_img_mosaic_module.c,共通/その他
+,app_delete_img_mosaic(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, ImgMosaicObj",modules/src/app_img_mosaic_module.c,共通/その他
+,app_deinit_ldc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"ldcObj, LDCObj, start_frame",modules/src/app_ldc_module.c,共通/その他
+,app_delete_ldc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"ldcObj, LDCObj, start_frame",modules/src/app_ldc_module.c,共通/その他
+,app_deinit_obj_arr_split(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"objArrSplitObj, ObjArrSplitObj",modules/src/app_obj_arr_split_module.c,共通/その他
+,app_delete_obj_arr_split(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"objArrSplitObj, ObjArrSplitObj",modules/src/app_obj_arr_split_module.c,共通/その他
+,app_deinit_scaler(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scalerObj, coeff_obj, ScalerObj, start_frame",modules/src/app_scaler_module.c,共通/その他
+,app_delete_scaler(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scalerObj, ScalerObj, start_frame",modules/src/app_scaler_module.c,共通/その他
+,scale_set_coeff(),その他,タスクループ,一般的な制御ロジックを実行する（注記: Copy CbCr）,Copy CbCr,Copy CbCr,,modules/src/app_scaler_module.c,共通/その他
+,app_deinit_sensor(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,sensorObj,modules/src/app_sensor_module.c,共通/その他
+,addParam(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_params, max_params",modules/src/app_tidl_module.c,共通/その他
+,app_deinit_tidl(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, createParams, TIDLObj, tivxTIDLJ7Params, tidlParams",modules/src/app_tidl_module.c,共通/その他
+,app_delete_tidl(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, TIDLObj, createParams, tivxTIDLJ7Params, tidlParams",modules/src/app_tidl_module.c,共通/その他
+,createOutputTensors(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxTIDLJ7Params, tidlParams, numOutputBuf, _max_params, num_params, max_params",modules/src/app_tidl_module.c,共通/その他
+,getQC(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,modules/src/app_tidl_module.c,共通/その他
+,initParam(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_params, max_params, _max_params",modules/src/app_tidl_module.c,共通/その他
+,app_deinit_viss(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"vissObj, VISSObj, start_frame",modules/src/app_viss_module.c,共通/その他
+,app_delete_viss(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"vissObj, VISSObj, start_frame",modules/src/app_viss_module.c,共通/その他
+,Draw2D_drawCharYuv420SP(),その他,タスクループ,一般的な制御ロジックを実行する,,,"Draw2D_Obj, pObj, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_drawPixel(),その他,タスクループ,一般的な制御ロジックを実行する,,,"Draw2D_Obj, pObj, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_rgb565ToYuv444(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128）","Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128","Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128",,utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_updateBufAddr(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"Draw2D_Obj, pObj, Draw2D_clearBuf, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_getFontColor(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: if out of bound draw 'space' char）,if out of bound draw 'space' char,if out of bound draw 'space' char,"Draw2D_Handle, Draw2D_Obj, pObj",utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,Draw2D_resetFontColor(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: Assume color format is 2 bytes per pixel）,Assume color format is 2 bytes per pixel,Assume color format is 2 bytes per pixel,,utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,Draw2D_setFontColor(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: Assume color format is 2 bytes per pixel）,Assume color format is 2 bytes per pixel,Assume color format is 2 bytes per pixel,,utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,appDctrlDpHpdCbFxn(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する,,,"gAppDctrlHandle, Fvid2_Handle, Dss_DctrlDpHpdCbParams, cbParams, advVpParams, Dss_DctrlAdvVpParams, drvAdvVpParams, lcdAdvSignalCfg, vpParams, Dss_DctrlVpParams",utils/dss/src/app_dctrl.c,共通/その他
+,appDssDefaultSetDefaultPrm(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"dssParams, g_app_dss_default_obj, vpParams, advVpParams, overlayParams, layerParams, dsiParams",utils/dss/src/app_dss_defaults.c,共通/その他
+,appDssDualDisplayDefaultSetDefaultPrm(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"dssParams, dual_display_obj, g_app_dss_dual_display_default_obj, vpParams, advVpParams, overlayParams, layerParams, dsiParams",utils/dss/src/app_dss_dual_display_defaults.c,共通/その他
+,DispApp_commonInit(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: For DSS1）,For DSS1,For DSS1,"appObj, initParams, socParams, dctrlHandle, oldiParams, oldiCfg, Fvid2_Handle, instObj, hdmiCfg, i2cHandle",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,DispApp_enableDisableRequiredInstance(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"appObj, initParams, socParams, dctrlHandle, oldiParams, oldiCfg, Fvid2_Handle, instObj, hdmiCfg, i2cHandle",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,DispApp_initDssParams(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"Dss_DctrlVpParams, vpParams, Dss_DctrlAdvVpParams, advVpParams, Dss_DctrlOverlayParams, overlayParams, Dss_DctrlOverlayLayerParams, layerParams, Dss_DctrlGlobalDssParams, globalDssParams",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,appDssConfigureBoard(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"ioExpCfg, I2C_Params, i2cParams, gI2cHandle, i2cCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigureDP(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"ioExpCfg, I2C_Params, i2cParams, gI2cHandle, i2cCfg, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigurePm(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,ioExpCfg,utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigureUB941AndUB925(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Configures the I2C instance with the passed parameters）,Configures the I2C instance with the passed parameters,Configures the I2C instance with the passed parameters,"gI2cHandle, i2cCfg, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssPrepareSN65I2cConfig(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"gI2cDsiBridgeCfg, gI2cHandle",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssSN65DsiErrorRegRead(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Enable Power Switch control）,Enable Power Switch control,Enable Power Switch control,"gI2cHandle, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appEglBindFrameBuffer(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する（注記: Creates texture and eglimage objects）,Creates texture and eglimage objects,Creates texture and eglimage objects,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglCheckEglError(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglCheckGlError(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglPrintGLString(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglSwap(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglWindowDestroyTex(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: find free slot amd 生成する texture）,find free slot amd create texture,find free slot amd 生成する texture,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglWindowResetTex(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,choose_format(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,tex_obj,utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,screen_buf_attach(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他

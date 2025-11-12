@@ -1,0 +1,48 @@
+@startuml
+title Vision Apps (Camera -> Display) Component Map
+
+skinparam componentStyle rectangle
+skinparam wrapWidth 220
+skinparam maxMessageSize 200
+
+rectangle "Linux(A72) app_multi_cam" as A72 #LightSteelBlue {
+  [CLI/Config Parser]
+  [OpenVX Graph Control]
+  [IPC Client (RPMsg/Notify)]
+}
+
+rectangle "RTOS(MCU2_0)" as MCU2 #PaleGreen {
+  [Sensor Drivers]
+  [Capture (CSI/ISS + DMA)]
+  [VISS (AE/AWB/CCF)]
+  [LDC (Undistort)]
+  [MSC (Scaler/Crop)]
+  [ImgMosaic (2x2/Layouts)]
+  [Display (DSS)]
+  [IPC Server]
+  [UDMA Engine]
+  [Mem Pools]
+}
+
+package "TI OpenVX Kernels / TIDL" as Kernels #Wheat
+
+A72 --> MCU2 : IPC: start/stop, layout, fps, mode
+A72 --> Kernels : Graph create/verify
+MCU2 --> Kernels : Node execution
+MCU2 --> [UDMA Engine] : frame move
+
+[Sensor Drivers] --> [Capture (CSI/ISS + DMA)]
+[Capture (CSI/ISS + DMA)] --> [VISS (AE/AWB/CCF)]
+[VISS (AE/AWB/CCF)] --> [LDC (Undistort)]
+[LDC (Undistort)] --> [MSC (Scaler/Crop)]
+[MSC (Scaler/Crop)] --> [ImgMosaic (2x2/Layouts)]
+[ImgMosaic (2x2/Layouts)] --> [Display (DSS)]
+
+legend right
+== Legend ==
+A72: Control & UI
+MCU2_0: Real-time pipeline
+IPC: RPMsg/Notify
+Kernels: TI OpenVX, TIDL
+endlegend
+@enduml

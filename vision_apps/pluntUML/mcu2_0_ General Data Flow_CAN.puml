@@ -1,0 +1,181 @@
+@startuml
+title J722S Vision Apps: MCU2_0 (R5F) General Flow + Linux協調 + CANモード切替 + 工程説明＋ソース紐づけ完全版
+skinparam participantPadding 30
+skinparam noteBackgroundColor #fefce8
+skinparam noteBorderColor #e0c000
+skinparam boxPadding 10
+
+actor "SBL / BootROM" as SBL
+actor "汎用Linux (A72)" as LNX
+participant "MCU2_0 (RTOS)" as MCU2
+participant "C7x DSP (RTOS)" as C7X
+participant "Display SubSystem (DSS)" as DSS
+participant "CAN受信タスク\n(MCU2_0)" as CANRX #fff3b0
+participant "A72 Linux App\n(vx_app_multi_cam)" as LNXAPP
+participant "IPC Framework\n(appIpcSendNotify)" as IPC #fff3b0
+
+' ======================================================
+' 用語集
+' ======================================================
+note over MCU2
+== 用語集 ==
+**MCU2_0 (R5F)** : RTOS上で動作する画像処理制御コア。カメラ入力、VPAC、DSS制御などを担当。  
+**C7x DSP** : Deep Learning/画像加工アクセラレータ。RTOSで動作。  
+**DSS** : Display SubSystem。映像をディスプレイに出力。  
+**VPAC** : Vision Processing Accelerator。VISS(画像信号処理)やMSC(スケーリング)を含む。  
+**VISS** : Vision Imaging SubSystem。RAW→YUV変換、ノイズ除去などを行う。  
+**OpenVX/TIOVX** : ノードベースで画像処理を構築するAPI/ランタイム（TI拡張版）。  
+**IPC** : Inter-Processor Communication。A72(Linux)とRTOS間のイベント通信機構。  
+**TIDL** : TI Deep Learning。C7x上でCNN推論を実行するライブラリ。  
+**CAN FD** : 車載通信プロトコル。MCU2_0で受信してモード切替トリガに使用可能。
+end note
+
+' ======================================================
+' 各処理フェーズ目的
+' ======================================================
+note over MCU2
+== 各処理フェーズ目的 ==
+① 初期化 : SoC, クロック, DMA, TIOVX環境の立ち上げ  
+② モジュール作成 : Camera/VISS/MSC/Display 構造体生成  
+③ グラフ構築 : OpenVXノード接続 (Capture→VISS→MSC→Display)  
+④ 検証 : 依存・バッファ確定 (vxVerifyGraph)  
+⑤ 実行 : フレーム処理ループ  
+⑥ 出力 : DSS表示  
+⑦ IPC制御 : Linux⇔RTOS間でレイアウトやFPSを変更  
+⑧ 終了 : リソース解放・シャットダウン
+end note
+
+' ======================================================
+' ソースファイル対応表
+' ======================================================
+note over MCU2
+|No|フェーズ|主ファイル|関数|
+|--|--|--|--|
+|①|初期化|utils/app_init/src/app_init.c|appInit(), Board_init()|
+|②|TIOVX環境|utils/app_init/src/app_init.c|tivxInit(), tivxHostInit()|
+|③|モジュール生成|modules/src/app_capture_module.c〜app_display_module.c|appCaptureCreate(), appVissCreate(), appDisplayCreate()|
+|④|グラフ構築|apps/basic_demos/app_multi_cam/app_multi_cam_graph.c|appMultiCamCreateGraph()|
+|⑤|検証|同上|vxVerifyGraph()|
+|⑥|実行|apps/basic_demos/app_multi_cam/app_multi_cam_main.c|appRun()|
+|⑦|表示|modules/src/app_display_module.c|appDisplayProcess()|
+|⑧|統計|utils/app_perf_stats/src/app_perf_stats.c|appPerfStatsTask()|
+|⑨|終了|app_multi_cam_main.c|appDeInit()|
+|★|CAN制御|新規: mcu2_can_rx_task.c|mcan_rx_task(), appIpcSendNotify()|
+end note
+
+' ======================================================
+' カメラ映像処理工程 (ソース表との紐づけ付き)
+' ======================================================
+note over MCU2
+== カメラ映像処理工程 ==
+① **センサ初期化 (I2C)** → ソース表③  
+　カメラモジュールにレジスタ設定を送信し、露光・解像度を確定。  
+　→ 設定しないと映像信号が出ない。
+
+② **MIPI CSI-2受信** → ソース表③  
+　RAWデータをCSI RXで受信し、メモリ転送。  
+　→ 高速シリアル信号をSoCで取り込む。
+
+③ **Capture Driver (DMA→DDR)** → ソース表③  
+　DMAで映像をDDRに格納。  
+　→ CPUコピーでは処理が間に合わない。
+
+④ **VISS (RAW→YUV)** → ソース表③  
+　RAW画像をYUVに変換しノイズ除去。  
+　→ 表示・AI処理に必要な形式へ変換。
+
+⑤ **LDC (歪み補正)** → ソース表③  
+　広角カメラの歪みを補正。  
+　→ 補正なしでは表示や解析精度が低下。
+
+⑥ **MSC (Multi-Scaler)** → ソース表③  
+　解像度統一。  
+　→ 複数カメラを同一フレームに並べるため。
+
+⑦ **Mosaic (画像合成)** → ソース表③  
+　複数映像を1枚にまとめる。  
+　→ 例：2×2レイアウトの統合表示。
+
+⑧ **DSS (Display SubSystem)** → ソース表③ & ⑦  
+　映像を出力。  
+　→ HDMI/LCDへフレーム転送と同期信号制御。
+end note
+
+' ======================================================
+' RTOS単独モード
+' ======================================================
+== RTOS単独モード ==
+SBL -> MCU2 : RTOSファーム起動 (no Linux)
+MCU2 -> MCU2 : ① Board_init(), tivxInit(), appModulesCreate()
+MCU2 -> MCU2 : ③ vxCreateGraph()\n(tivxCaptureNode, VISS, MSC, Display)
+MCU2 -> MCU2 : ④ vxVerifyGraph()
+loop 各フレーム
+  MCU2 -> C7X : ⑤ 画像加工 / AI推論
+  C7X --> MCU2 : 処理結果返却
+  MCU2 -> DSS : ⑥ フレーム出力 (DMA転送)
+end
+MCU2 -> MCU2 : ⑧ vxReleaseGraph(), appModulesDelete()
+note right of MCU2
+RTOS単体で動作。Linux非依存。  
+リアルタイム性・即起動を重視。
+end note
+
+' ======================================================
+' Linux＋RTOS協調モード
+' ======================================================
+== 汎用Linux＋RTOS協調モード ==
+LNX -> MCU2 : remoteprocでRTOS FWロード
+LNX -> MCU2 : appIpcSendNotify(INIT)
+MCU2 -> MCU2 : ①～③ 初期化・モジュール生成
+LNX -> LNX : vxCreateGraph() / tivxNode生成
+LNX -> MCU2 : RPC: create node (capture/viss/display)
+LNX -> MCU2 : vxProcessGraph() (RPC)
+loop 各フレーム
+  MCU2 -> C7X : ⑤ 画像加工 / AI推論
+  C7X --> MCU2 : 結果返却
+  MCU2 -> DSS : ⑥ 映像出力
+  LNX <-- MCU2 : ⑦ IPCイベント (status / perf)
+end
+LNX -> MCU2 : appIpcSendNotify(レイアウト切替)
+MCU2 -> DSS : Display再設定
+LNX -> MCU2 : vxGraphStop(), vxReleaseGraph()
+note right of LNX
+Linuxが司令塔。UI/設定変更が可能。  
+RTOSは実処理エンジンとして動作。
+end note
+
+' ======================================================
+' CAN入力によるモード切替 (追加要素)
+' ======================================================
+== CAN入力によるモード切替 (追加 #fff3b0) ==
+CAN -> CANRX : CANフレーム受信 (ID=0x321, Data=Rear)
+CANRX -> MCU2 : 解析: モード=Rear_View
+note right of CANRX #fff3b0
+★新規: mcu2_can_rx_task.c  
+CAN受信→モード判定→イベント変換。
+end note
+
+MCU2 -> IPC : appIpcSendNotify(MPU1_0, APP_EVT_CAM_SELECT_REAR)
+note right of IPC #fff3b0
+★既存IPC再利用。  
+RTOSからLinuxへイベント通知。
+end note
+
+IPC -> LNXAPP : onIpcNotify(event=APP_EVT_CAM_SELECT_REAR)
+LNXAPP -> LNXAPP : appSwitchLayout(REAR_VIEW)
+LNXAPP -> DSS : Mosaic設定変更 (後方カメラ全画面)
+note right of LNXAPP #fff3b0
+★改修: app_multi_cam_main.c に onIpcNotify追加  
+→ 表示切替関数(appSwitchLayout)呼び出し。
+end note
+
+MCU2 -> DSS : 新レイアウトで表示更新
+loop 各フレーム
+  MCU2 -> DSS : DMA出力更新
+end
+note right of DSS #fff3b0
+結果: CAN信号により映像モードが自動切替。  
+RTOS＋Linux連携で実現。
+end note
+
+@enduml

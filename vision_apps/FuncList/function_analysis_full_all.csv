@@ -1,0 +1,1689 @@
+﻿レベル,関数,カテゴリ,起点,処理概要,コメント(英語),コメント(日本語),参照データ,ファイル,実行形態
+,add_graph_parameter_by_node_index(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: * Utility API used to add a グラフ parameter from a ノード, ノード parameter index）","* Utility API used to add a graph parameter from a node, node parameter index","* Utility API used to add a グラフ parameter from a ノード, ノード parameter index",Draw2D_Handle,apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_screen_task(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,app_run_screen_task_delete(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, objArrSplitObj, sensorObj",apps/basic_demos/app_multi_cam/main.c,Linux(A72)
+,appResume(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,tskParams,platform/am62a/rtos/mcu1_0/main.c,RTOS(MCU1_0)
+,appSuspend(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,tskParams,platform/am62a/rtos/mcu1_0/main.c,RTOS(MCU1_0)
+,tx_application_define(),初期化,関数呼び出し,"モジュールやパラメータを初期化し、実行準備を行う（注記: The following line should never be reached because vTaskStartScheduler()
+  will only return if there was not enough FreeRTOS heap memory available to
+  生成する the Idle and (if configured) Timer tasks. Heap management, and
+  techniques for trapping heap exhaustion, are described in the book text.）","The following line should never be reached because vTaskStartScheduler()
+    will only return if there was not enough FreeRTOS heap memory available to
+    create the Idle and (if configured) Timer tasks.  Heap management, and
+    techniques for trapping heap exhaustion, are described in the book text.","The following line should never be reached because vTaskStartScheduler()
+  will only return if there was not enough FreeRTOS heap memory available to
+  生成する the Idle and (if configured) Timer tasks. Heap management, and
+  techniques for trapping heap exhaustion, are described in the book text.",,platform/am62a/rtos/mcu1_0/main.c,RTOS(MCU1_0)
+,appGetDdrSharedHeapSize(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: does not return）,does not return,does not return,,platform/j721e/rtos/mcu1_0/main.c,RTOS(MCU1_0)
+,Drivers_i2cClose(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Exit gracefully）,Exit gracefully,Exit gracefully,gI2cHandle,platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+,Drivers_i2cOpen(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: I2C Driver Parameters）,I2C Driver Parameters,I2C Driver Parameters,"gI2cHandle, gI2cParams",platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c,RTOS(MCU2_0)
+0,main(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: cfgClec.rtMap value is different for each C7x）,cfgClec.rtMap value is different for each C7x,cfgClec.rtMap value is different for each C7x,tskParams,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,InitMmu(),初期化,関数呼び出し,"モジュールやパラメータを初期化し、実行準備を行う（注記: init cache size here, since this needs to be done in secure mode）","init cache size here, since this needs to be done in secure mode","init cache size here, since this needs to be done in secure mode",,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,StartupEmulatorWaitFxn(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: This address is mapped to a virtual address of 0x0001_0000_0000）,This address is mapped to a virtual address of 0x0001_0000_0000,This address is mapped to a virtual address of 0x0001_0000_0000,tskParams,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,appC7xClecInitDru(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: A copy of this function is in both C7 main files, except the cfgClec.rtMap value）","A copy of this function is in both C7 main files, except the cfgClec.rtMap value","A copy of this function is in both C7 main files, except the cfgClec.rtMap value",tskParams,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,appCacheInit(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: ddr）,ddr,ddr,,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,appMmuMap(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j721e/rtos/c7x_1/main.c,共通/その他
+1,setup_dru_qos(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: DRU configuration）,DRU configuration,DRU configuration,tskParams,platform/j721e/rtos/c7x_1/main.c,共通/その他
+,srv_bowl_lut_gen_createIntermediateParams(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"in_params, srv_bowl_lut_gen_freeIntermediateParams, srv_bowl_lut_gen_handle, srv_bowl_lut_gen_createParams, createParams, verify_create_params, srv_bowl_lut_gen_setParams, srv_bowl_lut_gen_createIntermediateParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_createNodes(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_bowl_lut_gen_handle, srv_bowl_lut_gen_createParams, createParams, verify_create_params, srv_bowl_lut_gen_setParams, srv_bowl_lut_gen_createIntermediateParams, srv_bowl_lut_gen_freeIntermediateParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_delete(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: srv_bowl_lut_gen_create）,srv_bowl_lut_gen_create,srv_bowl_lut_gen_create,srv_bowl_lut_gen_freeIntermediateParams,applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_free(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_bowl_lut_gen_handle, srv_bowl_lut_gen_createParams, createParams, verify_create_params, srv_bowl_lut_gen_setParams, srv_bowl_lut_gen_createIntermediateParams, srv_bowl_lut_gen_freeIntermediateParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_freeIntermediateParams(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_bowl_lut_gen_handle, srv_bowl_lut_gen_createParams, createParams, verify_create_params, srv_bowl_lut_gen_setParams, srv_bowl_lut_gen_createIntermediateParams, srv_bowl_lut_gen_freeIntermediateParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_freeNodes(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_bowl_lut_gen_handle, srv_bowl_lut_gen_createParams, createParams, verify_create_params, srv_bowl_lut_gen_setParams, srv_bowl_lut_gen_createIntermediateParams, srv_bowl_lut_gen_freeIntermediateParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_bowl_lut_gen_setParams(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"createParams, srv_bowl_lut_gen_createIntermediateParams, srv_bowl_lut_gen_handle, in_params, srv_bowl_lut_gen_freeIntermediateParams, srv_bowl_lut_gen_createParams, verify_create_params, srv_bowl_lut_gen_setParams",applibs/srv_bowl_lut_gen_applib/srv_bowl_lut_gen_applib.c,共通/その他
+,srv_calib_createIntermediateParams(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"in_point_detect_params, srv_calib_freeIntermediateParams, srv_calib_handle, srv_calib_createParams, createParams, verify_create_params, srv_calib_setParams, srv_calib_createIntermediateParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_createNodes(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_calib_handle, srv_calib_createParams, createParams, verify_create_params, srv_calib_setParams, srv_calib_createIntermediateParams, srv_calib_freeIntermediateParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_delete(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: srv_calib_create）,srv_calib_create,srv_calib_create,srv_calib_freeIntermediateParams,applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_free(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_calib_handle, srv_calib_createParams, createParams, verify_create_params, srv_calib_setParams, srv_calib_createIntermediateParams, srv_calib_freeIntermediateParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_freeIntermediateParams(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: copying correct camera id to each user data object）,copying correct camera id to each user data object,copying correct camera id to each user data object,"srv_calib_handle, srv_calib_createParams, createParams, verify_create_params, srv_calib_setParams, srv_calib_createIntermediateParams, srv_calib_freeIntermediateParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_freeNodes(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srv_calib_handle, srv_calib_createParams, createParams, verify_create_params, srv_calib_setParams, srv_calib_createIntermediateParams, srv_calib_freeIntermediateParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,srv_calib_setParams(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"createParams, srv_calib_createIntermediateParams, srv_calib_handle, in_point_detect_params, srv_calib_freeIntermediateParams, srv_calib_createParams, verify_create_params, srv_calib_setParams",applibs/srv_calibration_applib/srv_calibration_applib.c,共通/その他
+,ct_read_raw_image(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"dcc_2a_buf, aewb_cfg, ae_awb_params, raw_params",applibs/test/test_vpac_viss_aewb.c,共通/その他
+,app_c7x_kernel_main(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: OpenVX references）,OpenVX references,OpenVX references,"AppObj, gAppObj",apps/basic_demos/app_c7x_kernel/main.c,共通/その他
+,app_deinit_display1(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj",apps/basic_demos/app_dof/dof_display_module.c,共通/その他
+,app_deinit_display2(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj",apps/basic_demos/app_dof/dof_display_module.c,共通/その他
+,app_delete_display1(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj",apps/basic_demos/app_dof/dof_display_module.c,共通/その他
+,app_delete_display2(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj",apps/basic_demos/app_dof/dof_display_module.c,共通/その他
+,app_deinit_dofproc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofprocObj, DofProcObj",apps/basic_demos/app_dof/dof_proc_module.c,共通/その他
+,app_delete_dofproc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofprocObj, DofProcObj",apps/basic_demos/app_dof/dof_proc_module.c,共通/その他
+,app_deinit_pyramid(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: exemplar not needed any more）,exemplar not needed any more,exemplar not needed any more,"pyramidObj, PyramidObj",apps/basic_demos/app_dof/dof_pyramid_module.c,共通/その他
+,app_delete_pyramid(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: exemplar not needed any more）,exemplar not needed any more,exemplar not needed any more,"pyramidObj, PyramidObj",apps/basic_demos/app_dof/dof_pyramid_module.c,共通/その他
+,app_deinit_dofviz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_buf, dofvizObj, DofVizObj",apps/basic_demos/app_dof/dof_viz_module.c,共通/その他
+,app_delete_dofviz(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofvizObj, DofVizObj",apps/basic_demos/app_dof/dof_viz_module.c,共通/その他
+,app_dof_main(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: checksums for the confidence image and the flow vector image
+  confidence image (at least on plane 0) remains constant through
+  the video whereas field vectore changes）","checksums for the confidence image and the flow vector image
+    confidence image (at least on plane 0) remains constant through
+    the video whereas field vectore changes","checksums for the confidence image and the flow vector image
+  confidence image (at least on plane 0) remains constant through
+  the video whereas field vectore changes","AppObj, gAppObj, pyramidObj, dofprocObj, dofvizObj, displayObj, display1Obj, display2Obj, num_buf",apps/basic_demos/app_dof/main.c,共通/その他
+,app_find_image_array_index(),表示制御,タスクループ,"処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: starting file number + 2 frames required to queue up dof
+      + the number of checksums availble）","starting file number + 2 frames required to queue up dof
+            + the number of checksums availble","starting file number + 2 frames required to queue up dof
+      + the number of checksums availble","Draw2D_Handle, AppObj, gAppObj, PyramidObj, pyramidObj, DofProcObj, dofprocObj, DofVizObj, dofvizObj, DisplayObj",apps/basic_demos/app_dof/main.c,共通/その他
+,app_get_file_format_ext(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: * Utility API used to add a グラフ parameter from a ノード, ノード parameter index）","* Utility API used to add a graph parameter from a node, node parameter index","* Utility API used to add a グラフ parameter from a ノード, ノード parameter index","AppObj, pyramidObj, dofprocObj, dofvizObj, displayObj, display1Obj, display2Obj, num_buf",apps/basic_demos/app_dof/main.c,共通/その他
+,update_pre_proc_params_display(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, AppObj, pyramidObj, dofprocObj, dofvizObj",apps/basic_demos/app_dof/main.c,共通/その他
+,update_pre_proc_params_dofproc(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"dofprocObj, AppObj, DofVizObj, dofvizObj, DisplayObj, displayObj, pyramidObj",apps/basic_demos/app_dof/main.c,共通/その他
+,update_pre_proc_params_dofviz(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"dofvizObj, AppObj, DisplayObj, displayObj, pyramidObj, dofprocObj",apps/basic_demos/app_dof/main.c,共通/その他
+,update_pre_proc_params_pyramid(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pyramidObj, AppObj, DofProcObj, dofprocObj, DofVizObj, dofvizObj, DisplayObj, displayObj",apps/basic_demos/app_dof/main.c,共通/その他
+,AppUtil_netIterSvr(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,apps/basic_demos/app_fd_exchange/apputils_net.c,共通/その他
+,App_clientHdlr(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: while (!done)）,while (!done),while (!done),"App_CmdLineParams, clParams, cmdParams",apps/basic_demos/app_fd_exchange/main_producer.c,共通/その他
+,App_intSigHandler(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: De-allocate any allocated objects.）,De-allocate any allocated objects.,De-allocate any allocated objects.,"tivxReferenceExportHandle, lastObj",apps/basic_demos/app_fd_exchange/main_producer.c,共通/その他
+,App_parseCmdLineArgs(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"clParams, App_CmdLineParams, cmdParams",apps/basic_demos/app_fd_exchange/main_producer.c,共通/その他
+,App_showUsage(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: while (!done)）,while (!done),while (!done),"App_CmdLineParams, clParams, cmdParams",apps/basic_demos/app_fd_exchange/main_producer.c,共通/その他
+,app_default_param_set(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"sensorObj, displayObj, AppObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj, dmabuf",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_deinit(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"sensorObj, captureObj, vissObj, aewbObj, ldcObj, scalerObj, imgMosaicObj, displayObj, AppObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_delete_graph(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"captureObj, vissObj, aewbObj, ldcObj, scalerObj, imgMosaicObj, displayObj, AppObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_parse_cfg_file(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"sensorObj, captureObj, vissObj, ldcObj, displayObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_parse_cmd_line_args(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, sensorObj, AppObj, gAppObj, sensor_obj, capture_obj, vissObj, viss_obj, aewbObj, aewb_obj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_pipeline_params_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: UNMap CbCr）,UNMap CbCr,UNMap CbCr,"SensorObj, sensorObj, poolObj, AppObj, displayObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_querry_param_set(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"sensorObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj, dmabuf",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_run_task(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, sensorObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_run_task_delete(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"AppObj, captureObj, vissObj, ldcObj, sensorObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_set_cfg_default(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, vissObj, ldcObj, AppObj, sensorObj, displayObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_show_usage(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, tivxTaskSetDefaultCreateParams, captureObj, vissObj, ldcObj, sensorObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,app_update_param_set(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: LINUX）,LINUX,LINUX,"appIssGetResizeParams, sensorObj, set_img_mosaic_params, imgMosaicObj, set_codec_pipe_params",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,construct_gst_strings(),その他,タスクループ,一般的な制御ロジックを実行する（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"dmabuf, set_codec_pipe_params, AppObj, codec_pipe_params, appIssGetResizeParams, sensorObj, set_img_mosaic_params, imgMosaicObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,set_codec_pipe_params(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: LINUX）,LINUX,LINUX,"codec_pipe_params, AppObj, appIssGetResizeParams, sensorObj, set_img_mosaic_params, imgMosaicObj, set_codec_pipe_params",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,set_display_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: UNMap CbCr）,UNMap CbCr,UNMap CbCr,"displayObj, AppObj, SensorObj, sensorObj, poolObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,set_img_mosaic_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, dmabuf, set_codec_pipe_params, AppObj, codec_pipe_params",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,set_ref_pool_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"poolObj, AppObj, sensorObj, displayObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,set_sensor_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: UNMap CbCr）,UNMap CbCr,UNMap CbCr,"sensorObj, poolObj, AppObj, displayObj, sensorParams, set_img_mosaic_params, TIOVXImgMosaicModuleObj, imgMosaicObj",apps/basic_demos/app_multi_cam_codec/main.c,共通/その他
+,appSingleCamUpdateVpacDcc(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"dcc_buf, AppObj",apps/basic_demos/app_single_cam/app_single_cam_main.c,共通/その他
+,app_single_cam_main(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: default to first センサ in センサ enumaration list）,default to first sensor in sensor enumaration list,default to first センサ in センサ enumaration list,"AppObj, gAppObj, app_send_test_frame, tivxCaptureRegisterErrorFrame",apps/basic_demos/app_single_cam/app_single_cam_main.c,共通/その他
+,save_debug_images(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,AppObj,apps/basic_demos/app_single_cam/app_single_cam_main.c,共通/その他
+,x86_app_deinit(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"IssAeDynamicParams, numAeDynParams, AppObj, raw_params, dcc_buf",apps/basic_demos/app_single_cam/main_x86.c,共通/その他
+,x86_app_delete_graph(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: This is needed only in x86 mode）,This is needed only in x86 mode,This is needed only in x86 mode,AppObj,apps/basic_demos/app_single_cam/main_x86.c,共通/その他
+,x86_app_init(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, IssAeDynamicParams, numAeDynParams, raw_params, dcc_buf",apps/basic_demos/app_single_cam/main_x86.c,共通/その他
+,x86_app_parse_cfg_file(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,AppObj,apps/basic_demos/app_single_cam/main_x86.c,共通/その他
+,x86_app_parse_cmd_line_args(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,apps/basic_demos/app_single_cam/main_x86.c,共通/その他
+,app_draw_graphics(),表示制御,タスクループ,"処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: if testing, just 実行する the number of frames that are found in the expected
+      checksums + a BUFFER to maintain data integrity (-1 bc of the <= comparison
+      in the loop)）","if testing, just run the number of frames that are found in the expected
+            checksums + a BUFFER to maintain data integrity (-1 bc of the <= comparison
+            in the loop)","if testing, just 実行する the number of frames that are found in the expected
+      checksums + a BUFFER to maintain data integrity (-1 bc of the <= comparison
+      in the loop)","AppObj, gAppObj",apps/basic_demos/app_stereo/main.c,共通/その他
+,app_find_object_array_index(),その他,タスクループ,一般的な制御ロジックを実行する,,,,apps/basic_demos/app_stereo/main.c,共通/その他
+,app_stereo_main(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,"AppObj, gAppObj, num_buf, sde_params",apps/basic_demos/app_stereo/main.c,共通/その他
+,app_deinit_dof(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofObj, DOFObj",apps/cv_demos/app_sfm/app_dof_module.c,共通/その他
+,app_delete_dof(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofObj, DOFObj",apps/cv_demos/app_sfm/app_dof_module.c,共通/その他
+,app_deinit_sfm(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"sfmObj, createParams, SFMObj, setCreateParams, SFM_TI_CreateParams",apps/cv_demos/app_sfm/app_sfm_module.c,共通/その他
+,app_delete_sfm(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"sfmObj, SFMObj, createParams, setCreateParams, SFM_TI_CreateParams",apps/cv_demos/app_sfm/app_sfm_module.c,共通/その他
+,app_find_config_object_array_index(),その他,タスクループ,一般的な制御ロジックを実行する,,,"Draw2D_Handle, app_read_cam_params, AppObj, tivxSFMParams, cur_frame, start_frame",apps/cv_demos/app_sfm/main.c,共通/その他
+,app_find_image_object_array_index(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"Draw2D_Handle, app_read_cam_params, AppObj, tivxSFMParams, cur_frame, start_frame",apps/cv_demos/app_sfm/main.c,共通/その他
+,update_img_mosaic_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Forcing it to spatial only）,Forcing it to spatial only,Forcing it to spatial only,"scalerObj, imgMosaicObj, AppObj, pyramidObj, dofObj, sfmObj, app_read_cam_params, DisplayObj, displayObj, Draw2D_Handle",apps/cv_demos/app_sfm/main.c,共通/その他
+,update_params_dof(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"dofObj, scalerObj, AppObj, SFMObj, sfmObj, ImgMosaicObj, imgMosaicObj, pyramidObj, app_read_cam_params, DisplayObj",apps/cv_demos/app_sfm/main.c,共通/その他
+,update_params_pyramid(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"pyramidObj, scalerObj, AppObj, ScalerObj, scalarObj, DOFObj, dofObj, SFMObj, sfmObj, ImgMosaicObj",apps/cv_demos/app_sfm/main.c,共通/その他
+,update_params_scalar(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"scalarObj, AppObj, DOFObj, dofObj, scalerObj, SFMObj, sfmObj, ImgMosaicObj, imgMosaicObj, pyramidObj",apps/cv_demos/app_sfm/main.c,共通/その他
+,update_params_sfm(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Forcing it to spatial only）,Forcing it to spatial only,Forcing it to spatial only,"sfmObj, scalerObj, AppObj, ImgMosaicObj, imgMosaicObj, pyramidObj, dofObj, app_read_cam_params, DisplayObj, displayObj",apps/cv_demos/app_sfm/main.c,共通/その他
+,app_tidl_main(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"AppObj, gAppObj, createParams, setCreateParams, disp_params, disp_params_obj",apps/dl_demos/app_tidl/main.c,共通/その他
+,createInputTensors(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"numInputBuf, AppObj, numOutputBuf, imgParams",apps/dl_demos/app_tidl/main.c,共通/その他
+,displayOutput(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,numOutputBuf,apps/dl_demos/app_tidl/main.c,共通/その他
+,resizeImage(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"AppObj, imgParams, numInputBuf",apps/dl_demos/app_tidl/main.c,共通/その他
+,app_create_graph_post_proc_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj, tivxPixelVizParams, viz_params, tivxTIDLJ7Params, tidlParams, numOutputBuf, numInputBuf",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_create_graph_post_proc_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_deinit_post_proc_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj, tivxPixelVizParams, viz_params, tivxTIDLJ7Params, tidlParams, numOutputBuf, numInputBuf",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_deinit_post_proc_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_delete_post_proc_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj, tivxPixelVizParams, viz_params, tivxTIDLJ7Params, tidlParams, numOutputBuf, numInputBuf",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_delete_post_proc_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, PostProcObj",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,drawDetections(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,postProcObj,apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,drawPoints(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"postProcObj, PostProcObj",apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,fillTableTensors(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,postProcObj,apps/dl_demos/app_tidl_avp/avp_post_proc_module.c,共通/その他
+,app_deinit_pre_proc_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, PreProcObj, tivxImgPreProcParams, tivxTIDLJ7Params, tidlParams, numInputBuf, numOutputBuf",apps/dl_demos/app_tidl_avp/avp_pre_proc_module.c,共通/その他
+,app_deinit_pre_proc_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, PreProcObj, tivxTIDLJ7Params, tidlParams, numInputBuf",apps/dl_demos/app_tidl_avp/avp_pre_proc_module.c,共通/その他
+,app_delete_pre_proc_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, PreProcObj, tivxImgPreProcParams, tivxTIDLJ7Params, tidlParams, numInputBuf, numOutputBuf",apps/dl_demos/app_tidl_avp/avp_pre_proc_module.c,共通/その他
+,app_delete_pre_proc_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, PreProcObj, tivxTIDLJ7Params, tidlParams, numInputBuf",apps/dl_demos/app_tidl_avp/avp_pre_proc_module.c,共通/その他
+,app_deinit_tidl_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, createParams, TIDLObj, TIDL_CreateParams, setCreateParams",apps/dl_demos/app_tidl_avp/avp_tidl_module.c,共通/その他
+,app_deinit_tidl_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, createParams, TIDLObj, tivxTIDLJ7Params, tidlParams",apps/dl_demos/app_tidl_avp/avp_tidl_module.c,共通/その他
+,app_delete_tidl_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, TIDLObj, createParams, TIDL_CreateParams, setCreateParams",apps/dl_demos/app_tidl_avp/avp_tidl_module.c,共通/その他
+,app_delete_tidl_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, TIDLObj, createParams, tivxTIDLJ7Params, tidlParams",apps/dl_demos/app_tidl_avp/avp_tidl_module.c,共通/その他
+,app_update_draw_detections_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: for depth this is different from num_classes. num_classes is used for visualization granuaility）,for depth this is different from num_classes. num_classes is used for visualization granuaility,for depth this is different from num_classes. num_classes is used for visualization granuaility,"drawDetectionsObj, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, psdPreProcObj, vdPreProcObj, segPreProcObj, psdPostProcObj",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,set_draw_detection_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: for depth this is different from num_classes. num_classes is used for visualization granuaility）,for depth this is different from num_classes. num_classes is used for visualization granuaility,for depth this is different from num_classes. num_classes is used for visualization granuaility,"drawDetectionsObj, app_update_draw_detections_params, DrawDetectionsObj, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, psdPreProcObj, vdPreProcObj",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,set_post_proc_defaults_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, viz_params, AppObj, PostProcObj, scalerObj, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params, ImgMosaicObj, imgMosaicObj",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,set_pre_proc_defaults_od(),その他,タスクループ,一般的な制御ロジックを実行する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"preProcObj, AppObj, PreProcObj, PostProcObj, postProcObj, scalerObj, viz_params, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,set_pre_proc_defaults_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, AppObj, PreProcObj, PostProcObj, postProcObj, viz_params, scalerObj, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,update_post_proc_params_pc(),その他,タスクループ,一般的な制御ロジックを実行する（注記: 63 values - depth range）,63 values - depth range,63 values - depth range,"postProcObj, scalerObj, viz_params, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,update_pre_proc_params_od(),その他,タスクループ,一般的な制御ロジックを実行する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"preProcObj, PostProcObj, postProcObj, AppObj, scalerObj, PreProcObj, viz_params, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,update_pre_proc_params_pc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"preProcObj, PostProcObj, postProcObj, viz_params, AppObj, scalerObj, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params, ImgMosaicObj",apps/dl_demos/app_tidl_avp/main.c,共通/その他
+,app_deinit_dof_viz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofVizObj, DofVizObj",apps/dl_demos/app_tidl_avp3/avp_dof_viz_module.c,共通/その他
+,app_delete_dof_viz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofVizObj, DofVizObj",apps/dl_demos/app_tidl_avp3/avp_dof_viz_module.c,共通/その他
+,app_deinit_dof_pre_proc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofPreProcObj, DofPreProcObj",apps/dl_demos/app_tidl_avp3/avp_pre_proc_module.c,共通/その他
+,app_delete_dof_pre_proc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofPreProcObj, DofPreProcObj",apps/dl_demos/app_tidl_avp3/avp_pre_proc_module.c,共通/その他
+,set_dof_pre_proc_defaults(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofPreProcObj, update_dof_pre_proc_params, AppObj, DofPreProcObj, scalerObj, PostProcObj, postProcObj, viz_params, DrawDetectionsObj, drawDetectionsObj",apps/dl_demos/app_tidl_avp3/main.c,共通/その他
+,set_dof_viz_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"dofVizObj, AppObj, pyramidObj, dofProcObj, dofPreProcObj, preProcObj, odPostProcObj, pcPostProcObj, psdDrawDetectionsObj, vdDrawDetectionsObj",apps/dl_demos/app_tidl_avp3/main.c,共通/その他
+,set_img_mosaic_frame1(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"imgMosaicObj, DisplayObj, displayObj, AppObj, PyramidObj, pyramidObj, DofProcObj, dofProcObj, enable_flow_vec_delay_obj, DofVizObj",apps/dl_demos/app_tidl_avp3/main.c,共通/その他
+,set_img_mosaic_frame2(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, AppObj, ImgMosaicObj",apps/dl_demos/app_tidl_avp3/main.c,共通/その他
+,update_dof_pre_proc_params(),その他,タスクループ,一般的な制御ロジックを実行する,,,"dofPreProcObj, scalerObj, PostProcObj, postProcObj, AppObj, viz_params, DrawDetectionsObj, drawDetectionsObj, app_update_draw_detections_params, ImgMosaicObj",apps/dl_demos/app_tidl_avp3/main.c,共通/その他
+,app_deinit_dof_proc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofProcObj, DofProcObj",apps/dl_demos/app_tidl_avp4/app_dof_proc_module.c,共通/その他
+,app_delete_dof_proc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofProcObj, DofProcObj",apps/dl_demos/app_tidl_avp4/app_dof_proc_module.c,共通/その他
+,app_deinit_img_hist(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"imgHistObj, ImgHistObj",apps/dl_demos/app_tidl_avp4/app_img_hist_module.c,共通/その他
+,app_delete_img_hist(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"imgHistObj, ImgHistObj",apps/dl_demos/app_tidl_avp4/app_img_hist_module.c,共通/その他
+,app_deinit_srv(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srvObj, srv_handle, param_obj, SRVObj, calMatBuf, ldcParams",apps/dl_demos/app_tidl_avp4/app_srv_module.c,共通/その他
+,app_delete_srv(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"srvObj, SRVObj, param_obj, calMatBuf, ldcParams",apps/dl_demos/app_tidl_avp4/app_srv_module.c,共通/その他
+,set_dof_proc_defaults(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"dofProcObj, PreProcObj, preProcObj, PostProcObj, postProcObj, viz_params, update_post_proc_params, AppObj, scalerObj, ScalerObj",apps/dl_demos/app_tidl_avp4/main.c,共通/その他
+,set_dof_pyramid_defaults(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"pyramidObj, DofProcObj, dofProcObj, PreProcObj, preProcObj, PostProcObj, postProcObj, viz_params, update_post_proc_params, AppObj",apps/dl_demos/app_tidl_avp4/main.c,共通/その他
+,set_img_hist_defaults(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"imgHistObj, AppObj, SensorObj, sensorObj, PyramidObj, pyramidObj, DofProcObj, dofProcObj, PreProcObj, preProcObj",apps/dl_demos/app_tidl_avp4/main.c,共通/その他
+,app_create_graph_img_mosaic(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,imgMosaicObj,apps/dl_demos/app_tidl_bev/bev_img_mosaic_module.c,共通/その他
+,app_deinit_bev_cam_post_proc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, BEVPostProcObj",apps/dl_demos/app_tidl_bev/bev_post_proc_module.c,共通/その他
+,app_deinit_bev_post_proc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, BEVPostProcObj",apps/dl_demos/app_tidl_bev/bev_post_proc_module.c,共通/その他
+,app_delete_bev_post_proc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, BEVPostProcObj",apps/dl_demos/app_tidl_bev/bev_post_proc_module.c,共通/その他
+,app_deinit_tidl_bev(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, createParams, TIDLObj, tivxTIDLJ7Params, tidlParams",apps/dl_demos/app_tidl_bev/bev_tidl_module.c,共通/その他
+,app_delete_tidl_bev(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, TIDLObj, createParams, tivxTIDLJ7Params, tidlParams, numInputBuf, numOutputBuf",apps/dl_demos/app_tidl_bev/bev_tidl_module.c,共通/その他
+,app_find_lidar_object_array_index(),その他,タスクループ,一般的な制御ロジックを実行する,,,Draw2D_Handle,apps/dl_demos/app_tidl_bev/main.c,共通/その他
+,set_post_proc_defaults_BEV(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: 0-NCHW）,0-NCHW,0-NCHW,"postProcObj, AppObj, BEVPostProcObj, scalerObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, preProcObj",apps/dl_demos/app_tidl_bev/main.c,共通/その他
+,update_post_proc_params_BEV(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"postProcObj, AppObj, BEVPostProcObj, scalerObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, preProcObj, Draw2D_Handle",apps/dl_demos/app_tidl_bev/main.c,共通/その他
+,update_post_proc_params_BEV_camera_sp(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"postProcObj, scalerObj, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, preProcObj, BEVPostProcObj, Draw2D_Handle",apps/dl_demos/app_tidl_bev/main.c,共通/その他
+,set_scaler_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"scalerObj, DisplayObj, displayObj, AppObj, SensorObj, sensorObj, captureObj, set_img_mosaic_params, ImgMosaicObj, imgMosaicObj",apps/dl_demos/app_tidl_cam/main.c,共通/その他
+,app_deinit_post_proc(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: *
+ * @brief Deinitializes the post processing object
+ *
+ * This function releases the post processing config and output image array.
+ *
+ * @param[in] postProcObj The post processing object to be deinitialized.
+ *
+ * @return None）","*
+ * @brief Deinitializes the post processing object
+ *
+ * This function releases the post processing config and output image array.
+ *
+ * @param[in] postProcObj The post processing object to be deinitialized.
+ *
+ * @return None","*
+ * @brief Deinitializes the post processing object
+ *
+ * This function releases the post processing config and output image array.
+ *
+ * @param[in] postProcObj The post processing object to be deinitialized.
+ *
+ * @return None","postProcObj, PostProcObj",apps/dl_demos/app_tidl_front_cam/app_post_proc_module.c,共通/その他
+,app_delete_post_proc(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: *
+ * @brief Deletes the post processing ノード and kernel
+ *
+ * This function releases the ノード and kernel created by the post processing
+ * module. It should be called after the post processing ノード is no longer
+ * needed.
+ *
+ * @param[in] postProcObj The post processing object to be deleted.
+ *
+ * @return None）","*
+ * @brief Deletes the post processing node and kernel
+ *
+ * This function releases the node and kernel created by the post processing
+ * module. It should be called after the post processing node is no longer
+ * needed.
+ *
+ * @param[in] postProcObj The post processing object to be deleted.
+ *
+ * @return None","*
+ * @brief Deletes the post processing ノード and kernel
+ *
+ * This function releases the ノード and kernel created by the post processing
+ * module. It should be called after the post processing ノード is no longer
+ * needed.
+ *
+ * @param[in] postProcObj The post processing object to be deleted.
+ *
+ * @return None","postProcObj, PostProcObj",apps/dl_demos/app_tidl_front_cam/app_post_proc_module.c,共通/その他
+,app_deinit_pre_proc(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: *
+ * @brief Releases resources allocated by app_init_pre_proc_od
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *             the resources to be released.）","*
+ * @brief Releases resources allocated by app_init_pre_proc_od
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *                         the resources to be released.","*
+ * @brief Releases resources allocated by app_init_pre_proc_od
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *             the resources to be released.","preProcObj, PreProcObj, tivxTIDLJ7Params, tidlParams, numInputBuf",apps/dl_demos/app_tidl_front_cam/app_pre_proc_module.c,共通/その他
+,app_delete_pre_proc(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: *
+ * @brief Deletes the pre-processing ノード from the グラフ.
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *             the ノード to be deleted.）","*
+ * @brief Deletes the pre-processing node from the graph.
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *                         the node to be deleted.","*
+ * @brief Deletes the pre-processing ノード from the グラフ.
+ *
+ * @param[in] preProcObj - A pointer to the pre-processing object which contains
+ *             the ノード to be deleted.","preProcObj, PreProcObj, tivxTIDLJ7Params, tidlParams, numInputBuf",apps/dl_demos/app_tidl_front_cam/app_pre_proc_module.c,共通/その他
+,load_cpu_task(),初期化,タスクループ,"モジュールやパラメータを初期化し、実行準備を行う（注記: *
+ * @brief The load_cpu_task function is a CPU-intensive タスク that is designed to simulate a load on the CPU.
+ *
+ * @param app_var The application object that contains the parameters and state of the application.）","*
+ * @brief The load_cpu_task function is a CPU-intensive task that is designed to simulate a load on the CPU.
+ *
+ * @param app_var The application object that contains the parameters and state of the application.","*
+ * @brief The load_cpu_task function is a CPU-intensive タスク that is designed to simulate a load on the CPU.
+ *
+ * @param app_var The application object that contains the parameters and state of the application.","AppObj, tivxTaskSetDefaultCreateParams",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,load_cpu_task_stop_and_delete(),終了処理,タスクループ,"ノード／メモリ等のリソースを解放し、実行を終了する（注記: *
+ * @brief Deletes CPU load tasks.
+ *
+ * This function waits for all CPU load tasks to complete, deletes the
+ * mutex used to synchronize タスク completion status, and then deletes
+ * each of the CPU load tasks.
+ *
+ * @param obj Pointer to the application object containing configuration
+ *      and state information.）","*
+ * @brief Deletes CPU load tasks.
+ *
+ * This function waits for all CPU load tasks to complete, deletes the
+ * mutex used to synchronize task completion status, and then deletes
+ * each of the CPU load tasks.
+ *
+ * @param obj Pointer to the application object containing configuration
+ *            and state information.","*
+ * @brief Deletes CPU load tasks.
+ *
+ * This function waits for all CPU load tasks to complete, deletes the
+ * mutex used to synchronize タスク completion status, and then deletes
+ * each of the CPU load tasks.
+ *
+ * @param obj Pointer to the application object containing configuration
+ *      and state information.",,apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,set_img_mosaic_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, DisplayObj, displayObj, AppObj, SensorObj, sensorObj, encode_buf, update_scaler_params, scalerObj, odPreProcObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,set_omx_encode_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: IMX728-UB971_SONY）,IMX728-UB971_SONY,IMX728-UB971_SONY,"encode_buf, update_scaler_params, AppObj, scalerObj, sensorObj, odPreProcObj, sgPreProcObj, odPostProcObj, sgPostProcObj, displayObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,set_post_proc_defaults_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: 0-NCHW）,0-NCHW,0-NCHW,"postProcObj, AppObj, PostProcObj, scalerObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, SensorObj, sensorObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,set_post_proc_defaults_sg(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"postProcObj, AppObj, PostProcObj, scalerObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, SensorObj, sensorObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,set_pre_proc_defaults(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: user asked to 停止する processing）,user asked to stop processing,user asked to 停止する processing,"preProcObj, PostProcObj, postProcObj, AppObj, scalerObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, SensorObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,update_post_proc_params_od(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"postProcObj, scalerObj, PostProcObj, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, SensorObj, sensorObj",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,update_post_proc_params_sg(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"postProcObj, scalerObj, AppObj, ImgMosaicObj, imgMosaicObj, DisplayObj, displayObj, SensorObj, sensorObj, encode_buf",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,update_scaler_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"scalerObj, AppObj, sensorObj, odPreProcObj, sgPreProcObj, odPostProcObj, sgPostProcObj, displayObj, captureObj, update_scaler_params",apps/dl_demos/app_tidl_front_cam/main.c,共通/その他
+,getReferenceAddr(),その他,タスクループ,一般的な制御ロジックを実行する,,,tivxReferenceExportHandle,apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_allocate_input_buffer(),その他,タスクループ,一般的な制御ロジックを実行する,,,"compHandle, omxEncodeHandle, OMX_GetHandle, omx_encode_create_handle, omxEncodeCfg, free_handle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_allocate_output_buffers(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"compHandle, omxEncodeHandle, OMX_GetHandle, omx_encode_create_handle, omxEncodeCfg, free_handle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_delete_handle(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,tivxReferenceExportHandle,apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_enqueue_buf(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"compHandle, omx_encode_dqueue_buf, omxEncodeHandle, omx_encode_delete_handle, tivxReferenceExportHandle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_init(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"OMX_GetHandle, compHandle, omxEncodeHandle, omx_encode_create_handle, omxEncodeCfg, free_handle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_init_cfg(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: OMX Version）,OMX Version,OMX Version,"_omxEncodeHandle, omxEncodeCfg, compHandle, omxEncodeHandle, OMX_GetHandle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_move_to_state(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"compHandle, omxEncodeHandle, omx_encode_enqueue_buf, omx_encode_dqueue_buf, omx_encode_delete_handle, tivxReferenceExportHandle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_start(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"compHandle, omx_encode_enqueue_buf, omxEncodeHandle, omx_encode_dqueue_buf, omx_encode_delete_handle, tivxReferenceExportHandle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,omx_encode_stop(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,"omx_encode_delete_handle, omxEncodeHandle, tivxReferenceExportHandle",apps/dl_demos/app_tidl_front_cam/omx_encode_module.c,共通/その他
+,app_deinit_draw_detections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"drawDetectionsObj, DrawDetectionsObj",apps/dl_demos/app_tidl_od_cam/app_draw_detections_module.c,共通/その他
+,app_delete_draw_detections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"drawDetectionsObj, DrawDetectionsObj",apps/dl_demos/app_tidl_od_cam/app_draw_detections_module.c,共通/その他
+,update_draw_detections_defaults(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"drawDetectionsObj, scalerObj, set_img_mosaic_params, AppObj, ImgMosaicObj, imgMosaicObj, sensorObj, Draw2D_Handle",apps/dl_demos/app_tidl_od_cam/main.c,共通/その他
+,app_create_graph_post_proc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,postProcObj,apps/dl_demos/app_tidl_seg/app_post_proc_module.c,共通/その他
+,set_post_proc_defaults(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"postProcObj, viz_params, update_post_proc_params, AppObj, PostProcObj, scalerObj, DisplayObj, displayObj, preProcObj, update_pre_proc_params",apps/dl_demos/app_tidl_seg/main.c,共通/その他
+,update_post_proc_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: 5 classes for semantic segmentation）,5 classes for semantic segmentation,5 classes for semantic segmentation,"postProcObj, scalerObj, viz_params, DisplayObj, displayObj, AppObj, preProcObj, update_pre_proc_params, update_post_proc_params, imgMosaicObj",apps/dl_demos/app_tidl_seg/main.c,共通/その他
+,update_pre_proc_params(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Number of time to clear the output バッファ before it gets reused）,Number of time to clear the output buffer before it gets reused,Number of time to clear the output バッファ before it gets reused,"AppObj, ImgMosaicObj, imgMosaicObj, scalerObj, PostProcObj, postProcObj, viz_params, update_post_proc_params, DisplayObj, displayObj",apps/dl_demos/app_tidl_seg/main.c,共通/その他
+,app_deinit_pose_calc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"poseCalcObj, PoseCalcObj",apps/dl_demos/app_tidl_vl/app_pose_calc_module.c,共通/その他
+,app_delete_pose_calc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"poseCalcObj, PoseCalcObj",apps/dl_demos/app_tidl_vl/app_pose_calc_module.c,共通/その他
+,createInputOutputTensors(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,poseCalcObj,apps/dl_demos/app_tidl_vl/app_pose_calc_module.c,共通/その他
+,app_deinit_pose_viz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"poseVizObj, PoseVizObj",apps/dl_demos/app_tidl_vl/app_pose_viz_module.c,共通/その他
+,app_delete_pose_viz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"poseVizObj, PoseVizObj",apps/dl_demos/app_tidl_vl/app_pose_viz_module.c,共通/その他
+,app_run_graph(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,apps/srv_demos/app_srv_calibration/app_srv_calibration.c,共通/その他
+,app_run_graph_srv_calib(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,SrvCalibAppObj,apps/srv_demos/app_srv_calibration/app_srv_calibration.c,共通/その他
+,app_srv_calibration_main(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"SrvCalibAppObj, gAppObj, capture_params, sensorParams, raw_params, instCfg, capture_param_obj, viss_params, ae_awb_params",apps/srv_demos/app_srv_calibration/app_srv_calibration.c,共通/その他
+,write_calmat(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Extracts calmat data and writes to file）,Extracts calmat data and writes to file,Extracts calmat data and writes to file,"out_calmat_params, calMatBuf, SrvCalibAppObj, out_params",apps/srv_demos/app_srv_calibration/app_srv_calibration.c,共通/その他
+,read_calmat_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,calMatBuf,apps/srv_demos/app_srv_calibration/srv_utils.c,共通/その他
+,read_chartpos_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Reads CHARTPOS file）,Reads CHARTPOS file,Reads CHARTPOS file,calMatBuf,apps/srv_demos/app_srv_calibration/srv_utils.c,共通/その他
+,read_lut_file(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Reads LUT file using get_test_file_path）,Reads LUT file using get_test_file_path,Reads LUT file using get_test_file_path,"ldcParams, calMatBuf",apps/srv_demos/app_srv_calibration/srv_utils.c,共通/その他
+,write_calmat_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Read calmat per camera）,Read calmat per camera,Read calmat per camera,calMatBuf,apps/srv_demos/app_srv_calibration/srv_utils.c,共通/その他
+,app_create_graph_gpu_lut(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"in_params, lens_params, in_lens_params, param_obj, calMatBuf, create_params, srv_handle",apps/srv_demos/app_srv_camera/app_srv_camera.c,共通/その他
+,app_run_graph_gpu_lut(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"AppObj, srv_handle, param_obj",apps/srv_demos/app_srv_camera/app_srv_camera.c,共通/その他
+,app_create_graph(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"in_params, lens_params, in_lens_params, param_obj, calMatBuf",apps/srv_demos/app_srv_fileio/main.c,共通/その他
+,app_init(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"AppObj, in_params, lens_params, in_lens_params, param_obj, calMatBuf",apps/srv_demos/app_srv_fileio/main.c,共通/その他
+,get_offset(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,ldcParams,apps/srv_demos/app_srv_fileio/main.c,共通/その他
+,load_from_raw_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: skip over a RGBA pixel）,skip over a RGBA pixel,skip over a RGBA pixel,ldcParams,apps/srv_demos/app_srv_fileio/main.c,共通/その他
+,vision_apps_test_main(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,,apps/tests/app_vx_conformance_video_io/main.c,共通/その他
+,initSensorParams(),フレーム取得,タスクループ,"カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: * Utility API used to add a グラフ parameter from a ノード, ノード parameter index）","* Utility API used to add a graph parameter from a node, node parameter index","* Utility API used to add a グラフ parameter from a ノード, ノード parameter index","IssSensor_CreateParams, sensorParams, num_buf, msc_coeff_obj, display_params, display_param_obj",apps/utilities/app_heterogeneous/app_heterogeneous.c,共通/その他
+,testGraphProcessing(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: Copy CbCr）,Copy CbCr,Copy CbCr,"IssSensor_CreateParams, sensorParams, num_buf, msc_coeff_obj, display_params, display_param_obj, raw_params, initSensorParams, ae_awb_params, instCfg",apps/utilities/app_heterogeneous/app_heterogeneous.c,共通/その他
+,write_output_image_yuv(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"IssSensor_CreateParams, sensorParams, num_buf, msc_coeff_obj, display_params, display_param_obj, raw_params, initSensorParams, ae_awb_params",apps/utilities/app_heterogeneous/app_heterogeneous.c,共通/その他
+,appMemAllocTest(),その他,タスクループ,一般的な制御ロジックを実行する,,,,apps/utilities/app_mem/main_mem.c,共通/その他
+,app_log_device_send_string(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する,,,,apps/utilities/app_remote_log/main_remote_log.c,共通/その他
+,TestGraProcessingDcc(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"dcc_viss_buf, ae_awb_params, raw_params, GetDCCBuf",apps/utilities/app_viss/main.c,共通/その他
+,ct_free_mem(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"dcc_viss_buf, ae_awb_params, raw_params",apps/utilities/app_viss/main.c,共通/その他
+,tivxPtkAlgCleanup(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/common/target/vx_ptk_alg_common.c,共通/その他
+,tivxAddTargetKernelWriteArray(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: TBD: Write file write code here）,TBD: Write file write code here,TBD: Write file write code here,,kernels/fileio/arm/vx_fileio_write_array_target.c,共通/その他
+,tivxRemoveTargetKernelWriteArray(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_array_target.c,共通/その他
+,tivxAddTargetKernelWriteImage(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_image_target.c,共通/その他
+,tivxRemoveTargetKernelWriteImage(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_image_target.c,共通/その他
+,tivxAddTargetKernelWriteRawImage(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_raw_image_target.c,共通/その他
+,tivxRemoveTargetKernelWriteRawImage(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_raw_image_target.c,共通/その他
+,tivxAddTargetKernelWriteTensor(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_tensor_target.c,共通/その他
+,tivxRemoveTargetKernelWriteTensor(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_tensor_target.c,共通/その他
+,tivxAddTargetKernelWriteUserDataObject(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_user_data_object_target.c,共通/その他
+,tivxRemoveTargetKernelWriteUserDataObject(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_fileio_write_user_data_object_target.c,共通/その他
+,tivxRegisterFileIOTargetArmKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_kernels_fileio_target.c,共通/その他
+,tivxUnRegisterFileIOTargetArmKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/arm/vx_kernels_fileio_target.c,共通/その他
+,tivxFileIOLoadKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/host/vx_kernels_fileio_host.c,共通/その他
+,tivxFileIOUnLoadKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/host/vx_kernels_fileio_host.c,共通/その他
+,tivxRegisterFileIOKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/host/vx_kernels_fileio_host.c,共通/その他
+,tivxUnRegisterFileIOKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/fileio/host/vx_kernels_fileio_host.c,共通/その他
+,tivxAddTargetKernelDrawBevCamBoxDetections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: tivx_clr_debug_zone(VX_ZONE_INFO);）,tivx_clr_debug_zone(VX_ZONE_INFO);,tivx_clr_debug_zone(VX_ZONE_INFO);,,kernels/img_proc/a72/vx_dl_bev_cam_post_proc_target.c,共通/その他
+,tivxRemoveTargetKernelDrawBevCamBoxDetections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_dl_bev_cam_post_proc_target.c,共通/その他
+,blendSegMask(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: *
+ * @param フレーム Original NV12 data バッファ, where the in-place updates will happen
+ * @param box bounding box co-ordinates.
+ * @param outDataWidth width of the output バッファ.
+ * @param outDataHeight Height of the output バッファ.
+ *
+ * @returns original フレーム with some in-place post processing done）","*
+ * @param frame Original NV12 data buffer, where the in-place updates will happen
+ * @param box bounding box co-ordinates.
+ * @param outDataWidth width of the output buffer.
+ * @param outDataHeight Height of the output buffer.
+ *
+ * @returns original frame with some in-place post processing done","*
+ * @param フレーム Original NV12 data バッファ, where the in-place updates will happen
+ * @param box bounding box co-ordinates.
+ * @param outDataWidth width of the output バッファ.
+ * @param outDataHeight Height of the output バッファ.
+ *
+ * @returns original フレーム with some in-place post processing done","num_params, tivxDLBEVPostProcParams",kernels/img_proc/a72/vx_dl_bev_post_proc_target.c,共通/その他
+,tivxAddTargetKernelDrawBevBoxDetections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_dl_bev_post_proc_target.c,共通/その他
+,tivxRemoveTargetKernelDrawBevBoxDetections(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_dl_bev_post_proc_target.c,共通/その他
+,dlPreProcess_4D_NV12_image(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/img_proc/a72/vx_dl_bev_pre_proc_armv8_target.c,共通/その他
+,tivxAddTargetKernelDLPreProc4DArmv8(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ##################################################################################）,##################################################################################,##################################################################################,dl4DPreProcessImageParams,kernels/img_proc/a72/vx_dl_bev_pre_proc_armv8_target.c,共通/その他
+,tivxRemoveTargetKernelDLPreProc4DArmv8(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,dl4DPreProcessImageParams,kernels/img_proc/a72/vx_dl_bev_pre_proc_armv8_target.c,共通/その他
+,tivxAddTargetKernelImgHist(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_img_hist_target.c,共通/その他
+,tivxRemoveTargetKernelImgHist(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_img_hist_target.c,共通/その他
+,tivxRegisterImgProcTargetA72Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_kernels_img_proc_target.c,共通/その他
+,tivxUnRegisterImgProcTargetA72Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_kernels_img_proc_target.c,共通/その他
+,blendImage(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawCircle(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawHorizontalLine(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the line is more vertical than horizontal）,the line is more vertical than horizontal,the line is more vertical than horizontal,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawLine(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawPixel(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Module headers.）,Module headers.,Module headers.,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawRect(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawText(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,drawVerticalLine(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,fillRegion(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Module headers.）,Module headers.,Module headers.,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,getColor(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Module headers.）,Module headers.,Module headers.,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,initGraph(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,updateGraph(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/a72/vx_nv12_drawing_utils.c,共通/その他
+,getFont(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/img_proc/a72/vx_nv12_font_utils.c,共通/その他
+,tivxAddTargetKernelDLColorBlend(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_color_blend_target.c,共通/その他
+,tivxRemoveTargetKernelDLColorBlend(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_color_blend_target.c,共通/その他
+,tivxAddTargetKernelDLColorConvert(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_color_convert_target.c,共通/その他
+,tivxRemoveTargetKernelDLColorConvert(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_color_convert_target.c,共通/その他
+,tivxAddTargetKernelDLDrawBox(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_draw_box_target.c,共通/その他
+,tivxRemoveTargetKernelDLDrawBox(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_draw_box_target.c,共通/その他
+,dl_pre_proc_kernel(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_pre_proc_target.c,共通/その他
+,tivxAddTargetKernelDLPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Write DL pre proc operation here）,Write DL pre proc operation here,Write DL pre proc operation here,,kernels/img_proc/c66/vx_dl_pre_proc_target_no_dma.c,共通/その他
+,tivxRemoveTargetKernelDLPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dl_pre_proc_target_no_dma.c,共通/その他
+,tivxAddTargetKernelDofPlaneSep(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dof_plane_seperation_target.c,共通/その他
+,tivxRemoveTargetKernelDofPlaneSep(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_dof_plane_seperation_target.c,共通/その他
+,drawBox(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/img_proc/c66/vx_draw_box_detections_target.c,共通/その他
+,memcpyC66(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Not enabled - change to 1 for doing CPU copy）,Not enabled - change to 1 for doing CPU copy,Not enabled - change to 1 for doing CPU copy,"num_params, tivxDrawBoxDetectionsParams",kernels/img_proc/c66/vx_draw_box_detections_target.c,共通/その他
+,tivxAddTargetKernelDrawBoxDetections(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_draw_box_detections_target.c,共通/その他
+,tivxRemoveTargetKernelDrawBoxDetections(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_draw_box_detections_target.c,共通/その他
+,drawJoinedPoints(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,kernels/img_proc/c66/vx_draw_keypoint_detections_target.c,共通/その他
+,tivxAddTargetKernelDrawKeypointDetections(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tivxDrawKeypointDetectionsParams,kernels/img_proc/c66/vx_draw_keypoint_detections_target.c,共通/その他
+,tivxRemoveTargetKernelDrawKeypointDetections(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,tivxDrawKeypointDetectionsParams,kernels/img_proc/c66/vx_draw_keypoint_detections_target.c,共通/その他
+,tivxAddTargetKernelImgPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxImgPreProcKernelParams, nodeParams",kernels/img_proc/c66/vx_image_preprocessing_target.c,共通/その他
+,tivxRemoveTargetKernelImgPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxImgPreProcKernelParams, nodeParams",kernels/img_proc/c66/vx_image_preprocessing_target.c,共通/その他
+,memcpyC662d(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_params, tivxImgPreProcParams",kernels/img_proc/c66/vx_image_preprocessing_target_no_dma.c,共通/その他
+,tivxRegisterImgProcTargetC66Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_kernels_img_proc_target.c,共通/その他
+,tivxUnRegisterImgProcTargetC66Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_kernels_img_proc_target.c,共通/その他
+,tivxAddTargetKernelOCPostProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_oc_post_proc_target.c,共通/その他
+,tivxRemoveTargetKernelOCPostProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_oc_post_proc_target.c,共通/その他
+,tivxAddTargetKernelOCPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_oc_pre_proc_target.c,共通/その他
+,tivxRemoveTargetKernelOCPreProc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_oc_pre_proc_target.c,共通/その他
+,tivxAddTargetKernelODPostProc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_od_postprocessing_target.c,共通/その他
+,tivxRemoveTargetKernelODPostProc(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_od_postprocessing_target.c,共通/その他
+,convert_16bit_to_8bit(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/img_proc/c66/vx_pixel_visualization_target.c,共通/その他
+,tivxAddTargetKernelPixelViz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_pixel_visualization_target.c,共通/その他
+,tivxRemoveTargetKernelPixelViz(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_pixel_visualization_target.c,共通/その他
+,tivxAddTargetKernelPoseViz(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_pose_visualization_target.c,共通/その他
+,tivxRemoveTargetKernelPoseViz(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c66/vx_pose_visualization_target.c,共通/その他
+,tivxAddTargetKernelVisualLocalization(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tivxVisualLocalizationKernelParams,kernels/img_proc/c66/vx_visual_localization_target.c,共通/その他
+,tivxRemoveTargetKernelVisualLocalization(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tivxVisualLocalizationKernelParams,kernels/img_proc/c66/vx_visual_localization_target.c,共通/その他
+,tivxVLFreeMem(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tivxVisualLocalizationKernelParams,kernels/img_proc/c66/vx_visual_localization_target.c,共通/その他
+,tivxRegisterImgProcTargetC71Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c71/vx_kernels_img_proc_target.c,共通/その他
+,tivxUnRegisterImgProcTargetC71Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/c71/vx_kernels_img_proc_target.c,共通/その他
+,tivxAddTargetKernelSFM(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxSFMObj, sfmObj",kernels/img_proc/c71/vx_sfm_target.c,共通/その他
+,tivxRemoveTargetKernelSFM(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxSFMObj, sfmObj",kernels/img_proc/c71/vx_sfm_target.c,共通/その他
+,tivxSFMFreeMem(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"sfmObj, tivxSFMObj",kernels/img_proc/c71/vx_sfm_target.c,共通/その他
+,tivxImgMosaicParamsSetDefaults(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,tivxImgMosaicParams,kernels/img_proc/host/tivx_img_mosaic_host.c,共通/その他
+,tivxImgProcLoadKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/host/vx_kernels_img_proc_host.c,共通/その他
+,tivxImgProcUnLoadKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/host/vx_kernels_img_proc_host.c,共通/その他
+,tivxRegisterImgProcKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/host/vx_kernels_img_proc_host.c,共通/その他
+,tivxUnRegisterImgProcKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/host/vx_kernels_img_proc_host.c,共通/その他
+,tivxAddTargetKernelImgMosaicMsc(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"num_params, tivxImgMosaicParams, tivxImgMosaicMscObj, msc_obj",kernels/img_proc/r5f/vx_img_mosaic_msc_target.c,共通/その他
+,tivxKernelImgMosaicMscDrvSetScCfg(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: status = VX_FAILURE;）,status = VX_FAILURE;,status = VX_FAILURE;,"sc_cfg, Fvid2_Handle, tivxImgMosaicMscInstObj, inst_obj",kernels/img_proc/r5f/vx_img_mosaic_msc_target.c,共通/その他
+,tivxKernelImgMosaicMscDrvWait(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Submit MSC Request）,Submit MSC Request,Submit MSC Request,"inst_obj, tivxImgMosaicMscInstObj, tivxKernelImgMosaicMscDrvSetScCfg, sc_cfg, Fvid2_Handle",kernels/img_proc/r5f/vx_img_mosaic_msc_target.c,共通/その他
+,tivxRemoveTargetKernelImgMosaicMsc(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"num_params, tivxImgMosaicParams, tivxImgMosaicMscObj, msc_obj",kernels/img_proc/r5f/vx_img_mosaic_msc_target.c,共通/その他
+,tivxKernelImgMosaicMscFreeMem(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"msc_obj, inst_obj, tivxImgMosaicMscObj, tivxImgMosaicMscInstObj, unitParams",kernels/img_proc/r5f/vx_img_mosaic_msc_target_sim.c,共通/その他
+,tivxVpacMscScaleInitParams(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"unitParams, tivxImgMosaicMscInstObj",kernels/img_proc/r5f/vx_img_mosaic_msc_target_sim.c,共通/その他
+,tivxRegisterImgProcTargetR5FKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/r5f/vx_kernels_img_proc_target.c,共通/その他
+,tivxUnRegisterImgProcTargetR5FKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/img_proc/r5f/vx_kernels_img_proc_target.c,共通/その他
+,gpuRender1x1_renderFrame(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pObj, pEglWindowObj",kernels/sample/a72/gpu_render1x1.c,共通/その他
+,gpuRender1x1_renderFrame1x1(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pObj, vPositionHandle, vTexHandle, yuvTexSamplerHandle, gpuRender1x1_renderFrame, GpuRender1x1_Obj, pEglWindowObj",kernels/sample/a72/gpu_render1x1.c,共通/その他
+,gpuRender1x1_setup(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pObj, vPositionHandle, yuvTexSamplerHandle, vTexHandle, GpuRender1x1_Obj, pEglWindowObj, gpuRender1x1_renderFrame",kernels/sample/a72/gpu_render1x1.c,共通/その他
+,gpuRender2x2_renderFrame(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pObj, render1x1Obj, pEglWindowObj",kernels/sample/a72/gpu_render2x2.c,共通/その他
+,gpuRender2x2_setup(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"pObj, render1x1Obj, gpuRender2x2_renderFrame, GpuRender2x2_Obj, pEglWindowObj",kernels/sample/a72/gpu_render2x2.c,共通/その他
+,tivxRegisterSampleTargetA72Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/sample/a72/vx_kernels_sample_target.c,共通/その他
+,tivxUnRegisterSampleTargetA72Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/sample/a72/vx_kernels_sample_target.c,共通/その他
+,tivxAddTargetKernelOpenglMosaic(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,kernels/sample/a72/vx_opengl_mosaic_target.c,共通/その他
+,tivxRemoveTargetKernelOpenglMosaic(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,kernels/sample/a72/vx_opengl_mosaic_target.c,共通/その他
+,tivxRegisterSampleKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/sample/host/vx_kernels_sample_host.c,共通/その他
+,tivxSampleLoadKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/sample/host/vx_kernels_sample_host.c,共通/その他
+,tivxSampleUnLoadKernels(),フレーム取得,関数呼び出し,"カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: These three lines only work on PC emulation mode ...
+     * this will need to be updated when moving to target）","These three lines only work on PC emulation mode ...
+         * this will need to be updated when moving to target","These three lines only work on PC emulation mode ...
+     * this will need to be updated when moving to target",,kernels/sample/host/vx_kernels_sample_host.c,共通/その他
+,tivxUnRegisterSampleKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/sample/host/vx_kernels_sample_host.c,共通/その他
+,DSPF_dp_qrd_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: =======================================================================）,=======================================================================,=======================================================================,,kernels/srv/c66/DSPF_dp_qrd_cn.c,共通/その他
+,DSPF_dp_qrd_inverse_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: use backward substitution to solve x=inv(R)*y）,use backward substitution to solve x=inv(R)*y,use backward substitution to solve x=inv(R)*y,,kernels/srv/c66/DSPF_dp_qrd_cn.c,共通/その他
+,DSPF_dp_qrd_solver_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (col=0;col<=loop_count;col++)）,for (col=0;col<=loop_count;col++),for (col=0;col<=loop_count;col++),,kernels/srv/c66/DSPF_dp_qrd_cn.c,共通/その他
+,DSPF_dp_bidiag_to_diag_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (i=Ncols-1;i>=0;i--)）,for (i=Ncols-1;i>=0;i--),for (i=Ncols-1;i>=0;i--),,kernels/srv/c66/DSPF_dp_svd_cn.c,共通/その他
+,DSPF_dp_convert_to_bidiag_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: -------------------------------------------------------------------）,-------------------------------------------------------------------,-------------------------------------------------------------------,,kernels/srv/c66/DSPF_dp_svd_cn.c,共通/その他
+,DSPF_dp_sort_singular_values_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (k=Ncols-1:k>=0;k--)）,for (k=Ncols-1:k>=0;k--),for (k=Ncols-1:k>=0;k--),,kernels/srv/c66/DSPF_dp_svd_cn.c,共通/その他
+,DSPF_dp_svd_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: =======================================================================）,=======================================================================,=======================================================================,,kernels/srv/c66/DSPF_dp_svd_cn.c,共通/その他
+,DSPF_sp_qrd_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: =======================================================================）,=======================================================================,=======================================================================,,kernels/srv/c66/DSPF_sp_qrd_cn.c,共通/その他
+,DSPF_sp_qrd_inverse_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: use backward substitution to solve x=inv(R)*y）,use backward substitution to solve x=inv(R)*y,use backward substitution to solve x=inv(R)*y,,kernels/srv/c66/DSPF_sp_qrd_cn.c,共通/その他
+,DSPF_sp_qrd_solver_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (col=0;col<=loop_count;col++)）,for (col=0;col<=loop_count;col++),for (col=0;col<=loop_count;col++),,kernels/srv/c66/DSPF_sp_qrd_cn.c,共通/その他
+,DSPF_sp_bidiag_to_diag_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (i=Ncols-1;i>=0;i--)）,for (i=Ncols-1;i>=0;i--),for (i=Ncols-1;i>=0;i--),,kernels/srv/c66/DSPF_sp_svd_cn.c,共通/その他
+,DSPF_sp_convert_to_bidiag_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: -------------------------------------------------------------------）,-------------------------------------------------------------------,-------------------------------------------------------------------,,kernels/srv/c66/DSPF_sp_svd_cn.c,共通/その他
+,DSPF_sp_sort_singular_values_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: for (k=Ncols-1:k>=0;k--)）,for (k=Ncols-1:k>=0;k--),for (k=Ncols-1:k>=0;k--),,kernels/srv/c66/DSPF_sp_svd_cn.c,共通/その他
+,DSPF_sp_svd_cn(),その他,タスクループ,一般的な制御ロジックを実行する（注記: =======================================================================）,=======================================================================,=======================================================================,,kernels/srv/c66/DSPF_sp_svd_cn.c,共通/その他
+,svGenerate_3D_Bowl(),フレーム取得,タスクループ,"カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: ===============================================================================
+*
+* Name:    svGenerate_3D_Bowl()
+*
+* Description: Creates 3D Bowl Mesh in array of X, Y, Z coordinates for 3D SRV
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================）","===============================================================================
+*
+* Name:        svGenerate_3D_Bowl()
+*
+* Description: Creates 3D Bowl Mesh in array of X, Y, Z coordinates for 3D SRV
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================","===============================================================================
+*
+* Name:    svGenerate_3D_Bowl()
+*
+* Description: Creates 3D Bowl Mesh in array of X, Y, Z coordinates for 3D SRV
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================",,kernels/srv/c66/core_generate_3dbowl.c,共通/その他
+,svGenerate_3D_GPULUT(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Repeat pixels if we try to access a pixel outside the camera input image）,Repeat pixels if we try to access a pixel outside the camera input image,Repeat pixels if we try to access a pixel outside the camera input image,,kernels/srv/c66/core_generate_gpulut.c,共通/その他
+,Calculate1DErrorForPoint(),その他,タスクループ,一般的な制御ロジックを実行する,,,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,GetLineAfterRansac(),その他,タスクループ,一般的な制御ロジックを実行する,,,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svAssociatePointsToLine(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+*
+* Name:    svAssociatePointsToLine()
+*
+* Description: Associates each boundary point to one of four lines or labels as outlier
+*
+*
+* Input:
+*  sv:          Handle for the SV structure
+*  errThr:        Defines what classifies as an outlier     
+*  candLineIdx:     Array with possible canidate points for each line
+*  LineIdxArr:      Pointer for storing information correlating each point to a line
+*  NumOutliers:     Pointer for storing the number of outliers
+*
+===============================================================================）","===============================================================================
+*
+* Name:       svAssociatePointsToLine()
+*
+* Description: Associates each boundary point to one of four lines or labels as outlier
+*
+*
+* Input:
+*   sv:                   Handle for the SV structure
+*   errThr:               Defines what classifies as an outlier         
+*   candLineIdx:          Array with possible canidate points for each line
+*   LineIdxArr:           Pointer for storing information correlating each point to a line
+*   NumOutliers:          Pointer for storing the number of outliers
+*
+===============================================================================","===============================================================================
+*
+* Name:    svAssociatePointsToLine()
+*
+* Description: Associates each boundary point to one of four lines or labels as outlier
+*
+*
+* Input:
+*  sv:          Handle for the SV structure
+*  errThr:        Defines what classifies as an outlier     
+*  candLineIdx:     Array with possible canidate points for each line
+*  LineIdxArr:      Pointer for storing information correlating each point to a line
+*  NumOutliers:     Pointer for storing the number of outliers
+*
+===============================================================================",tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svBinarizeImage(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ===============================================================================
+ *
+ * Name:    svBinarizeImage()
+ *
+ * Description: Binarize input picture based on local mean
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *  view_number: view id
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:        svBinarizeImage()
+ *
+ * Description: Binarize input picture based on local mean
+ *
+ *
+ * Input:
+ *   sv:        Handle for the SV structure
+ *   view_number: view id
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:    svBinarizeImage()
+ *
+ * Description: Binarize input picture based on local mean
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *  view_number: view id
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================","buf_bwLumaFrame, buf_grayLumaFrame, bwLumaFrame, tivxPointDetectParams",kernels/srv/c66/core_point_detect.c,共通/その他
+,svCheckAllDirections(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+ *
+ * Name:      svCheckAllDirections()
+ *
+ * Description:   check if a boundary point meets some conditions
+ *
+ *
+ * Input:
+ *  sv:      Handle for the SV structure
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:            svCheckAllDirections()
+ *
+ * Description:     check if a boundary point meets some conditions
+ *
+ *
+ * Input:
+ *   sv:            Handle for the SV structure
+ *
+ * Returns:
+ *                  1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:      svCheckAllDirections()
+ *
+ * Description:   check if a boundary point meets some conditions
+ *
+ *
+ * Input:
+ *  sv:      Handle for the SV structure
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================","tivxPointDetectParams, bwLumaFrame",kernels/srv/c66/core_point_detect.c,共通/その他
+,svCheckFPCondition(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ===============================================================================
+ *
+ * Name:      svCheckFPCondition()
+ *
+ * Description:   check whether finder patterns are valid ones
+ *
+ *
+ * Input:
+ *  inputCenter:  detected finder patterns
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:            svCheckFPCondition()
+ *
+ * Description:     check whether finder patterns are valid ones
+ *
+ *
+ * Input:
+ *   inputCenter:   detected finder patterns
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:      svCheckFPCondition()
+ *
+ * Description:   check whether finder patterns are valid ones
+ *
+ *
+ * Input:
+ *  inputCenter:  detected finder patterns
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================",tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svCheckPatternProfileHiDia(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+ *
+ * Name:      svCheckPatternProfileHiDia()
+ *
+ * Description:   Check finder pattern profile in diagonal directions
+ *
+ *
+ * Input:
+ *  bwLumaFrame:  Binarized fisheye input
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:            svCheckPatternProfileHiDia()
+ *
+ * Description:     Check finder pattern profile in  diagonal directions
+ *
+ *
+ * Input:
+ *   bwLumaFrame:   Binarized fisheye input
+ *
+ * Returns:
+ *                  1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:      svCheckPatternProfileHiDia()
+ *
+ * Description:   Check finder pattern profile in diagonal directions
+ *
+ *
+ * Input:
+ *  bwLumaFrame:  Binarized fisheye input
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================",bwLumaFrame,kernels/srv/c66/core_point_detect.c,共通/その他
+,svCheckPatternProfileLowDia(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+ *
+ * Name:      svCheckPatternProfileLowDia()
+ *
+ * Description:   Check finder pattern profile in low diagonal directions
+ *
+ *
+ * Input:
+ *  bwLumaFrame:  Binarized fisheye input
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:            svCheckPatternProfileLowDia()
+ *
+ * Description:     Check finder pattern profile in low diagonal directions
+ *
+ *
+ * Input:
+ *   bwLumaFrame:   Binarized fisheye input
+ *
+ * Returns:
+ *                  1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:      svCheckPatternProfileLowDia()
+ *
+ * Description:   Check finder pattern profile in low diagonal directions
+ *
+ *
+ * Input:
+ *  bwLumaFrame:  Binarized fisheye input
+ *
+ * Returns:
+ *         1 if the current pixel is candidate pixel of finder pattern
+ * Effects:
+ *
+ ===============================================================================",bwLumaFrame,kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetCornerFromLine(),その他,タスクループ,一般的な制御ロジックを実行する（注記: y = ax + b）,y = ax + b,y = ax + b,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetFinderPatterns(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ===============================================================================
+ *
+ * Name:    svGetFinderPatterns()
+ *
+ * Description: Find find patterns from a fisheye input
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *  prms:   Scratch Buffers
+ *  in_image  Input Luma image
+ *
+ *
+ * Returns:
+ *       1 if finder pattern are detected, 0 otherwise
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:        svGetFinderPatterns()
+ *
+ * Description: Find find patterns from a fisheye input
+ *
+ *
+ * Input:
+ *   sv:        Handle for the SV structure
+ *   prms:      Scratch Buffers
+ *   in_image   Input Luma image
+ *
+ *
+ * Returns:
+ *              1 if finder pattern are detected, 0 otherwise
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:    svGetFinderPatterns()
+ *
+ * Description: Find find patterns from a fisheye input
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *  prms:   Scratch Buffers
+ *  in_image  Input Luma image
+ *
+ *
+ * Returns:
+ *       1 if finder pattern are detected, 0 otherwise
+ * Effects:
+ *
+ ===============================================================================","tivxPointDetectParams, bwLumaFrame, buf_bwLumaFrame, buf_grayLumaFrame",kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetInitialLines(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetLine(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,,kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetLineFitError(),その他,タスクループ,一般的な制御ロジックを実行する,,,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svGetLineFrom2Pts(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+*
+* Name:    svGetLineFrom2Pts()
+*
+* Description: Estimates line givin 2 points
+*
+*
+* Input:
+*  sv:       Handle for the SV structure
+*  NaNSlope:    Pointer for storing NaNslope (1 or 0)
+*  Slope:     Pointer for storing line slope
+*  icpt:      Pointer for storing Y intercept
+*  xIcpt:     Pointer for storing X intercept
+*  lineIdx:    Line ID (1-4)
+*
+===============================================================================）","===============================================================================
+*
+* Name:        svGetLineFrom2Pts()
+*
+* Description: Estimates line givin 2 points
+*
+*
+* Input:
+*   sv:             Handle for the SV structure
+*   NaNSlope:       Pointer for storing NaNslope (1 or 0)
+*   Slope:          Pointer for storing line slope
+*   icpt:           Pointer for storing Y intercept
+*   xIcpt:          Pointer for storing X intercept
+*   lineIdx:        Line ID (1-4)
+*
+===============================================================================","===============================================================================
+*
+* Name:    svGetLineFrom2Pts()
+*
+* Description: Estimates line givin 2 points
+*
+*
+* Input:
+*  sv:       Handle for the SV structure
+*  NaNSlope:    Pointer for storing NaNslope (1 or 0)
+*  Slope:     Pointer for storing line slope
+*  icpt:      Pointer for storing Y intercept
+*  xIcpt:     Pointer for storing X intercept
+*  lineIdx:    Line ID (1-4)
+*
+===============================================================================",tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svInterpolateMissingBoundary(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: exclude in the next iteration）,exclude in the next iteration,exclude in the next iteration,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svRandomPerm(),その他,タスクループ,一般的な制御ロジックを実行する（注記: RAND_MAX assumed to be 32767）,RAND_MAX assumed to be 32767,RAND_MAX assumed to be 32767,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svRansacLineFit(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ===============================================================================
+*
+* Name:    svRansacLineFit()
+*
+* Description: Calculates corner points & error using RANSAC to estimate the 4 lines 
+*
+*
+* Input:
+*  sv:       Handle for the SV structure
+*  inX & inY:   Pattern Boundary Points
+*  fcX & fcY:   Fiesheye Corrected Boundary Points
+*  corner:     Pointer for storing coner locations
+*  numPts:     Number of boundary points
+*
+* Returns:
+*       returns line fit error measurement 
+*
+===============================================================================）","===============================================================================
+*
+* Name:        svRansacLineFit()
+*
+* Description: Calculates corner points & error using RANSAC to estimate the 4 lines 
+*
+*
+* Input:
+*   sv:             Handle for the SV structure
+*   inX & inY:      Pattern Boundary Points
+*   fcX & fcY:      Fiesheye Corrected Boundary Points
+*   corner:         Pointer for storing coner locations
+*   numPts:         Number of boundary points
+*
+* Returns:
+*              returns line fit error measurement 
+*
+===============================================================================","===============================================================================
+*
+* Name:    svRansacLineFit()
+*
+* Description: Calculates corner points & error using RANSAC to estimate the 4 lines 
+*
+*
+* Input:
+*  sv:       Handle for the SV structure
+*  inX & inY:   Pattern Boundary Points
+*  fcX & fcY:   Fiesheye Corrected Boundary Points
+*  corner:     Pointer for storing coner locations
+*  numPts:     Number of boundary points
+*
+* Returns:
+*       returns line fit error measurement 
+*
+===============================================================================",,kernels/srv/c66/core_point_detect.c,共通/その他
+,svRefineFPCorner(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: warped index）,warped index,warped index,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,svUpdateBoundaryPoints(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: LDC）,LDC,LDC,tivxPointDetectParams,kernels/srv/c66/core_point_detect.c,共通/その他
+,addMatrix(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Ncols: # of cols of inM1）,Ncols: # of cols of inM1,Ncols: # of cols of inM1,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,computeF(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: printMatrix(Nrows, Ncols, J);）","printMatrix(Nrows, Ncols, J);","printMatrix(Nrows, Ncols, J);",,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,computeJ(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: ******************* For Levenberg-Marquardt ********************）,******************* For Levenberg-Marquardt ********************,******************* For Levenberg-Marquardt ********************,,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,constructCalmat(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+*
+* Name:    constructCalmat()
+*
+* Description: generate calmat from R and T
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================）","===============================================================================
+*
+* Name:        constructCalmat()
+*
+* Description: generate calmat from R and T
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================","===============================================================================
+*
+* Name:    constructCalmat()
+*
+* Description: generate calmat from R and T
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================",,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,copyCornerPoints(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: ===============================================================================
+*
+* Name:    copyCornerPoints()
+*
+* Description: rearrange detected corner points
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================）","===============================================================================
+*
+* Name:        copyCornerPoints()
+*
+* Description: rearrange detected corner points
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================","===============================================================================
+*
+* Name:    copyCornerPoints()
+*
+* Description: rearrange detected corner points
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================","tivxPoseEstimationParams, CameraIntrinsicParams",kernels/srv/c66/core_pose_estimation.c,共通/その他
+,crossProduct(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: ///////////////////////////////////////////////）,///////////////////////////////////////////////,///////////////////////////////////////////////,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,estimateRtBetweenChartAndCamera(),初期化,タスクループ,"モジュールやパラメータを初期化し、実行準備を行う（注記: =======================================================================
+*
+* Name:    estimateRtBetweenChartAndCamera()
+*
+* Description: pose estimation based on DLT
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================）","=======================================================================
+*
+* Name:        estimateRtBetweenChartAndCamera()
+*
+* Description: pose estimation based on DLT
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================","=======================================================================
+*
+* Name:    estimateRtBetweenChartAndCamera()
+*
+* Description: pose estimation based on DLT
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,estimateRtBetweenChartAndCamera_ransac(),初期化,タスクループ,"モジュールやパラメータを初期化し、実行準備を行う（注記: =======================================================================
+*
+* Name:    estimateRtBetweenChartAndCamera_ransac()
+*
+* Description: pose estimation based on RANSAC
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================）","=======================================================================
+*
+* Name:        estimateRtBetweenChartAndCamera_ransac()
+*
+* Description: pose estimation based on RANSAC
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================","=======================================================================
+*
+* Name:    estimateRtBetweenChartAndCamera_ransac()
+*
+* Description: pose estimation based on RANSAC
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,estimateRt_LM(),初期化,タスクループ,"モジュールやパラメータを初期化し、実行準備を行う（注記: =======================================================================
+*
+* Name:    estimateRt_LM()
+*
+* Description: Levenberg - Marquardt algorithm to update pose
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================）","=======================================================================
+*
+* Name:        estimateRt_LM()
+*
+* Description: Levenberg - Marquardt algorithm to update pose
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================","=======================================================================
+*
+* Name:    estimateRt_LM()
+*
+* Description: Levenberg - Marquardt algorithm to update pose
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================",,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,extractRandT(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: =======================================================================
+*
+* Name:    extractRandT()
+*
+* Description: extract R and T
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================）","=======================================================================
+*
+* Name:        extractRandT()
+*
+* Description: extract R and T
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================","=======================================================================
+*
+* Name:    extractRandT()
+*
+* Description: extract R and T
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,getDiagonal(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,getPtArrFromIndex(),その他,タスクループ,一般的な制御ロジックを実行する,,,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,getX(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: ******************* For Levenberg-Marquardt ********************）,******************* For Levenberg-Marquardt ********************,******************* For Levenberg-Marquardt ********************,,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,initChartPoints(),初期化,タスクループ,"モジュールやパラメータを初期化し、実行準備を行う（注記: ===============================================================================
+*
+* Name:    initChartPoints()
+*
+* Description: Set chart positions
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================）","===============================================================================
+*
+* Name:        initChartPoints()
+*
+* Description: Set chart positions
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================","===============================================================================
+*
+* Name:    initChartPoints()
+*
+* Description: Set chart positions
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+* Effects:
+*
+===============================================================================",,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,initMatrix(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Ncols: # of cols of inM1）,Ncols: # of cols of inM1,Ncols: # of cols of inM1,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,initializePECameraIntrinsics(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,muliplyScalerMatrix(),その他,タスクループ,一般的な制御ロジックを実行する（注記: Ncols: # of cols of inM1）,Ncols: # of cols of inM1,Ncols: # of cols of inM1,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,multiplyMatrix(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Ncols2: # of cols of inM2）,Ncols2: # of cols of inM2,Ncols2: # of cols of inM2,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,myrandPE(),その他,タスクループ,一般的な制御ロジックを実行する（注記: RAND_MAX assumed to be 32767）,RAND_MAX assumed to be 32767,RAND_MAX assumed to be 32767,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,normalizeData_2d(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: multiply3(T2Inv, &sv->Hnorm, T1, &sv->H);）","multiply3(T2Inv, &sv->Hnorm, T1, &sv->H);","multiply3(T2Inv, &sv->Hnorm, T1, &sv->H);",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,print_matrix3D_f(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,print_point2D_f(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,randomPerm(),その他,タスクループ,一般的な制御ロジックを実行する（注記: RAND_MAX assumed to be 32767）,RAND_MAX assumed to be 32767,RAND_MAX assumed to be 32767,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,scale2UnitMatrix(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,solveDelta(),表示制御,タスクループ,"処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: scale such that columns 1 and 2 are close to unit and H(3,3) is positive）","scale such that columns 1 and 2 are close to unit and H(3,3) is positive","scale such that columns 1 and 2 are close to unit and H(3,3) is positive",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,subtractMatrix(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Ncols: # of cols of inM1）,Ncols: # of cols of inM1,Ncols: # of cols of inM1,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,svExtrinsicPoseEstimation(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: =======================================================================
+*
+* Name:    svExtrinsicPoseEstimation()
+*
+* Description: estimate pose of each camera
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================）","=======================================================================
+*
+* Name:        svExtrinsicPoseEstimation()
+*
+* Description: estimate pose of each camera
+*
+*
+* Input:
+*   sv:        Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================","=======================================================================
+*
+* Name:    svExtrinsicPoseEstimation()
+*
+* Description: estimate pose of each camera
+*
+*
+* Input:
+*  sv:    Handle for the SV structure
+*
+* Returns:
+*
+*
+* Effects:
+*
+*
+=======================================================================",tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,svSetFrameCentersPEstimate(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ===============================================================================
+ *
+ * Name:    svSetFrameCentersPEstimate()
+ *
+ * Description: Set input フレーム distortion centers and find the center of each input
+ *       view in the output フレーム
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================）","===============================================================================
+ *
+ * Name:        svSetFrameCentersPEstimate()
+ *
+ * Description: Set input frame distortion centers and find the center of each input
+ *              view in the output frame
+ *
+ *
+ * Input:
+ *   sv:        Handle for the SV structure
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================","===============================================================================
+ *
+ * Name:    svSetFrameCentersPEstimate()
+ *
+ * Description: Set input フレーム distortion centers and find the center of each input
+ *       view in the output フレーム
+ *
+ *
+ * Input:
+ *  sv:    Handle for the SV structure
+ *
+ * Returns:
+ *
+ * Effects:
+ *
+ ===============================================================================","CameraIntrinsicParams, tivxPoseEstimationParams",kernels/srv/c66/core_pose_estimation.c,共通/その他
+,transposeMatrix(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Ncols: # of cols of input）,Ncols: # of cols of input,Ncols: # of cols of input,tivxPoseEstimationParams,kernels/srv/c66/core_pose_estimation.c,共通/その他
+,tivxAddTargetKernelGenerate3Dbowl(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: local memory buffers, etc) >）","local memory buffers, etc) >","local memory buffers, etc) >",,kernels/srv/c66/vx_generate_3dbowl_target.c,共通/その他
+,tivxRemoveTargetKernelGenerate3Dbowl(),フレーム処理,関数呼び出し,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: local memory buffers, etc) >）","local memory buffers, etc) >","local memory buffers, etc) >",,kernels/srv/c66/vx_generate_3dbowl_target.c,共通/その他
+,tivxAddTargetKernelGenerateGpulut(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_generate_gpulut_target.c,共通/その他
+,tivxRemoveTargetKernelGenerateGpulut(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_generate_gpulut_target.c,共通/その他
+,tivxRegisterSrvTargetC66Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_kernels_srv_target.c,共通/その他
+,tivxUnRegisterSrvTargetC66Kernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_kernels_srv_target.c,共通/その他
+,tivxAddTargetKernelPointDetect(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Note: Freeing this in order to allow for total allocated memory to reset）,Note: Freeing this in order to allow for total allocated memory to reset,Note: Freeing this in order to allow for total allocated memory to reset,,kernels/srv/c66/vx_point_detect_target.c,共通/その他
+,tivxRemoveTargetKernelPointDetect(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_point_detect_target.c,共通/その他
+,tivxAddTargetKernelPoseEstimation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_pose_estimation_target.c,共通/その他
+,tivxRemoveTargetKernelPoseEstimation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/c66/vx_pose_estimation_target.c,共通/その他
+,tivxAddTargetKernelGlSrv(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/gpu/vx_gl_srv_target.c,共通/その他
+,tivxRemoveTargetKernelGlSrv(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/gpu/vx_gl_srv_target.c,共通/その他
+,tivxRegisterSrvTargetGpuKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/gpu/vx_kernels_srv_target.c,共通/その他
+,tivxUnRegisterSrvTargetGpuKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/srv/gpu/vx_kernels_srv_target.c,共通/その他
+,tivxRegisterSrvKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/srv/host/vx_kernels_srv_host.c,共通/その他
+,tivxSrvLoadKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/srv/host/vx_kernels_srv_host.c,共通/その他
+,tivxSrvUnLoadKernels(),フレーム取得,関数呼び出し,"カメラ入力の受信やDMA転送を設定・実行してフレームを取得する（注記: These three lines only work on PC emulation mode ...
+     * this will need to be updated when moving to target）","These three lines only work on PC emulation mode ...
+         * this will need to be updated when moving to target","These three lines only work on PC emulation mode ...
+     * this will need to be updated when moving to target",,kernels/srv/host/vx_kernels_srv_host.c,共通/その他
+,tivxUnRegisterSrvKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/srv/host/vx_kernels_srv_host.c,共通/その他
+,bowl_generation_3dlut_check(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: i）,i,i,"in_params, in_offset_params, calMatBuf",kernels/srv/test/test_generate_3dbowl.c,共通/その他
+,bowl_generation_calmat_check(),その他,タスクループ,一般的な制御ロジックを実行する,,,"in_params, in_offset_params, calMatBuf",kernels/srv/test/test_generate_3dbowl.c,共通/その他
+,gpulut_generation_lut_check(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"in_params, in_lens_params, lens_params",kernels/srv/test/test_generate_gpulut.c,共通/その他
+,read_gpulut_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: lut_size is the number of entries in the LUT）,lut_size is the number of entries in the LUT,lut_size is the number of entries in the LUT,"in_params, in_lens_params, lens_params",kernels/srv/test/test_generate_gpulut.c,共通/その他
+,read_xyzlut3d_file(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: lut_size is the number of entries in the LUT）,lut_size is the number of entries in the LUT,lut_size is the number of entries in the LUT,"in_params, in_lens_params, lens_params",kernels/srv/test/test_generate_gpulut.c,共通/その他
+,load_input_images_old(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,param_obj,kernels/srv/test/test_gpu_srv.c,共通/その他
+,make_filename(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: * Utility API to export グラフ information to file for debug and visualization）,* Utility API to export graph information to file for debug and visualization,* Utility API to export グラフ information to file for debug and visualization,,kernels/srv/test/test_gpu_srv.c,共通/その他
+,ct_read_image2(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"in_params, in_lens_params, lens_params, out_params, ref_params",kernels/srv/test/test_point_detect.c,共通/その他
+,ct_write_image2(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"in_params, in_lens_params, lens_params, out_params, ref_params",kernels/srv/test/test_point_detect.c,共通/その他
+,point_detect_binarize_check(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: ref corners are downshifted by 4, out corners need to be shifted down）","ref corners are downshifted by 4, out corners need to be shifted down","ref corners are downshifted by 4, out corners need to be shifted down","in_params, in_lens_params, lens_params, out_params, ref_params",kernels/srv/test/test_point_detect.c,共通/その他
+,tivxRegisterStereoKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/stereo/host/vx_kernels_stereo_host.c,共通/その他
+,tivxStereoLoadKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/stereo/host/vx_kernels_stereo_host.c,共通/その他
+,tivxStereoUnLoadKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/stereo/host/vx_kernels_stereo_host.c,共通/その他
+,tivxUnRegisterStereoKernels(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,,kernels/stereo/host/vx_kernels_stereo_host.c,共通/その他
+,tivxAddTargetKernelBamDisparityMerge(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_disparity_merge_target.c,共通/その他
+,tivxRemoveTargetKernelBamDisparityMerge(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_disparity_merge_target.c,共通/その他
+,tivxAddTargetKernelBamExtractDisparityConfidence(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_extract_disparity_confidence_target.c,共通/その他
+,tivxRemoveTargetKernelBamExtractDisparityConfidence(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_extract_disparity_confidence_target.c,共通/その他
+,tivxAddTargetKernelBamGroundEstimation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_ground_estimation_target.c,共通/その他
+,tivxRemoveTargetKernelBamGroundEstimation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_ground_estimation_target.c,共通/その他
+,tivxAddTargetKernelBamHoleFilling(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_hole_filling_target.c,共通/その他
+,tivxRemoveTargetKernelBamHoleFilling(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_hole_filling_target.c,共通/その他
+,tivxAddTargetKernelBamMedianFilter(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_median_filter_target.c,共通/その他
+,tivxRemoveTargetKernelBamMedianFilter(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_median_filter_target.c,共通/その他
+,tivxAddTargetKernelBamObstacleDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_obstacle_detection_target.c,共通/その他
+,tivxRemoveTargetKernelBamObstacleDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_obstacle_detection_target.c,共通/その他
+,tivxAddTargetKernelBamOccupancyGridDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_occupancy_grid_detection_target.c,共通/その他
+,tivxRemoveTargetKernelBamOccupancyGridDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_occupancy_grid_detection_target.c,共通/その他
+,tivxAddTargetKernelBamPointCloudCreation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_point_cloud_creation_target.c,共通/その他
+,tivxRemoveTargetKernelBamPointCloudCreation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_point_cloud_creation_target.c,共通/その他
+,tivxAddTargetKernelBamSdeDisparityVisualize(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/bam/vx_bam_sde_disparity_visualize_target.c,共通/その他
+,tivxRemoveTargetKernelBamSdeDisparityVisualize(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/bam/vx_bam_sde_disparity_visualize_target.c,共通/その他
+,tivxAddTargetKernelDisparityMerge(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_disparity_merge_target.c,共通/その他
+,tivxRemoveTargetKernelDisparityMerge(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_disparity_merge_target.c,共通/その他
+,extractDisparityAndConfidence(),その他,タスクループ,一般的な制御ロジックを実行する,,,,kernels/stereo/target/vx_extract_disparity_confidence_target.c,共通/その他
+,tivxAddTargetKernelExtractDisparityConfidence(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_extract_disparity_confidence_target.c,共通/その他
+,tivxRemoveTargetKernelExtractDisparityConfidence(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_extract_disparity_confidence_target.c,共通/その他
+,tivxAddTargetKernelGroundEstimation(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Issue the reset command.）,Issue the reset command.,Issue the reset command.,,kernels/stereo/target/vx_ground_estimation_target.c,共通/その他
+,tivxRemoveTargetKernelGroundEstimation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_ground_estimation_target.c,共通/その他
+,tivxAddTargetKernelHoleFilling(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_hole_filling_target.c,共通/その他
+,tivxRemoveTargetKernelHoleFilling(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_hole_filling_target.c,共通/その他
+,tivxRegisterStereoTargetKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_kernels_stereo_target.c,共通/その他
+,tivxUnRegisterStereoTargetKernels(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_kernels_stereo_target.c,共通/その他
+,tivxAddTargetKernelMedianFilter(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_median_filter_target.c,共通/その他
+,tivxRemoveTargetKernelMedianFilter(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_median_filter_target.c,共通/その他
+,tivxAddTargetKernelObstacleDetection(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_obstacle_detection_target.c,共通/その他
+,tivxRemoveTargetKernelObstacleDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_obstacle_detection_target.c,共通/その他
+,tivxAddTargetKernelOccupancyGridDetection(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: Issue the reset command.）,Issue the reset command.,Issue the reset command.,,kernels/stereo/target/vx_occupancy_grid_detection_target.c,共通/その他
+,tivxRemoveTargetKernelOccupancyGridDetection(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_occupancy_grid_detection_target.c,共通/その他
+,tivxAddTargetKernelPointCloudCreation(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: the user can call to modify the processing of the kernel at 実行する-time) >）,the user can call to modify the processing of the kernel at run-time) >,the user can call to modify the processing of the kernel at 実行する-time) >,,kernels/stereo/target/vx_point_cloud_creation_target.c,共通/その他
+,tivxRemoveTargetKernelPointCloudCreation(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_point_cloud_creation_target.c,共通/その他
+,tivxAddTargetKernelSdeDisparityVisualize(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_sde_disparity_visualize_target.c,共通/その他
+,tivxRemoveTargetKernelSdeDisparityVisualize(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_sde_disparity_visualize_target.c,共通/その他
+,visualizeSdeDisparity(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,,kernels/stereo/target/vx_sde_disparity_visualize_target.c,共通/その他
+,tivxAddTargetKernelSdeHistogramVisualize(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,kernels/stereo/target/vx_sde_histogram_visualize_target.c,共通/その他
+,tivxRemoveTargetKernelSdeHistogramVisualize(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,kernels/stereo/target/vx_sde_histogram_visualize_target.c,共通/その他
+,visualizeSdeHistogram(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,kernels/stereo/target/vx_sde_histogram_visualize_target.c,共通/その他
+,tivxAddTargetKernelSdeTriangulation(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scParams, pcParams",kernels/stereo/target/vx_sde_triangulation_target.c,共通/その他
+,tivxRemoveTargetKernelSdeTriangulation(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scParams, pcParams",kernels/stereo/target/vx_sde_triangulation_target.c,共通/その他
+,app_deinit_aewb(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"aewbObj, AEWBObj",modules/src/app_aewb_module.c,共通/その他
+,app_delete_aewb(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"aewbObj, AEWBObj",modules/src/app_aewb_module.c,共通/その他
+,app_deinit_capture(),フレーム取得,タスクループ,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, CaptureObj, start_frame, app_send_error_frame, tivxCaptureRegisterErrorFrame",modules/src/app_capture_module.c,共通/その他
+,app_delete_capture(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"captureObj, CaptureObj, start_frame, app_send_error_frame, tivxCaptureRegisterErrorFrame",modules/src/app_capture_module.c,共通/その他
+,app_deinit_display(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, disp_params_obj, DisplayObj",modules/src/app_display_module.c,共通/その他
+,app_delete_display(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"displayObj, DisplayObj, disp_params_obj",modules/src/app_display_module.c,共通/その他
+,app_deinit_img_mosaic(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, ImgMosaicObj",modules/src/app_img_mosaic_module.c,共通/その他
+,app_delete_img_mosaic(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"imgMosaicObj, ImgMosaicObj",modules/src/app_img_mosaic_module.c,共通/その他
+,app_deinit_ldc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"ldcObj, LDCObj, start_frame",modules/src/app_ldc_module.c,共通/その他
+,app_delete_ldc(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"ldcObj, LDCObj, start_frame",modules/src/app_ldc_module.c,共通/その他
+,app_deinit_obj_arr_split(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"objArrSplitObj, ObjArrSplitObj",modules/src/app_obj_arr_split_module.c,共通/その他
+,app_delete_obj_arr_split(),フレーム処理,関数呼び出し,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"objArrSplitObj, ObjArrSplitObj",modules/src/app_obj_arr_split_module.c,共通/その他
+,app_deinit_scaler(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scalerObj, coeff_obj, ScalerObj, start_frame",modules/src/app_scaler_module.c,共通/その他
+,app_delete_scaler(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"scalerObj, ScalerObj, start_frame",modules/src/app_scaler_module.c,共通/その他
+,scale_set_coeff(),その他,タスクループ,一般的な制御ロジックを実行する（注記: Copy CbCr）,Copy CbCr,Copy CbCr,,modules/src/app_scaler_module.c,共通/その他
+,app_deinit_sensor(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,sensorObj,modules/src/app_sensor_module.c,共通/その他
+,addParam(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_params, max_params",modules/src/app_tidl_module.c,共通/その他
+,app_deinit_tidl(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, createParams, TIDLObj, tivxTIDLJ7Params, tidlParams",modules/src/app_tidl_module.c,共通/その他
+,app_delete_tidl(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tidlObj, TIDLObj, createParams, tivxTIDLJ7Params, tidlParams",modules/src/app_tidl_module.c,共通/その他
+,createOutputTensors(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"tivxTIDLJ7Params, tidlParams, numOutputBuf, _max_params, num_params, max_params",modules/src/app_tidl_module.c,共通/その他
+,getQC(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,,modules/src/app_tidl_module.c,共通/その他
+,initParam(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,"num_params, max_params, _max_params",modules/src/app_tidl_module.c,共通/その他
+,app_deinit_viss(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"vissObj, VISSObj, start_frame",modules/src/app_viss_module.c,共通/その他
+,app_delete_viss(),フレーム取得,関数呼び出し,カメラ入力の受信やDMA転送を設定・実行してフレームを取得する,,,"vissObj, VISSObj, start_frame",modules/src/app_viss_module.c,共通/その他
+,App_free(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,"gUdmaDrvObj, Udma_DrvObj, gUdmaChObj, Udma_ChObj",platform/am62a/qnx/app_init.c,共通/その他
+,appUtilsTaskInit(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: Dummy function to avoid build issues）,Dummy function to avoid build issues,Dummy function to avoid build issues,,platform/am62a/qnx/app_init.c,共通/その他
+,MmuP_setConfig(),割り込み,タスクループ,"DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: L1P - 32kb$, L1D - 64kb$, L2 - 0kb$）","L1P - 32kb$, L1D - 64kb$, L2 - 0kb$","L1P - 32kb$, L1D - 64kb$, L2 - 0kb$",,platform/am62a/rtos/c7x_1/main.c,共通/その他
+,appC75ClecInitDru(),フレーム処理,タスクループ,取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す,,,tskParams,platform/am62a/rtos/c7x_1/main.c,共通/その他
+,configureC7xL1DCacheAsWriteThrough(),フレーム処理,タスクループ,"取得フレームを画像処理パイプライン（VISS/MSC/TIDL等）に通す（注記: IMPORTANT NOTE: For C7x,
+ * - stack size and stack ptr MUST be 8KB aligned
+ * - AND min stack size MUST be 16KB
+ * - AND stack assigned for タスク コンテキスト is ""size - 8KB""
+ *    - 8KB chunk for the stack area is used for 割り込み handling in this タスク コンテキスト）","IMPORTANT NOTE: For C7x,
+ * - stack size and stack ptr MUST be 8KB aligned
+ * - AND min stack size MUST be 16KB
+ * - AND stack assigned for task context is ""size - 8KB""
+ *       - 8KB chunk for the stack area is used for interrupt handling in this task context","IMPORTANT NOTE: For C7x,
+ * - stack size and stack ptr MUST be 8KB aligned
+ * - AND min stack size MUST be 16KB
+ * - AND stack assigned for タスク コンテキスト is ""size - 8KB""
+ *    - 8KB chunk for the stack area is used for 割り込み handling in this タスク コンテキスト","l1dcfg, tskParams",platform/am62a/rtos/c7x_1/main.c,共通/その他
+,setC7xSnoopCfgReg(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: On reset value is 1）,On reset value is 1,On reset value is 1,"l1dcfg, tskParams",platform/am62a/rtos/c7x_1/main.c,共通/その他
+,appCacheMarInit(),IPC通信,関数呼び出し,"CPU間のイベント・パラメータ更新を通知／受信する（注記: set cache, non-cache sections for C6x）","set cache, non-cache sections for C6x","set cache, non-cache sections for C6x",,platform/j721e/rtos/c66x_2/main.c,共通/その他
+,appMain(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: This address is mapped to a virtual address of 0x0001_0000_0000）,This address is mapped to a virtual address of 0x0001_0000_0000,This address is mapped to a virtual address of 0x0001_0000_0000,tskParams,platform/j721e/rtos/c7x_1/main.c,共通/その他
+,appDeInit(),IPC通信,関数呼び出し,"CPU間のイベント・パラメータ更新を通知／受信する（注記: Register remote service for SL2 reallocation
+   * Can add more conditions if needed.）","Register remote service for SL2 reallocation
+     * Can add more conditions if needed.","Register remote service for SL2 reallocation
+   * Can add more conditions if needed.",,platform/j721e/rtos/common/app_init.c,共通/その他
+,appIdleLoop(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,,platform/j721e/rtos/common/app_init.c,共通/その他
+,appLogDeviceWrite(),IPC通信,関数呼び出し,CPU間のイベント・パラメータ更新を通知／受信する,,,,platform/j721e/rtos/common/app_init.c,共通/その他
+,appRegisterOpenVXTargetKernels(),表示制御,関数呼び出し,"処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Unregister remote service for SL2 reallocation.
+   * Can add more conditions if needed.）","Unregister remote service for SL2 reallocation.
+     * Can add more conditions if needed.","Unregister remote service for SL2 reallocation.
+   * Can add more conditions if needed.",,platform/j721e/rtos/common/app_init.c,共通/その他
+,appUnRegisterOpenVXTargetKernels(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,,platform/j721e/rtos/common/app_init.c,共通/その他
+,appMenuMain(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: * Close the files.）,* Close the files.,* Close the files.,,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRun(),IPC通信,関数呼び出し,"CPU間のイベント・パラメータ更新を通知／受信する（注記: appCliRegisterAppCmd(""app_dof_example"", ""DOF Example Demo"", app_dof_main);）","appCliRegisterAppCmd(""app_dof_example"", ""DOF Example Demo"", app_dof_main);","appCliRegisterAppCmd(""app_dof_example"", ""DOF Example Demo"", app_dof_main);",,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRunSampleCliApp(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,gFsAppDataBuf,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRunSampleCliAppSubCmd(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,gFsAppDataBuf,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRunTiovxConformance(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,gFsAppDataBuf,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRunTiovxTutorial(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,gFsAppDataBuf,platform/j721e/rtos/common/app_run.c,共通/その他
+,vx_tutorial_get_char(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,gFsAppDataBuf,platform/j721e/rtos/common/app_run.c,共通/その他
+,appRtosTestRegister(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する,,,,platform/j721e/rtos/common/app_run_rtos_test.c,共通/その他
+,appRtosTestUnRegister(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する,,,,platform/j721e/rtos/common/app_run_rtos_test.c,共通/その他
+,appRunRtosTest(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する,,,,platform/j721e/rtos/common/app_run_rtos_test.c,共通/その他
+,appGetHostOSType(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,,platform/j721e/rtos/common_qnx/app_common.c,共通/その他
+,StartupEmulatorWaitFxn1(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する,,,tskParams,platform/j721s2/rtos/c7x_2/main.c,共通/その他
+,Board_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_board_config.c,共通/その他
+,Board_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_board_config.c,共通/その他
+,Board_driversClose(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_board_open_close.c,共通/その他
+,Dpl_deinit(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: Enable 割り込み handling）,Enable interrupt handling,Enable 割り込み handling,,platform/j722s/rtos/c7x_1/generated/ti_dpl_config.c,共通/その他
+,Dpl_init(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: This function is called by __system_start）,This function is called by __system_start,This function is called by __system_start,,platform/j722s/rtos/c7x_1/generated/ti_dpl_config.c,共通/その他
+,__mmu_init(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: This function is called by __system_start）,This function is called by __system_start,This function is called by __system_start,,platform/j722s/rtos/c7x_1/generated/ti_dpl_config.c,共通/その他
+,putchar_(),その他,HW割り込み,一般的な制御ロジックを実行する（注記: ----------- DebugP -----------）,----------- DebugP -----------,----------- DebugP -----------,,platform/j722s/rtos/c7x_1/generated/ti_dpl_config.c,共通/その他
+,System_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: finally we initialize all peripheral drivers）,finally we initialize all peripheral drivers,finally we initialize all peripheral drivers,,platform/j722s/rtos/c7x_1/generated/ti_drivers_config.c,共通/その他
+,System_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: finally we initialize all peripheral drivers）,finally we initialize all peripheral drivers,finally we initialize all peripheral drivers,,platform/j722s/rtos/c7x_1/generated/ti_drivers_config.c,共通/その他
+,System_lateInit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Common Functions）,* Common Functions,* Common Functions,,platform/j722s/rtos/c7x_1/generated/ti_drivers_config.c,共通/その他
+,Drivers_close(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_drivers_open_close.c,共通/その他
+,Drivers_open(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_drivers_open_close.c,共通/その他
+,Pinmux_init(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: * Pinmux）,* Pinmux,* Pinmux,"gPinMuxMainDomainCfg, gPinMuxMcuDomainCfg",platform/j722s/rtos/c7x_1/generated/ti_pinmux_config.c,共通/その他
+,Module_clockDisable(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c,共通/その他
+,Module_clockEnable(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: * Auto generated file）,* Auto generated file,* Auto generated file,,platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c,共通/その他
+,Module_clockSetFrequency(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c,共通/その他
+,PowerClock_deinit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c,共通/その他
+,PowerClock_init(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c,共通/その他
+,IpcNotify_getConfig(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する,,,tskParams,platform/j722s/rtos/c7x_1/main.c,共通/その他
+,convertPhys2Virt(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: * Description : This function converts a physical memory region address to virtual memory region address given the base addresses of both memory regions 
+ * which are mapped using MMU in appMmuMap
+ * Arguments:
+ *   - shared_ptr : Physical pointer
+ *   - virtBase  : Base address of virtual memory space
+ *   - physBase  : Base address of physical memory space
+ *   - size    : Size of memory space
+ *   - target_ptr : Virtual pointer to be returned after conversion if shared_ptr belongs to memory space with base address physBase
+ *           else, target_ptr is returned as it is without any modification）","* Description : This function converts a physical memory region address to virtual memory region address given the base addresses of both memory regions 
+ *  which are mapped using MMU in appMmuMap
+ *  Arguments:
+ *      - shared_ptr : Physical pointer
+ *      - virtBase   : Base address of virtual memory space
+ *      - physBase   : Base address of physical memory space
+ *      - size       : Size of memory space
+ *      - target_ptr : Virtual pointer to be returned after conversion if shared_ptr belongs to memory space with base address physBase
+ *                     else, target_ptr is returned as it is without any modification","* Description : This function converts a physical memory region address to virtual memory region address given the base addresses of both memory regions 
+ * which are mapped using MMU in appMmuMap
+ * Arguments:
+ *   - shared_ptr : Physical pointer
+ *   - virtBase  : Base address of virtual memory space
+ *   - physBase  : Base address of physical memory space
+ *   - size    : Size of memory space
+ *   - target_ptr : Virtual pointer to be returned after conversion if shared_ptr belongs to memory space with base address physBase
+ *           else, target_ptr is returned as it is without any modification",,platform/j742s2/rtos/c7x_1/main.c,共通/その他
+,convertVirt2Phys(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: * Description : This function converts a virtual memory region address to physical memory region address given the base addresses of both memory regions 
+ * which are mapped using MMU in appMmuMap
+ * Arguments:
+ *   - virtAddr : Virtual pointer
+ *   - virtBase  : Base address of virtual memory space
+ *   - physBase  : Base address of physical memory space
+ *   - size    : Size of memory space
+ *   - phyAddr : Physical pointer to be returned after conversion if virtAddr belongs to memory space with base address virtBase
+ *           else, phyAddr is returned as it is without any modification）","* Description : This function converts a virtual memory region address to physical memory region address given the base addresses of both memory regions 
+ *  which are mapped using MMU in appMmuMap
+ *  Arguments:
+ *      - virtAddr : Virtual pointer
+ *      - virtBase   : Base address of virtual memory space
+ *      - physBase   : Base address of physical memory space
+ *      - size       : Size of memory space
+ *      - phyAddr :  Physical pointer to be returned after conversion if virtAddr belongs to memory space with base address virtBase
+ *                     else, phyAddr is returned as it is without any modification","* Description : This function converts a virtual memory region address to physical memory region address given the base addresses of both memory regions 
+ * which are mapped using MMU in appMmuMap
+ * Arguments:
+ *   - virtAddr : Virtual pointer
+ *   - virtBase  : Base address of virtual memory space
+ *   - physBase  : Base address of physical memory space
+ *   - size    : Size of memory space
+ *   - phyAddr : Physical pointer to be returned after conversion if virtAddr belongs to memory space with base address virtBase
+ *           else, phyAddr is returned as it is without any modification",,platform/j742s2/rtos/c7x_1/main.c,共通/その他
+,appCodecDeInit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,utils/codec_wrapper/src/codec_wrapper_linux.c,共通/その他
+,appCodecPrintStats(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,,utils/codec_wrapper/src/codec_wrapper_linux.c,共通/その他
+,Draw2D_drawCharYuv420SP(),その他,タスクループ,一般的な制御ロジックを実行する,,,"Draw2D_Obj, pObj, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_drawPixel(),その他,タスクループ,一般的な制御ロジックを実行する,,,"Draw2D_Obj, pObj, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_rgb565ToYuv444(),その他,関数呼び出し,"一般的な制御ロジックを実行する（注記: Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128）","Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128","Formula used for RGB to YUV
+
+ Y = 0.299R + 0.587G + 0.114B
+ U = 0.492 (B-Y) + 128
+ V = 0.877 (R-Y) + 128",,utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_updateBufAddr(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"Draw2D_Obj, pObj, Draw2D_clearBuf, Draw2D_Handle",utils/draw2d/src/draw2d.c,共通/その他
+,Draw2D_getFontColor(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: if out of bound draw 'space' char）,if out of bound draw 'space' char,if out of bound draw 'space' char,"Draw2D_Handle, Draw2D_Obj, pObj",utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,Draw2D_resetFontColor(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: Assume color format is 2 bytes per pixel）,Assume color format is 2 bytes per pixel,Assume color format is 2 bytes per pixel,,utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,Draw2D_setFontColor(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: Assume color format is 2 bytes per pixel）,Assume color format is 2 bytes per pixel,Assume color format is 2 bytes per pixel,,utils/draw2d/src/draw2d_font_bmp.c,共通/その他
+,appDctrlDpHpdCbFxn(),割り込み,HW割り込み,DMA完了などのHW割り込みで次処理を起動・状態更新する,,,"gAppDctrlHandle, Fvid2_Handle, Dss_DctrlDpHpdCbParams, cbParams, advVpParams, Dss_DctrlAdvVpParams, drvAdvVpParams, lcdAdvSignalCfg, vpParams, Dss_DctrlVpParams",utils/dss/src/app_dctrl.c,共通/その他
+,appDssDefaultSetDefaultPrm(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"dssParams, g_app_dss_default_obj, vpParams, advVpParams, overlayParams, layerParams, dsiParams",utils/dss/src/app_dss_defaults.c,共通/その他
+,appDssDualDisplayDefaultSetDefaultPrm(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"dssParams, dual_display_obj, g_app_dss_dual_display_default_obj, vpParams, advVpParams, overlayParams, layerParams, dsiParams",utils/dss/src/app_dss_dual_display_defaults.c,共通/その他
+,DispApp_commonInit(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: For DSS1）,For DSS1,For DSS1,"appObj, initParams, socParams, dctrlHandle, oldiParams, oldiCfg, Fvid2_Handle, instObj, hdmiCfg, i2cHandle",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,DispApp_enableDisableRequiredInstance(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,"appObj, initParams, socParams, dctrlHandle, oldiParams, oldiCfg, Fvid2_Handle, instObj, hdmiCfg, i2cHandle",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,DispApp_initDssParams(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"Dss_DctrlVpParams, vpParams, Dss_DctrlAdvVpParams, advVpParams, Dss_DctrlOverlayParams, overlayParams, Dss_DctrlOverlayLayerParams, layerParams, Dss_DctrlGlobalDssParams, globalDssParams",utils/dss/src/app_dss_mcu_plus.c,共通/その他
+,appDssConfigureBoard(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"ioExpCfg, I2C_Params, i2cParams, gI2cHandle, i2cCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigureDP(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"ioExpCfg, I2C_Params, i2cParams, gI2cHandle, i2cCfg, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigurePm(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: ==========================================================================）,==========================================================================,==========================================================================,ioExpCfg,utils/dss/src/app_dss_soc.c,共通/その他
+,appDssConfigureUB941AndUB925(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Configures the I2C instance with the passed parameters）,Configures the I2C instance with the passed parameters,Configures the I2C instance with the passed parameters,"gI2cHandle, i2cCfg, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssPrepareSN65I2cConfig(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"gI2cDsiBridgeCfg, gI2cHandle",utils/dss/src/app_dss_soc.c,共通/その他
+,appDssSN65DsiErrorRegRead(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: Enable Power Switch control）,Enable Power Switch control,Enable Power Switch control,"gI2cHandle, gI2cDsiBridgeCfg",utils/dss/src/app_dss_soc.c,共通/その他
+,EthApp_closeDmaCb(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: 開始する the software-based interVLAN routing）,Start the software-based interVLAN routing,開始する the software-based interVLAN routing,"pInterVlanCfg, gEthAppObj, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_configPtpCb(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"gEthAppObj, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_filterAddMacSharedCb(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: Application callback function to handle addition of a shared mcast
+ * address in the ALE）","Application callback function to handle addition of a shared mcast
+ * address in the ALE","Application callback function to handle addition of a shared mcast
+ * address in the ALE",,utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_filterDelMacSharedCb(),その他,タスクループ,"一般的な制御ロジックを実行する（注記: Application callback function to handle deletion of a shared mcast
+ * address from the ALE）","Application callback function to handle deletion of a shared mcast
+ * address from the ALE","Application callback function to handle deletion of a shared mcast
+ * address from the ALE",,utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_initLwip(),初期化,関数呼び出し,"モジュールやパラメータを初期化し、実行準備を行う（注記: we have to wait for initialization to finish before
+   * calling update_adapter()!）","we have to wait for initialization to finish before
+     * calling update_adapter()!","we have to wait for initialization to finish before
+   * calling update_adapter()!","gEthAppObj, pInterVlanCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_initNetif(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: Enable iperf）,Enable iperf,Enable iperf,"gEthAppObj, pInterVlanCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_initPtp(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: Apply phase adjustment directly to the HW）,Apply phase adjustment directly to the HW,Apply phase adjustment directly to the HW,"getHandle, gEthAppObj",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_lwipMain(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: Report port linked as long as any port owned by EthFw is up）,Report port linked as long as any port owned by EthFw is up,Report port linked as long as any port owned by EthFw is up,"gEthAppObj, pInterVlanCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_netifStatusCb(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: ETHAPP_LWIP_USE_DHCP）,ETHAPP_LWIP_USE_DHCP,ETHAPP_LWIP_USE_DHCP,"gEthAppObj, pInterVlanCfg, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_openDmaCb(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: Issue link down to Lwip stack and close the Lwip DMA channels）,Issue link down to Lwip stack and close the Lwip DMA channels,Issue link down to Lwip stack and close the Lwip DMA channels,"pInterVlanCfg, gEthAppObj, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_portLinkStatusChangeCb(),IPC通信,IPC通知起点,CPU間のイベント・パラメータ更新を通知／受信する（注記: Save host port MAC address）,Save host port MAC address,Save host port MAC address,"ethFwCfg, Cpsw_Cfg, cpswCfg, EnetDma_Cfg, dmaCfg, resCfg, EthFwMcast_SharedMcastCfg, sharedMcastCfg, mcastCfg, EthFwMcast_RsvdMcastCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_startHwInterVlan(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: Functions called from Config server library based on selection from GUI）,Functions called from Config server library based on selection from GUI,Functions called from Config server library based on selection from GUI,"pInterVlanCfg, gEthAppObj, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthApp_startSwInterVlan(),割り込み,タスクループ,DMA完了などのHW割り込みで次処理を起動・状態更新する（注記: Functions called from Config server library based on selection from GUI）,Functions called from Config server library based on selection from GUI,Functions called from Config server library based on selection from GUI,"pInterVlanCfg, gEthAppObj, getHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,EthFwCallbacks_isPortLinked(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う（注記: lwIP callbacks (exact name required)）,lwIP callbacks (exact name required),lwIP callbacks (exact name required),"Enet_Handle, gEthAppObj",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,LwipifEnetAppCb_getHandle(),IPC通信,IPC通知起点,CPU間のイベント・パラメータ更新を通知／受信する（注記: 初期化する the Remote Config server (CPSW Proxy Server)）,Initialize the Remote Config server (CPSW Proxy Server),初期化する the Remote Config server (CPSW Proxy Server),"gEthAppObj, EthFwCallbacks_lwipifCpswGetHandle, LwipifEnetAppCb_releaseHandle, EthFwCallbacks_lwipifCpswReleaseHandle, ethFwCfg, Cpsw_Cfg, cpswCfg, EnetDma_Cfg, dmaCfg, resCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,LwipifEnetAppCb_releaseHandle(),IPC通信,IPC通知起点,CPU間のイベント・パラメータ更新を通知／受信する（注記: Save host port MAC address）,Save host port MAC address,Save host port MAC address,"EthFwCallbacks_lwipifCpswReleaseHandle, gEthAppObj, ethFwCfg, Cpsw_Cfg, cpswCfg, EnetDma_Cfg, dmaCfg, resCfg, EthFwMcast_SharedMcastCfg, sharedMcastCfg",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,appEthFwEarlyInit(),初期化,IPC通知起点,モジュールやパラメータを初期化し、実行準備を行う（注記: Test VLAN config）,Test VLAN config,Test VLAN config,"semParams, gEthAppObj, EnetUtils_Cfg, SemaphoreP_Params, gEthApp_traceCfg, taskParams, gEthAppLwipStackBuf, gEthApp_lwipMainTaskSemObj, LwipifEnetAppCb_getHandle, EthFwCallbacks_lwipifCpswGetHandle",utils/ethfw/src/app_ethfw_freertos.c,共通/その他
+,appGrpxDraw(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"draw2d_obj, Draw2D_clearBuf, g_app_grpx_obj, tivxTaskSetDefaultCreateParams",utils/grpx/src/app_grpx.c,共通/その他
+,appGrpxDrawLoadBar(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う,,,draw2d_obj,utils/grpx/src/app_grpx.c,共通/その他
+,appGrpxDrawLoadBar2(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: fill active load color）,fill active load color,fill active load color,draw2d_obj,utils/grpx/src/app_grpx.c,共通/その他
+,appGrpxTaskMain(),表示制御,タスクループ,"処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: for full update, clear バッファ before calling callback）","for full update, clear buffer before calling callback","for full update, clear バッファ before calling callback","g_app_grpx_obj, draw2d_obj, tivxTaskSetDefaultCreateParams, Draw2D_Handle",utils/grpx/src/app_grpx.c,共通/その他
+,appGrpxGetCpuLoad(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する（注記: draw CPU load as text）,draw CPU load as text,draw CPU load as text,g_app_grpx_obj,utils/grpx/src/app_grpx_cpu_load.c,共通/その他
+,appGrpxGetDdrLoad(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: draw CPU load as text）,draw CPU load as text,draw CPU load as text,g_app_grpx_obj,utils/grpx/src/app_grpx_ddr_load.c,共通/その他
+,appGrpxGetHwaLoad(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する（注記: draw CPU load as text）,draw CPU load as text,draw CPU load as text,g_app_grpx_obj,utils/grpx/src/app_grpx_hwa_load.c,共通/その他
+,appGrpxGetNumHwa(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,draw2d_obj,utils/grpx/src/app_grpx_hwa_load.c,共通/その他
+,appGrpxDrawDefault(),その他,関数呼び出し,一般的な制御ロジックを実行する（注記: NOT SUPPORTED）,NOT SUPPORTED,NOT SUPPORTED,,utils/grpx/src/app_grpx_null.c,共通/その他
+,appGrpxInitParamsInit(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う（注記: NOT SUPPORTED）,NOT SUPPORTED,NOT SUPPORTED,"Draw2D_Handle, draw2d_obj",utils/grpx/src/app_grpx_null.c,共通/その他
+,appGstDeInit(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する（注記: Set pipeline state to NULL）,Set pipeline state to NULL,Set pipeline state to NULL,"p_gst_pipe_obj, g_app_gst_wrapper_obj",utils/gst_wrapper/src/gst_wrapper.c,共通/その他
+,appGstPrintStats(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,"p_gst_pipe_obj, g_app_gst_wrapper_obj",utils/gst_wrapper/src/gst_wrapper.c,共通/その他
+,appEglBindFrameBuffer(),IPC通信,タスクループ,CPU間のイベント・パラメータ更新を通知／受信する（注記: Creates texture and eglimage objects）,Creates texture and eglimage objects,Creates texture and eglimage objects,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglCheckEglError(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglCheckGlError(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglPrintGLString(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: native handle for our window）,native handle for our window,native handle for our window,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglSwap(),表示制御,関数呼び出し,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglWindowDestroyTex(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する（注記: find free slot amd 生成する texture）,find free slot amd create texture,find free slot amd 生成する texture,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,appEglWindowResetTex(),表示制御,タスクループ,処理済みフレームをモザイク合成し、DSS経由でディスプレイに表示する,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,choose_format(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,tex_obj,utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,screen_buf_attach(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う,,,"tex_obj, screen_pbuf",utils/opengl/src/a72/app_gl_egl_utils_qnx.c,共通/その他
+,H264CheckNalType(),初期化,タスクループ,モジュールやパラメータを初期化し、実行準備を行う,,,"inbuf, readFrame, rbuf, large_input_buf, nbuf",utils/openmax_wrapper/src/omax_dec.c,共通/その他
+,h264_free_decoder_specific(),その他,タスクループ,一般的な制御ロジックを実行する（注記: cleanup the avc configuration object）,cleanup the avc configuration object,cleanup the avc configuration object,inbuf,utils/openmax_wrapper/src/omax_dec.c,共通/その他
+,h264_parse_sps(),その他,タスクループ,一般的な制御ロジックを実行する（注記: If it's not there）,If it's not there,If it's not there,,utils/openmax_wrapper/src/omax_dec.c,共通/その他
+,mmf_golombunsigned(),その他,タスクループ,一般的な制御ロジックを実行する（注記: These are exp golomb code reading funcs. Required for AVC/ H.264）,These are exp golomb code reading funcs. Required for AVC/ H.264,These are exp golomb code reading funcs. Required for AVC/ H.264,,utils/openmax_wrapper/src/omax_dec.c,共通/その他
+,skip_list(),その他,タスクループ,一般的な制御ロジックを実行する,,,,utils/openmax_wrapper/src/omax_dec.c,共通/その他
+,CloseVencVdec(),その他,タスクループ,一般的な制御ロジックを実行する（注記: SOC_J721E）,SOC_J721E,SOC_J721E,"compHandle, OMX_FreeHandle, p_omax_pipe_obj, g_app_omax_wrapper_obj, readFrame, nGetInputFrame",utils/openmax_wrapper/src/omax_wrapper.c,共通/その他
+,OMAX_qPush(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,compHandle,utils/openmax_wrapper/src/omax_wrapper.c,共通/その他
+,appOMXDeInit(),終了処理,タスクループ,ノード／メモリ等のリソースを解放し、実行を終了する,,,"p_omax_pipe_obj, g_app_omax_wrapper_obj, large_input_buf",utils/openmax_wrapper/src/omax_wrapper.c,共通/その他
+,appOMXPrintStats(),その他,関数呼び出し,一般的な制御ロジックを実行する,,,"p_omax_pipe_obj, g_app_omax_wrapper_obj",utils/openmax_wrapper/src/omax_wrapper.c,共通/その他
+,timedwait(),その他,タスクループ,一般的な制御ロジックを実行する,,,compHandle,utils/openmax_wrapper/src/omax_wrapper.c,共通/その他
+,appSciserverDeInit(),終了処理,関数呼び出し,ノード／メモリ等のリソースを解放し、実行を終了する,,,,utils/sciserver/src/app_sciserver.c,共通/その他
+,appSciserverInit(),初期化,関数呼び出し,モジュールやパラメータを初期化し、実行準備を行う,,,serverParams,utils/sciserver/src/app_sciserver.c,共通/その他

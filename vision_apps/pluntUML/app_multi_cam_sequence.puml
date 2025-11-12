@@ -1,0 +1,301 @@
+@startuml
+title マルチカメラアプリケーション - データ利用タイミングを注記した詳細シーケンス
+
+skinparam noteBackgroundColor #FFF8C6
+skinparam participantBackgroundColor #E8F4FF
+skinparam sequenceGroupBackgroundColor #FFEEEE
+
+actor "User" as User
+participant "app_multi_cam_main" as Main
+participant "Config Parser" as CFG
+participant "Multi Sensor\nManager" as SensorMgr #Pink
+participant "Sensor\nHAL" as SensorHAL
+participant "DMA\nController" as DMA
+participant "Raw Buffers\n(Capture)" as RawBuf
+participant "VISS / ISP" as VISS
+participant "AEWB" as AEWB
+participant "MSC (Scaler\n& Composer)" as MSC #Pink
+participant "Layout\nManager" as LayoutMgr #Pink
+participant "Display\nDriver" as Display #Pink
+participant "Logger / UI" as UI
+
+' --- 各部品の責務（簡潔） ---
+note right of Main #FFF8E0
+部品の責務（追加詳細）
+ - Main (アプリ本体)
+   - 目的: 全体初期化、スレッド管理、イベント中継、異常復旧
+   - 参照タイミング: 起動時(AppConfig)、フレームループでの通知受取/配布
+   - 可変/固定: 主に固定（設定は起動時）、ランタイム中は状態・スレッド制御が変動
+ - Config Parser (CFG)
+   - 目的: 設定読み取り・検証・デフォルト適用
+   - 固定/変動: 起動時固定（config.json / argv）
+ - Multi Sensor Manager (SensorMgr)
+   - 目的: センサー列挙/オープン/同期・キャプチャ発行
+   - 固定/変動: チャネル割当は固定、同期モードや有効/無効は変動可
+ - Sensor HAL (SensorHAL)
+   - 目的: ハード依存のセンサー操作、DMA提出、露出等のハード設定
+   - 固定/変動: cfg の多くは起動時固定、露出/ゲインなどは動的制御
+ - DMA Controller (DMA)
+   - 目的: BufferDesc を HW に登録、完了割込みでコールバック
+   - 固定/変動: BufferDesc の物理アドレスは割当時固定、状態は変動
+ - Raw Buffers (RawBuf)
+   - 目的: 完了バッファキューイング、BufHandle 管理 (refcount, fence, timestamp)
+   - 固定/変動: バッファのメタは固定だが refcount/fence/timestamp は変動
+ - VISS / ISP
+   - 目的: RAW→RGB 等 ISP 処理、統計取得（AEWB への入力）、処理後 fence 発行
+   - 固定/変動: 処理パラメータは FrameMeta により動的
+ - AEWB
+   - 目的: 露出/ゲイン等の決定ロジックを提供
+   - 固定/変動: 出力は動的（例: exposure, analog_gain）
+ - MSC (Scaler & Composer)
+   - 目的: 各 BufHandle を取得し WindowConfig に基づきスケール・合成・出力
+   - 固定/変動: 合成ルールは動的（WindowConfig に従う）、内部バッファ管理は変動
+ - LayoutMgr
+   - 目的: DisplayLayout の保持・計算・検証 (appGetWindowConfig, appUpdateDisplayLayout)
+   - 固定/変動: mode は起動時／ユーザ操作で変動、Window 個別パラメータは変動
+ - Display Driver
+   - 目的: target_buf のブリット/フリップ、VSYNC 同期、最終出力
+   - 固定/変動: 解像度等は固定。表示タイミングは VSYNC により変動
+ - Logger / UI
+   - 目的: ユーザ入力・ログ出力・通知
+   - 固定/変動: 全てランタイムで変動
+end note
+
+note right of Main #FFFFE0
+データ構造の詳細（各フィールドの目的 / 固定or変動 / 想定値レンジ）
+ - AppConfig
+   - purpose: アプリ全体設定保持
+   - fixed/variable: 固定(起動時)
+ - SensorConfig (per-sensor)
+   - name: 目的->識別 (固定, 例: "CAM0")
+   - channel: 目的->物理チャネル (固定, 0..3)
+   - width,height: 目的->キャプチャ解像度 (固定, 16..4096)
+   - fps: 目的->フレームレート (固定, 1..120)
+ - DisplayLayout
+   - mode: 目的->レイアウト選択 (変動可, enum LAYOUT_MODE_*)
+   - windows[n]
+ - Window (per window)
+   - x,y: 目的->表示位置 (変動, 0..display_w/h)
+   - width,height: 目的->領域サイズ (変動, モード依存, 例: 960/540)
+   - scale: 目的->描画スケール (変動, 0.25..2.0)
+   - rotation: 目的->回転 (固定/変動, 選択肢 0/90/180/270)
+   - active: 目的->有効フラグ (変動, true/false)
+ - BufferDesc
+   - phys_addr: 目的->DMA 送信用物理アドレス (固定: バッファ割当時)
+   - size: 目的->バッファサイズ (固定)
+   - stride: 目的->ラインストライド (固定)
+   - format: 目的->ピクセル形式 (固定)
+ - BufHandle
+   - id: 目的->識別 (固定)
+   - desc: BufferDesc (固定内容)
+   - refcount: 目的->所有カウント (変動: 0..N)
+   - fence: 目的->同期ハンドル (変動: シグナル/未シグナル)
+ - FrameMeta
+   - timestamp: 目的->取得時刻 (変動, ns)
+   - frame_id: 目的->連番 (変動)
+   - exposure: 目的->露出値 (変動, 例: 33..33000 us)
+   - analog_gain: 目的->増幅値 (変動, 例: 1.0..16.0)
+   - channel: 目的->センサチャンネル (固定 for frame)
+end note
+
+note right of RawBuf #F8FFF0
+バッファライフサイクル（参照/同期ルール - まとめ）
+ - submit: SensorHAL -> DMA (BufferDesc を登録: phys_addr/size/stride/format)
+ - complete: DMA IRQ -> rawbuf_enqueue(buf_handle + FrameMeta)
+ - acquire: VISS/MSC 呼び出し時に rawbuf_acquire(buf_handle) -> refcount++
+ - fence: 生成/参照して GPU/MSC/Display 間同期を実施
+ - release: 使用後 rawbuf_release(buf_handle) -> refcount--（0なら再利用）
+end note
+
+' --- 起動時: AppConfig 読み取り（AppConfig を生成/供給） ---
+== 初期化フェーズ ==
+User -> Main: start(argc, argv)
+note right of User #LightYellow
+  /**
+   * マルチカメラ設定
+   * ファイル: config.json
+   */
+  {
+    "sensors": [
+      {
+        "name": string,   // センサー名 [64B]
+        "width": uint32,  // 幅 (16-4096)
+        "height": uint32, // 高さ (16-4096)
+        "fps": uint32,    // FPS (1-120)
+        "channel": uint8  // チャネル (0-3)
+      }
+    ],
+    "layout": {
+      "mode": uint32,    // レイアウトモード
+      "active": bool[]   // カメラ有効/無効
+    }
+  }
+end note
+Main -> CFG: app_parse_cmd_line_args(argv)
+CFG --> Main: AppConfig
+note right of Main
+AppConfig が生成されるタイミング:
+ - SensorConfig, DisplayLayout を含む（起動時固定値）
+ - 以降の初期化で参照される
+end note
+Main -> Main: app_init()
+note right of SensorMgr #Pink
+  /**
+   * マルチセンサー初期化
+   * 変更可能パラメータ:
+   * - チャネル割り当て
+   * - 同期モード
+   * - センサー設定
+   */
+end note
+note right of Main
+app_init() 内で AppConfig を基に初期化:
+ - gDispObj, sensor params 設定（固定値適用）
+end note
+
+' --- センサー初期化: SensorConfig を利用 ---
+Main -> SensorMgr: appMultiCamInit(&params)
+activate SensorMgr
+SensorMgr -> SensorHAL: sensor_enumerate()
+SensorHAL --> SensorMgr: sensor_list
+SensorMgr -> SensorHAL: sensor_open(channel, &cfg)
+note right of SensorHAL
+sensor_open() で SensorConfig を利用:
+ - cfg.width/height/fps がハード初期化に使われる（固定）
+end note
+SensorHAL --> SensorMgr: handle
+SensorMgr -> SensorHAL: sensor_start_stream(handle)
+SensorHAL --> SensorMgr: stream_started
+SensorMgr --> Main: sensors_ready
+deactivate SensorMgr
+
+Main -> LayoutMgr: appDisplayLayoutInit(&gDispObj)
+
+' 表示制御関連の構造体定義
+note right of LayoutMgr #Pink
+   * レイアウト制御構造体
+   * ファイル: app_display_layout.h
+  struct DisplayLayout {
+    uint32_t mode;        // [変更可] LAYOUT_MODE_*
+    struct Window {
+      uint32_t x, y;      // [変更可] 位置 (0-1920, 0-1080)
+      uint32_t width;     // [変更可] 幅
+      uint32_t height;    // [変更可] 高さ
+      float scale;        // [変更可] 0.25-2.0
+      uint32_t rotation;  // [変更可] 0,90,180,270度
+      bool active;        // [変更可] 表示有効/無効
+    } windows[MAX_SENSORS];
+  }
+
+   * レイアウトモード定義
+  enum LayoutMode {
+    LAYOUT_MODE_1 = 0,  // フル画面 (1920x1080)
+    LAYOUT_MODE_2H,     // 水平2分割 (各 1920x540)
+    LAYOUT_MODE_2V,     // 垂直2分割 (各 960x1080)
+    LAYOUT_MODE_4       // 4分割 (各 960x540)
+  };
+end note
+LayoutMgr --> Main: layout_init_ok
+note right of LayoutMgr
+appDisplayLayoutInit() で DisplayLayout 読込:
+ - mode, windows[]（Window.x/y/width/height/scale）を保持
+ - 以後の描画設定の基準となる
+end note
+
+Main -> Display: display_init(&gDispObj)
+Display --> Main: display_ready
+note right of Display
+display_init() は物理解像度等を読み、
+Display 側フォーマット/stride を確定する（表示固定値）
+end note
+
+== フレーム処理ループ（統合表示 + データ利用タイミング） ==
+loop every_frame
+
+  group 表示レイアウト制御（ユーザ操作時） #Pink
+    note right #Pink
+      表示レイアウト変更:
+       1) appUpdateDisplayLayout() で mode 切替
+       2) appSetDisplayConfig() で個別 Window 設定
+    end note
+
+    alt ユーザがレイアウト変更した場合
+      User -> LayoutMgr: レイアウト変更要求(params)
+      activate LayoutMgr
+      LayoutMgr -> LayoutMgr: appUpdateDisplayLayout(params)
+      LayoutMgr -> MSC: appSetWindowConfig(&layout)
+      Main -> Display: appSetDisplayConfig(&gDispObj, &layout, true)
+      deactivate LayoutMgr
+    end
+  end
+
+  group キャプチャ → DMA → RawBuf（チャネル毎） #LightBlue
+    ' ここで各チャネルが DMA を使ってバッファを取得し RawBuf に登録される
+    SensorMgr -> SensorHAL: capture_enqueue_request(chan=0)
+    SensorHAL -> DMA: dma_submit(buf_desc_chan0)
+    note right of DMA
+      dma_submit(): BufferDesc (phys_addr/size/stride/format) を登録（固定）
+    end note
+    DMA --> RawBuf: dma_complete_callback(buf_handle0)
+    note right of RawBuf
+      rawbuf_enqueue(): BufHandle 作成, refcount=1, FrameMeta を付与して notify
+    end note
+    RawBuf -> Main: notify_frame_ready(frame_id=0, buf_handle0, FrameMeta)
+  end
+
+  group ISP 処理（VISS / AEWB） #LightBlue
+    Main -> VISS: viss_process_frame(frame_id=0, buf_handle0, &FrameMeta)
+    activate VISS
+    note right of VISS
+      viss_process_frame():
+       - rawbuf_acquire(buf_handle0) -> refcount++
+       - FrameMeta を参照して ISP パラメータ決定
+       - 画像処理 -> optional fence 生成
+    end note
+    VISS -> AEWB: compute_stats(frame0, &FrameMeta)
+    AEWB --> VISS: aewb_decision(exposure, analog_gain)
+    VISS -> SensorHAL: apply_sensor_exposure(chan=0, exposure)
+    VISS --> MSC: processed_image_handle(buf_handle0, optional_fence)
+    deactivate VISS
+  end
+
+  group MSC 合成 → Display 出力（Window を参照） #Pink
+    MSC -> LayoutMgr: appGetWindowConfig(0)
+    LayoutMgr --> MSC: WindowConfig {x,y,w,h,scale,active}
+    note right of MSC
+      MSC は WindowConfig と BufHandle.fence を参照して:
+       - msc_acquire_buffer(buf_handle)
+       - msc_wait_fence(fence)
+       - msc_scale()/msc_crop_and_compose() -> target_buf
+    end note
+    MSC -> Display: display_blit(target_buf_handle, fence_out)
+    note right of Display
+      display_blit():
+       - VSYNC に合わせてフリップ、表示完了で fence_out シグナル
+    end note
+    Display --> MSC: blit_done (fence_signaled)
+    MSC -> RawBuf: rawbuf_release(buf_handle0)  ' refcount--
+  end
+
+  ' chan=1..3 も同様に capture→dma→rawbuf→viss→msc→display を繰返す
+  ' 各ステップで BufferDesc / BufHandle / FrameMeta / Window が参照される
+
+end
+
+' --- まとめノート: いつ何を参照するか ---
+note right of Main #FFF8C6
+参照タイミングまとめ:
+ - AppConfig        : 起動時のみ（初期化で読む、以降は参照）
+ - SensorConfig     : sensor_open/configure 時に使用（固定）
+ - BufferDesc/BufHandle: DMA submit 時に作成 -> 完了で RawBuf に enqueue -> VISS/MSC/Display が acquire/release で参照（同期は fence）
+ - FrameMeta        : フレーム完了通知時にセット、ISP/AEWB が参照して動的値を決定
+ - Window/DisplayLayout: 描画前（MSC 合成 / appSetDisplayConfig 時）に必ず参照
+end note
+
+legend right
+ - ピンク: レイアウト/表示
+ - 水色: キャプチャ/同期処理
+end legend
+
+
+@enduml

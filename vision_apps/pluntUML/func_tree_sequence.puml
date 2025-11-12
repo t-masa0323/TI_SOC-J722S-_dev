@@ -1,0 +1,39 @@
+@startuml
+actor User
+participant "main" as Main
+participant "app_multi_cam_main" as AppMain
+participant "app_init" as AppInit
+participant "SensorMgr" as Sensor
+participant "DMA" as DMA
+participant "VISS" as VISS
+participant "MSC" as MSC
+participant "Display" as Display
+participant "UI" as UI
+
+User -> Main: 起動
+Main -> AppInit: appInit()
+Main -> AppMain: app_multi_cam_main(argc, argv)
+AppMain -> AppInit: app_init(&gDispObj, AppConfig)
+AppInit -> Sensor: sensor_enumerate()
+Sensor -> Sensor: sensor_open()
+Sensor -> Sensor: sensor_start_stream()
+AppInit -> DMA: alloc_buffers()
+AppInit -> AppInit: create_threads()
+
+loop メインループ
+Main -> Sensor: capture_enqueue_request(chan)
+Sensor -> Sensor: sensor_submit_capture()
+Sensor -> DMA: dma_submit()
+DMA -> DMA: dma_complete_callback()
+DMA -> VISS: rawbuf_enqueue() → notify_frame_ready()
+VISS -> VISS: viss_process_frame()
+VISS -> Sensor: apply_sensor_exposure()
+VISS -> MSC: processed_image_handle()
+MSC -> MSC: msc_scale(), compose()
+MSC -> Display: display_blit()
+Display -> Display: display_wait_fence(), release()
+end
+
+UI -> Display: appUpdateDisplayLayout()
+Main -> AppInit: appDeInit()
+@enduml

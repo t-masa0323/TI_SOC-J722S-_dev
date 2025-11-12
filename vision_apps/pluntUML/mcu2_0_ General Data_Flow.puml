@@ -1,0 +1,94 @@
+@startuml
+title TI J722S Vision Apps 全体像：Data Flow + Control Flow + CPU責務 + メモリ領域
+
+skinparam component {
+  BackgroundColor #fefcf0
+  BorderColor black
+}
+skinparam note {
+  BackgroundColor #fff9e3
+  BorderColor #d9b400
+}
+skinparam ArrowColor #666666
+
+' ======================================================
+' CPU凡例とメモリ領域
+' ======================================================
+legend right
+|CPU|主責務|主メモリ領域|
+|--|--|--|
+|🟦 **A72 Linux**|司令塔 / UI制御 / Graph構築|DDR (RootFS, App, Control)|
+|🟥 **R5F MCU2_0 (RTOS)**|リアルタイム制御 / Capture / Mosaic / Display|OCMC, DDR(共有)|
+|🟪 **C7x DSP (RTOS)**|画像処理 / AI推論 (VISS/MSC/TIDL)|CMEM, DDR|
+|🟨 **IPC / CAN**|イベント伝達 / CPU間通信|DDR(共有メモリ領域)|
+endlegend
+
+' ======================================================
+' データフロー層（画像処理パイプライン）
+' ======================================================
+component "Image Sensor\n(外部カメラ)\n担当: 外部HW" as SENSOR
+component "CSI Receiver\n(MIPI-CSI2 RX)\n担当: R5F MCU2_0\nメモリ: OCMC→DDR" as CSI #FFF0F0
+component "Capture Driver\n(DMA→DDR転送)\n担当: R5F MCU2_0\nメモリ: DDR共有" as CAP #FFF0F0
+component "VISS\n(画像信号処理 RAW→YUV変換)\n担当: C7x DSP\nメモリ: CMEM" as VISS #FFF8F8
+component "LDC\n(歪み補正)\n担当: C7x DSP\nメモリ: CMEM" as LDC #FFF8F8
+component "MSC\n(マルチスケーラ)\n担当: C7x DSP\nメモリ: CMEM→DDR" as MSC #FFF8F8
+component "Mosaic\n(画像合成 2x2レイアウト)\n担当: R5F MCU2_0\nメモリ: DDR" as MOSAIC #FFF0F0
+component "DSS\n(Display SubSystem 出力)\n担当: R5F MCU2_0\nメモリ: DDR" as DSS #FFF0F0
+component "Display Panel\n(HDMI/LCD)\n担当: 外部HW" as DISP
+
+SENSOR --> CSI
+CSI --> CAP
+CAP --> VISS
+VISS --> LDC
+LDC --> MSC
+MSC --> MOSAIC
+MOSAIC --> DSS
+DSS --> DISP
+
+note top of SENSOR
+== データフロー層 ==
+映像信号を各CPUで分担して加工し表示。  
+VISS/MSC(L3処理)はC7x(DSP)、  
+Capture/Mosaic/DSSはR5Fがリアルタイム制御を担当。
+end note
+
+
+' ======================================================
+' 制御フロー層（アプリケーション＋CPU協調）
+' ======================================================
+component "A72 Linux\n(vx_app_multi_cam)\n責務: UI/Graph/IPC制御\nメモリ: DDR" as LNX #EAF7FF
+component "MCU2_0 R5F (RTOS)\n責務: Capture/Mosaic/DSS制御\nメモリ: OCMC + DDR共有" as MCU2 #FFF0F0
+component "C7x DSP (RTOS)\n責務: VISS/MSC/TIDL処理\nメモリ: CMEM + DDR" as C7X #FFF8F8
+component "CAN受信タスク\n(mcu2_can_rx_task.c)\n責務: モード入力\nメモリ: DDR(共有)" as CAN #FFF3B0
+component "IPC Framework\n(appIpcSendNotify)\n責務: イベント中継\nメモリ: DDR(共有)" as IPC #FFF3B0
+
+LNX --> MCU2 : remoteprocでRTOS起動\nappIpcSendNotify(INIT)
+MCU2 --> C7X : VISS/MSC/TIDL 実行要求
+MCU2 --> IPC : 状態/FPS/完了通知
+CAN --> MCU2 : モード切替要求(Rear/Front)
+MCU2 --> IPC : appIpcSendNotify(MPU1_0, APP_EVT_CAM_SELECT_REAR)
+IPC --> LNX : onIpcNotify(event=APP_EVT_CAM_SELECT_REAR)
+LNX --> LNX : appSwitchLayout(REAR_VIEW)\n→ Mosaic更新 (A72)
+LNX --> MCU2 : レイアウト/パラメータ更新 (RPC)
+
+note right of LNX
+== 制御フロー層 ==
+A72(Linux): 司令塔。Graph構築・レイアウト変更。  
+R5F: RTOS制御。Capture, Mosaic, Display担当。  
+C7x: 重処理(VISS/MSC/TIDL)。  
+IPC/CAN: イベント連携とCPU間通信を管理。
+end note
+
+
+' ======================================================
+' メモリ構成の補足
+' ======================================================
+note bottom of MCU2
+== メモリ領域概要 ==
+- **DDR** : Linux, DSP, RTOS間の共有バッファ  
+- **OCMC** : R5F内部の低レイテンシSRAM  
+- **CMEM** : DSP専用メモリ、高速画像処理領域  
+バッファ共有には **TIOVX Shared Memory** を利用。
+end note
+
+@enduml

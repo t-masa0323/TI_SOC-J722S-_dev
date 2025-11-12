@@ -1,0 +1,155 @@
+@startuml
+allowmixing
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+skinparam ArrowThickness 1
+
+' ===== ステレオタイプ別の背景色 =====
+skinparam component {
+  BackgroundColor<<Loop>> #AAFFAA
+  BackgroundColor<<Init>> #DDDDDD
+  BackgroundColor<<HW>> #F5E1FF
+}
+
+' ===== 凡例 =====
+legend left
+  ⚫ 黒: アプリ起動・初期化
+  🟠 橙: センサー制御
+  🟩 緑: DMA・バッファ処理
+  🔵 青: ISP・AEWB処理
+  🟡 黄: 表示・フェンス同期
+  📘 青: 設定参照
+  🟣 紫: HWからの通知・制御
+  L_* / <<Loop>> : ループ処理（継続）
+  C_* / <<Init>> : 初期化処理（単発）
+  HW_* / <<HW>> : ハードウェアモジュール
+  実線: 同期処理
+  点線: スレッド間非同期
+endlegend
+
+' ===== HWモジュール =====
+package "Hardware" {
+  component HW_CSI_RX <<HW>>
+  component HW_DMA_ENGINE <<HW>>
+  note right of HW_DMA_ENGINE
+    センサーからの映像信号を受信し、\nC_dma_c に通知を行う
+  end note
+}
+
+' ===== AppConfig モジュール =====
+package "AppConfig" {
+  component C_AppConfig <<Init>>
+  note right of C_AppConfig
+    設定項目:
+    - センサー数・種類
+    - 解像度・フレームレート
+    - 表示レイアウト
+    - VISS / AEWB 有効フラグ
+    - 出力形式・ログレベル
+    - NFSパス・バッファサイズ
+  end note
+}
+
+' ===== モジュール定義 =====
+package "Main Entry" {
+  component C_main_linux_arm_c <<Init>>
+}
+
+package "Application Core" {
+  component C_app_main_c <<Init>>
+  component C_config_c <<Init>>
+  component C_threads_c <<Init>>
+
+  note right of C_config_c
+    app_parse_cmd_line_args() により AppConfig を構築
+  end note
+}
+
+package "Sensor Layer" {
+  component L_sensor_mgr_c <<Loop>>
+  component C_sensor_hal_c <<Init>>
+}
+
+package "Buffer & DMA" {
+  component C_buffer_mgr_c <<Init>>
+  component C_dma_c <<Init>>
+  component C_raw_buf_c <<Init>>
+}
+
+package "Image Processing" {
+  component C_ics_c <<Init>>
+  component C_aewb_c <<Init>>
+}
+
+package "Display System" {
+  component C_msc_c <<Init>>
+  component C_display_c <<Init>>
+  component C_layout_mgr_c <<Init>>
+}
+
+package "UI Layer" {
+  component C_event_dispatch_c <<Init>>
+}
+
+package "Threads" {
+  component L_main_loop_thread <<Loop>>
+  component L_sensor_thread <<Loop>>
+  component L_isp_thread <<Loop>>
+  component L_display_thread <<Loop>>
+}
+
+package "Graph Builder" {
+  component C_app_cfg_c <<Init>>
+}
+
+package "Sensor Control" {
+  component C_app_sensor_c <<Init>>
+}
+
+package "Display Layout" {
+  component C_app_layout_c <<Init>>
+}
+
+' ===== AppConfig 参照関係（📘）=====
+C_AppConfig -[#blue]-> C_config_c
+C_AppConfig -[#blue]-> C_app_main_c
+C_AppConfig -[#blue]-> C_app_cfg_c
+C_AppConfig -[#blue]-> C_app_sensor_c
+C_AppConfig -[#blue]-> C_app_layout_c
+
+' ===== HW通知関係（🟣）=====
+HW_CSI_RX -[#purple]-> HW_DMA_ENGINE : CSI信号入力
+HW_DMA_ENGINE -[#purple]-> C_dma_c : フレームデータ通知（割り込み）
+
+' ===== 起動・初期化 =====
+C_main_linux_arm_c -[#black]-> C_app_main_c : ① <b><color:red>[Main]</color></b> app_multi_cam_main()\nアプリ起動・初期化開始
+C_app_main_c -[#black]-> C_config_c : ② <b><color:red>[Main]</color></b> app_parse_cmd_line_args()\n設定ファイル/CLIからAppConfig生成
+C_app_main_c -[#black]-> C_threads_c : ③ <b><color:red>[Main]</color></b> create_threads()\n各種スレッド生成
+C_app_main_c -[#black]-> L_sensor_mgr_c : ④ <b><color:red>[Main]</color></b> app_init()\nセンサー初期化
+C_app_main_c -[#black]-> C_buffer_mgr_c : ⑤ <b><color:red>[Main]</color></b> alloc_buffers()\nDMAバッファ割当
+
+' ===== キャプチャ要求 =====
+L_main_loop_thread -[#orange]-> L_sensor_mgr_c : ⑥ <b><color:red>[MainLoop]</color></b> capture_enqueue_request()\nキャプチャ要求キュー投入
+
+' ===== DMA送信 =====
+L_sensor_mgr_c -[#green]-> C_sensor_hal_c : ⑦ <b><color:red>[SensorThread]</color></b> sensor_submit_capture()\nセンサーにDMA要求
+C_sensor_hal_c -[#green]-> C_dma_c : ⑧ <b><color:red>[SensorThread]</color></b> dma_submit()\nDMAエンジンにバッファ登録
+
+' ===== DMA完了通知（非同期）=====
+C_dma_c ..[#green]-> C_raw_buf_c : ⑨ <b><color:red>[DMA IRQ]</color></b> dma_complete_callback()\n完了バッファをrawbufに通知
+C_raw_buf_c ..[#green]-> C_event_dispatch_c : ⑩ <b><color:red>[DMA IRQ]</color></b> notify_frame_ready()\nフレーム到着通知
+
+' ===== ISP処理（非同期）=====
+C_event_dispatch_c ..[#blue]-> L_isp_thread : ⑪ <b><color:red>[ISPThread]</color></b> viss_process_frame()\nISP処理開始
+L_isp_thread -[#blue]-> C_raw_buf_c : ⑫ <b><color:red>[ISPThread]</color></b> rawbuf_acquire()\nバッファ所有権取得
+L_isp_thread -[#blue]-> C_aewb_c : ⑬ <b><color:red>[ISPThread]</color></b> AEWB_compute_stats()\n統計計算と露出決定
+C_aewb_c -[#orange]-> C_sensor_hal_c : ⑭ <b><color:red>[ISPThread]</color></b> apply_sensor_exposure()\n露出/ゲイン反映
+
+' ===== ISP出力 → 表示 =====
+L_isp_thread -[#blue]-> C_ics_c : ⑮ <b><color:red>[ISPThread]</color></b> processed_image_handle()\nISP出力バッファ渡し
+C_ics_c -[#yellow]-> C_msc_c : ⑯ <b><color:red>[ISPThread]</color></b> msc_acquire_buffer()\nスケーラにバッファ渡し
+C_msc_c -[#yellow]-> C_layout_mgr_c : ⑰ <b><color:red>[ISPThread]</color></b> appGetWindowConfig()\nウィンドウ構成取得
+C_msc_c -[#yellow]-> C_display_c : ⑱ <b><color:red>[ISPThread]</color></b> display_blit()\n表示要求
+C_display_c -[#yellow]-> C_display_c : ⑲ <b><color:red>[DisplayThread]</color></b> display_wait_fence()\nVSYNC待ち
+C_display_c -[#yellow]-> C_raw_buf_c : ⑳ <b><color:red>[DisplayThread]</color></b> display_release()\nバッファ解放
+@enduml
