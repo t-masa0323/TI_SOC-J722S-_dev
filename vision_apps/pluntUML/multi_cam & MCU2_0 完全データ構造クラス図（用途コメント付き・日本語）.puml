@@ -1,0 +1,211 @@
+@startuml
+title J722S multi_cam + MCU2_0 データ構造クラス図（重要フィールド＋日本語用途コメント）
+
+skinparam classAttributeIconSize 0
+skinparam defaultTextAlignment left
+
+'
+'=======================================================
+' A72 Linux アプリ：app_multi_cam の中心構造体
+'=======================================================
+'
+class AppObj {
+  + SensorObj sensorObj         ;; センサ制御モジュール
+  + CaptureObj captureObj       ;; キャプチャ（RAW取り込み）モジュール
+  + VissObj vissObj             ;; ISP（VISS）画像処理モジュール
+  + LdcObj ldcObj               ;; 歪み補正（LDC）モジュール
+  + ImgMosaicObj mosaicObj      ;; モザイク（2×2などレイアウト）合成モジュール
+  + DisplayObj displayObj       ;; 画面出力（DSS）モジュール
+  --
+  + vx_context vxContext        ;; OpenVX コンテキスト（全ノード管理の中枢）
+  + vx_graph   vxGraph          ;; OpenVX グラフ（処理パイプライン）
+  + app_params params           ;; アプリ全体のパラメータ（画面サイズ・動作モード）
+}
+
+'
+'=======================================================
+' Sensor モジュール
+'=======================================================
+'
+class SensorObj {
+  + SensorParams params   ;; センサ解像度 / FPS / チャンネル数など
+  + vx_node sensor_node   ;; センサノード（OpenVX ノード）
+  + vx_image sensor_out   ;; センサ出力（RAW or YUV）
+}
+
+class SensorParams {
+  + int width             ;; センサ出力幅
+  + int height            ;; センサ出力高さ
+  + int fps               ;; センサフレームレート
+  + int num_channels      ;; 取得するカメラチャンネル数
+  + char sensor_name[]    ;; センサ名（IMX390など）
+}
+
+'
+'=======================================================
+' Capture モジュール
+'=======================================================
+'
+class CaptureObj {
+  + CaptureParams params  ;; CSI2/DMABUF の設定
+  + vx_node capture_node  ;; キャプチャノード
+  + vx_image raw_output[] ;; 取り込んだ RAW 画像バッファ
+}
+
+class CaptureParams {
+  + int csi2_lane         ;; 使用する MIPI CSI-2 レーン数
+  + int num_buf           ;; バッファ数（動作安定用）
+  + int data_format       ;; SENSOR_BAYER などの入力フォーマット
+  + int width             ;; 入力RAW幅
+  + int height            ;; 入力RAW高さ
+}
+
+'
+'=======================================================
+' VISS（ISP）モジュール
+'=======================================================
+'
+class VissObj {
+  + VissParams params     ;; AE/AWB など ISP 処理設定
+  + vx_node viss_node     ;; VISS ノード（OpenVX）
+  + vx_image yuv_output   ;; ISP後の YUV 出力
+  + dcc_buf               ;; DCC（ISP補正テーブル）
+  + aewb_params           ;; AE/AWB パラメータ
+}
+
+class VissParams {
+  + int use_dcc           ;; DCC を使うか
+  + int use_aewb          ;; AE/AWB を使うか
+  + int output_format     ;; 出力フォーマット（NV12など）
+}
+
+'
+'=======================================================
+' LDC（Lens Distortion Correction）モジュール
+'=======================================================
+'
+class LdcObj {
+  + LdcParams params      ;; 歪み補正モード・出力サイズ
+  + vx_node ldc_node      ;; LDC ノード
+  + vx_image ldc_output   ;; 歪み補正後の画像
+  + ldc_lut               ;; 歪み補正用のマッピングテーブル
+}
+
+class LdcParams {
+  + int warp_mode         ;; 歪み補正モード（等距離/魚眼 etc）
+  + int out_width         ;; 出力幅
+  + int out_height        ;; 出力高さ
+  + int enable            ;; LDC を有効/無効
+}
+
+'
+'=======================================================
+' Mosaic（画面分割合成）モジュール
+'=======================================================
+'
+class ImgMosaicObj {
+  + MosaicParams params   ;; 合成レイアウト設定
+  + vx_node mosaic_node   ;; Mosaic ノード
+  + vx_image mosaic_output ;; 合成後最終フレーム
+  + MosaicWindow windows[] ;; 各入力カメラの表示位置
+}
+
+class MosaicParams {
+  + int num_inputs        ;; 入力映像の数（例：4）
+  + int out_width         ;; モザイク出力幅
+  + int out_height        ;; モザイク出力高さ
+}
+
+class MosaicWindow {
+  + int ch                ;; 対応するカメラチャンネル
+  + int start_x           ;; 画面上の開始 X 位置
+  + int start_y           ;; 画面上の開始 Y 位置
+  + int width             ;; 配置する幅
+  + int height            ;; 配置する高さ
+}
+
+'
+'=======================================================
+' Display（DSS 出力）モジュール
+'=======================================================
+'
+class DisplayObj {
+  + DisplayParams params    ;; DSS 出力パラメータ
+  + vx_node display_node    ;; Display ノード
+  + vx_image input_image    ;; 表示する入力画像（Mosaic 出力）
+}
+
+class DisplayParams {
+  + int out_width           ;; パネル/HDMI 出力幅
+  + int out_height          ;; パネル/HDMI 出力高さ
+  + int pipeline            ;; 表示パイプライン選択番号
+}
+
+'
+'=======================================================
+' ObjArrSplit（RAW多チャンネルを分割）
+'=======================================================
+'
+class ObjArrSplitObj {
+  + vx_node split_node        ;; 分割ノード（OpenVX）
+  + vx_object_array input     ;; 元画像配列
+  + vx_image outputs[]        ;; チャンネル別の RAW 出力
+}
+
+'
+'=======================================================
+' A72 → RTOS (MCU2_0) サイド：実処理実行
+'=======================================================
+'
+class App_Mcu2_0_Obj {
+  + IpcMsg msg                ;; A72→MCU2_0 への指示メッセージ
+  + IpcMsgQueue q             ;; メッセージキュー
+  + I2C_Handle i2cHandle      ;; センサ制御用 I2C ハンドル
+  + EthFw_Handle ethHandle    ;; Ethernet FW（必要に応じて）
+}
+
+class IpcMsg {
+  + uint32 cmd                ;; コマンドID
+  + uint32 param              ;; パラメータ
+}
+
+class IpcMsgQueue {
+  + queue_id                  ;; キュー識別子
+}
+
+class I2C_Handle {
+  + hwAttrs                   ;; I2C設定（ピン/クロック）
+}
+
+class EthFw_Handle {
+  + mac_addr[]                ;; MACアドレス
+}
+
+'
+'=======================================================
+' 関係性（A72→RTOS＋内部リンク）
+'=======================================================
+'
+AppObj --> SensorObj
+AppObj --> CaptureObj
+AppObj --> VissObj
+AppObj --> LdcObj
+AppObj --> ImgMosaicObj
+AppObj --> DisplayObj
+
+SensorObj --> SensorParams
+CaptureObj --> CaptureParams
+VissObj    --> VissParams
+LdcObj     --> LdcParams
+ImgMosaicObj --> MosaicParams
+ImgMosaicObj --> MosaicWindow
+DisplayObj --> DisplayParams
+
+' RTOS の各処理を呼び出す（capture_run / viss_run など）
+CaptureObj --> App_Mcu2_0_Obj : "capture_run (MCU2_0)"
+VissObj    --> App_Mcu2_0_Obj : "viss_run"
+LdcObj     --> App_Mcu2_0_Obj : "ldc_run"
+ImgMosaicObj --> App_Mcu2_0_Obj : "mosaic_run"
+DisplayObj --> App_Mcu2_0_Obj : "display_run"
+
+@enduml

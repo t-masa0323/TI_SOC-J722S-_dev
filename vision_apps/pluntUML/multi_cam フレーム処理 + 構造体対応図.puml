@@ -1,0 +1,64 @@
+@startuml
+title J722S multi_cam フレーム処理フロー × 構造体対応図（日本語）
+
+skinparam sequenceArrowThickness 2
+skinparam sequenceParticipant underline
+
+participant "SensorObj\nセンサ設定" as SENSOR
+participant "CaptureObj\nRAW入力" as CAP
+participant "VissObj\nISP処理" as VISS
+participant "LdcObj\n歪み補正" as LDC
+participant "ImgMosaicObj\n合成" as MOS
+participant "DisplayObj\nDSS出力" as DISP
+participant "MCU2_0\n(Target Kernels)" as MCU
+
+'
+'======================================================
+' 1. センサ → RAW取り込み
+'======================================================
+'
+SENSOR -> CAP : センサ画像データをCSI2で受信\n(SensorParams → CaptureParams)
+note right: SensorObj は\nセンサ解像度・fps・I2C設定を保持
+
+CAP -> MCU : capture_run()\nRAW DMA転送
+note right: RAW Buffers は DDR に置かれる
+
+'
+'======================================================
+' 2. RAW → ISP（VISS）
+'======================================================
+'
+CAP -> VISS : RAW画像を渡す\n(dcc_buf と AE/AWB を参照)
+VISS -> MCU : viss_run()\nISP処理(デモザイク/NR/AWB)
+note right: VissObj 内の\nDCCパラメータは CMEM に存在
+
+VISS -> VISS : 出力 YUV を DDR に生成
+
+'
+'======================================================
+' 3. 歪み補正（LDC）
+'======================================================
+'
+VISS -> LDC : YUV画像を入力\n(LdcParams + LDC LUT)
+LDC -> MCU : ldc_run()\n投影変換/歪み補正
+LDC -> LDC : 歪み補正後画像（DDR）
+
+'
+'======================================================
+' 4. Mosaic 合成（2×2 など）
+'======================================================
+'
+LDC -> MOS : LDC後の画像を Mosaic へ
+MOS -> MCU : mosaic_run()\nレイアウト計算/合成
+MOS -> MOS : Mosaic 出力（DDR）
+
+'
+'======================================================
+' 5. ディスプレイ表示（DSS）
+'======================================================
+'
+MOS -> DISP : Mosaicフレームを渡す
+DISP -> MCU : display_run()\nDSS へフレーム投入
+DISP -> DISP : HDMI/パネルへ出力
+
+@enduml

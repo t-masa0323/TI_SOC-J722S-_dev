@@ -1,0 +1,69 @@
+@startuml
+title A72(Linux) - MCU2_0(RTOS) - HW フレーム処理シーケンス（概略）
+
+actor "User\n(アプリ起動)" as U
+participant "A72: main/appRun\n(Linux アプリ)" as A72
+participant "MCU2_0: appLoop\n(RTOS Vision Apps)" as R5
+participant "Capture HW\n(CSI2/VPAC-CAPTURE)" as CAP
+participant "VISS HW\n(ISP)" as VISS
+participant "LDC HW\n(歪み補正)" as LDC
+participant "ImgMosaic HW\n(またはGPU)" as MOS
+participant "DSS/Display\n(表示出力)" as DSS
+
+== アプリ起動 & 初期化 ==
+
+U -> A72 : main()\n// A72アプリ開始
+A72 -> A72 : appInit()\nセンサ/ノード/グラフ初期化
+
+A72 -> R5 : IPC: 初期化コマンド\n(sensor/capture/viss/ldc/mosaic/display init)
+R5 -> R5 : appInit()\nappRegisterTargetKernels()
+R5 --> A72 : 初期化完了通知
+
+== フレーム処理ループ ==
+
+U -> A72 : appRun()\n// メインループ開始
+
+loop 毎フレーム
+  A72 -> A72 : vxProcessGraph()\n// グラフ実行要求
+  A72 -> R5 : IPC: vxGraph Execute\n(共有メモリ上のGraphを実行)
+
+  '--- Capture ---
+  R5 -> CAP : start capture\n// 次フレーム取り込み開始
+  CAP --> R5 : IRQ: frame captured\n// キャプチャ完了割り込み
+  R5 -> R5 : capture_run()\nバッファ管理・次ノードへ
+
+  '--- VISS ---
+  R5 -> VISS : start VISS\n// ISP処理開始(Bayer→YUV)
+  VISS --> R5 : IRQ: viss done
+  R5 -> R5 : viss_run()\n露光/AWB結果反映など
+
+  '--- LDC ---
+  R5 -> LDC : start LDC\n// 歪み補正、ビュー変換
+  LDC --> R5 : IRQ: ldc done
+  R5 -> R5 : ldc_run()
+
+  '--- ImgMosaic ---
+  R5 -> MOS : start mosaic\n// 4カメラ2x2合成など
+  MOS --> R5 : IRQ: mosaic done
+  R5 -> R5 : mosaic_run()P
+
+  '--- Display 出力 ---
+  R5 -> DSS : queue frame\n// DSSにフレームをキュー
+  DSS --> R5 : VSYNC/EOF IRQ\n(必要に応じて)
+  R5 -> R5 : display_run()
+
+  '--- グラフ完了通知 ---
+  R5 -> A72 : IPC: Graph complete event\n// tivxEventで通知
+  A72 -> A72 : appRun内で状態更新\nフレームカウンタ更新など
+end
+
+== 終了処理 ==
+
+U -> A72 : 終了要求(Ctrl+C, UIなど)
+A72 -> A72 : appDeInit()\nノードとグラフのdelete
+A72 -> R5 : IPC: deinit command\n(各モジュール終了)
+R5 -> R5 : appDeInit()
+
+A72 --> U : プロセス終了
+
+@enduml

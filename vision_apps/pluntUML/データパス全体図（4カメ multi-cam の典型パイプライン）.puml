@@ -1,0 +1,67 @@
+@startuml
+title 4カメ Multi-Cam データパス全体図（概略）
+
+skinparam packageStyle rectangle
+
+package "外部デバイス" {
+  node "Camera0\n(Bayer RAW)" as Cam0
+  node "Camera1\n(Bayer RAW)" as Cam1
+  node "Camera2\n(Bayer RAW)" as Cam2
+  node "Camera3\n(Bayer RAW)" as Cam3
+}
+
+package "SoC 内部ハードウェア" {
+  node "Deserializer\n(FPD-Link / GMSL)" as Deser
+  node "CSI2 Receiver" as CSI2
+
+  frame "VPAC サブシステム" {
+    node "Capture\nノード\n(CSI2→メモリ)" as CAP
+    node "VISS\n(ISP: DPC/LSC/CCM/NR 等)" as VISS
+    node "LDC\n(歪み補正/ビュー変換)" as LDC
+  }
+
+  node "ImgMosaic\n(R5F + VPAC-MSC or GPU)" as MOS
+  node "DSS\n(Display SubSystem)" as DSS
+}
+
+node "Display Panel\n(LCD/HDMI/DP)" as DISP
+
+' センサ入力 → デシリアライザ → CSI2
+Cam0 --> Deser
+Cam1 --> Deser
+Cam2 --> Deser
+Cam3 --> Deser
+
+Deser --> CSI2 : 4ch CSI2\n(Bayer RAW)
+
+' CSI2 → Capture (メモリ)
+CSI2 --> CAP : RAW Bayer\n(各カメラストリーム)
+
+' Capture → VISS
+CAP --> VISS : Bayer RAW\n(フレームバッファ)
+
+' VISS 出力 (例)
+VISS --> LDC : YUV420 もしくは NV12\n(歪み補正前)
+
+' LDC 出力
+LDC --> MOS : YUV420\n(個々のビュー毎)
+
+' Mosaic で2x2合成など
+MOS --> DSS : 合成済みフレーム\n(1枚のYUVフレーム)
+
+' DSS からパネルへ
+DSS --> DISP : RGB信号\n(LVDS/HDMI/DP等)
+
+' A72 / MCU2_0 の役割メモ
+rectangle "MCU2_0 (RTOS)\n・Capture/VISS/LDC/ImgMosaic/DSS制御\n・リアルタイム処理" as R5
+rectangle "A72 (Linux)\n・アプリ制御(main/appRun)\n・設定変更/UI/ログ出力" as A72
+
+R5 -[dashed]- CAP : 制御・設定\n(OpenVX Target Kernel)
+R5 -[dashed]- VISS
+R5 -[dashed]- LDC
+R5 -[dashed]- MOS
+R5 -[dashed]- DSS
+
+A72 -[dotted]- R5 : IPC(RPMsg/OpenVX)\n(vxProcessGraph, コマンド)
+
+@enduml

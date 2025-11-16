@@ -1,0 +1,97 @@
+@startuml
+title J722S multi_cam メモリマップ × データ構造対応図（日本語コメント付き）
+
+skinparam rectangleStyle roundcorner
+
+'
+'========================================================
+' メモリ領域定義（実際の TI J722S の構成を反映）
+'========================================================
+'
+rectangle "DDR (LPDDR4)\n・大容量\n・RAW/YUV バッファ\n・Mosaic 出力\n・Display 入力\n" as DDR {
+}
+
+rectangle "OCMC (On-Chip Memory)\n・小容量\n・低レイテンシ\n・LDC LUT\n・ISP 内部テンポラリ\n" as OCMC {
+}
+
+rectangle "CMEM (Carveout Memory)\n・DMA / OpenVX 用\n・メタデータ\n" as CMEM {
+}
+
+rectangle "MSMC / L2\n・DSP/C7x の高速データ\n・ISP / LDC 中間処理\n" as MSMC {
+}
+
+rectangle "MCU2_0 SRAM\n・MCU2_0 の実行コード\n・小型構造体\n・IPCキュー\n" as MCU_SRAM {
+}
+
+'
+'========================================================
+' multi_cam の主要構造体
+'========================================================
+'
+rectangle "AppObj\n（アプリ中枢）" as AppObj
+rectangle "SensorObj\nセンサ設定\nI2C情報" as SensorObj
+rectangle "CaptureObj\nRAWバッファ管理" as CaptureObj
+rectangle "VissObj\nISP処理\nAE/AWB/DCC" as VissObj
+rectangle "LdcObj\nLDC補正\nLUT参照" as LdcObj
+rectangle "ImgMosaicObj\nレイアウト合成" as MosaicObj
+rectangle "DisplayObj\n最終表示" as DisplayObj
+rectangle "ObjArrSplitObj\nRAW分割" as SplitObj
+
+'
+'========================================================
+' バッファ対応（実データ）
+'========================================================
+'
+rectangle "RAW Buffers\n(4ch input)" as RAW
+rectangle "YUV Buffers\n(After VISS)" as YUV
+rectangle "LDC Output\n(Distortion corrected)" as LDC_OUT
+rectangle "Mosaic Frame\n(最終合成)" as MOSAIC_OUT
+
+'
+'========================================================
+' MCU2_0 側データ構造
+'========================================================
+'
+rectangle "App_Mcu2_0_Obj\nMCU2_0 状態・IPC" as MCUOBJ
+rectangle "IPC メッセージキュー" as IPCQ
+rectangle "I2C_Handle\nセンサ制御" as I2C
+rectangle "EthFw_Handle\n必要ならEth制御" as ETHFW
+
+'
+'========================================================
+' メモリ配置のリンク
+'========================================================
+'
+' DDR
+DDR -[hidden]-> RAW
+DDR -[hidden]-> YUV
+DDR -[hidden]-> LDC_OUT
+DDR -[hidden]-> MOSAIC_OUT
+
+AppObj --> DDR : Graph情報はDDR上に展開\n(OpenVX規定)
+CaptureObj --> RAW : RAW画像データ
+VissObj --> YUV : ISP後のYUV画像
+LdcObj --> LDC_OUT : 歪み補正後画像
+MosaicObj --> MOSAIC_OUT : 最終フレーム
+DisplayObj --> MOSAIC_OUT
+
+' OCMC
+OCMC --> LdcObj : LDC_LUT の格納\n低レイテンシ
+OCMC --> VissObj : ISP一時バッファ
+
+' CMEM
+CMEM --> CaptureObj : DMAパラメータ
+CMEM --> VissObj : DCCやメタデータ
+CMEM --> MosaicObj : Mosaicウィンドウ情報
+
+' MSMC / L2
+MSMC --> VissObj : 高速動作用バッファ
+MSMC --> LdcObj : 投影行列計算
+
+' MCU SRAM
+MCU_SRAM --> MCUOBJ : MCU2_0 の内部構造体
+MCU_SRAM --> IPCQ : IPC通信キュー
+MCU_SRAM --> I2C : センサ制御
+MCU_SRAM --> ETHFW
+
+@enduml

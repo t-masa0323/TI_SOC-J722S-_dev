@@ -1,0 +1,66 @@
+@startuml
+title multi_cam ? MCU2_0 IPC 呼び出しツリー (J722S)
+
+skinparam DefaultTextAlignment left
+skinparam packageStyle rectangle
+
+'==== A72 Linux 側 ====
+package "A72 Linux (app_multi_cam)" #DDFFDD {
+
+  class main
+  class app_init
+  class appInitGraph
+  class vxProcessGraph
+  class OpenVX_Node_Capture
+  class OpenVX_Node_VISS
+  class OpenVX_Node_LDC
+  class OpenVX_Node_Mosaic
+  class OpenVX_Node_Display
+
+  main --> app_init
+  app_init --> appInitGraph
+  appInitGraph --> OpenVX_Node_Capture
+  appInitGraph --> OpenVX_Node_VISS
+  appInitGraph --> OpenVX_Node_LDC
+  appInitGraph --> OpenVX_Node_Mosaic
+  appInitGraph --> OpenVX_Node_Display
+
+  main --> vxProcessGraph
+  vxProcessGraph --> OpenVX_Node_Capture : 実行 (remote)
+  vxProcessGraph --> OpenVX_Node_VISS    : 実行 (remote)
+  vxProcessGraph --> OpenVX_Node_LDC     : 実行 (remote)
+  vxProcessGraph --> OpenVX_Node_Mosaic  : 実行 (remote)
+  vxProcessGraph --> OpenVX_Node_Display : 実行 (remote)
+}
+
+'==== MCU2_0 (RTOS) 側 ====
+package "MCU2_0 (RTOS)" #FFEECC {
+
+  class ipc_server {
+    note right
+      TIOVX の Remote Target  
+      Capture/VISS/LDC/Mosaic/Display を実実行。
+    end note
+  }
+
+  class tirtos_capture_task
+  class tirtos_viss_task
+  class tirtos_ldc_task
+  class tirtos_mosaic_task
+  class tirtos_display_task
+
+  ipc_server --> tirtos_capture_task : tivxTargetNodeExecute(CAPTURE)
+  ipc_server --> tirtos_viss_task    : tivxTargetNodeExecute(VISS)
+  ipc_server --> tirtos_ldc_task     : tivxTargetNodeExecute(LDC)
+  ipc_server --> tirtos_mosaic_task  : tivxTargetNodeExecute(MOSAIC)
+  ipc_server --> tirtos_display_task : tivxTargetNodeExecute(DISPLAY)
+}
+
+'==== IPCルート ====
+OpenVX_Node_Capture --> ipc_server : IPC Msg (NODE_EXECUTE)
+OpenVX_Node_VISS    --> ipc_server
+OpenVX_Node_LDC     --> ipc_server
+OpenVX_Node_Mosaic  --> ipc_server
+OpenVX_Node_Display --> ipc_server
+
+@enduml

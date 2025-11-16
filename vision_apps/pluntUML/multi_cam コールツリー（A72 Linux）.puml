@@ -1,0 +1,75 @@
+@startuml
+title app_multi_cam ソースコード コールツリー (A72 Linux)
+
+skinparam DefaultTextAlignment left
+skinparam packageStyle rectangle
+skinparam ArrowColor #444444
+skinparam ArrowThickness 1.2
+
+package "app_multi_cam (A72 Linux)" {
+
+  class main {
+    +int main()
+    note right
+      アプリ入口。  
+      init → run → deinit の大枠を制御。
+    end note
+  }
+
+  main --> app_init
+  main --> app_run
+  main --> app_deinit
+
+  class app_init {
+    +void app_init()
+  }
+
+  app_init --> appDefaultParamSet : 1. パラメータ初期値
+  app_init --> appParseCmdLineArgs : 2. コマンドライン解析
+  app_init --> appUpdateParamSet   : 3. パラメータ更新
+  app_init --> appInitGraph        : 4. OpenVXグラフ構築
+
+  class appInitGraph {
+    +void appInitGraph()
+    note right
+      OpenVXノードを生成し  
+      Sensor → Capture → RAW Split → VISS → LDC → Mosaic → Display  
+      のパイプラインを構成。
+    end note
+  }
+
+  appInitGraph --> appInitSensor
+  appInitGraph --> appInitCapture
+  appInitGraph --> appInitObjArrSplit
+  appInitGraph --> appInitViss
+  appInitGraph --> appInitLdc
+  appInitGraph --> appInitImgMosaic
+  appInitGraph --> appInitDisplay
+  appInitGraph --> vxVerifyGraph : グラフ検証
+
+  class app_run {
+    +void app_run()
+  }
+
+  app_run --> vxProcessGraph : メインの1フレーム処理
+  app_run --> appUpdateSensorIfNeeded
+  app_run --> appSendDebugInfoIfEnabled
+  app_run --> appRunScreenTask
+  app_run --> appRunScreenTaskDelete
+
+  class app_deinit {
+    +void app_deinit()
+  }
+
+  app_deinit --> appDeInitDisplay
+  app_deinit --> appDeInitImgMosaic
+  app_deinit --> appDeInitLdc
+  app_deinit --> appDeInitViss
+  app_deinit --> appDeInitCapture
+  app_deinit --> appDeInitSensor
+  app_deinit --> appDeleteGraph
+  app_deinit --> appDeleteContext
+
+}
+
+@enduml

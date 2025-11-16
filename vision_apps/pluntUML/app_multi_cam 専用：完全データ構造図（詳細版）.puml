@@ -1,0 +1,215 @@
+
+@startuml
+title app_multi_cam 専用：完全データ構造図（最詳細版）
+
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam defaultTextAlignment left
+
+'=====================================
+' AppObj（全体統括）
+'=====================================
+class AppObj {
+  + SensorObj sensorObj
+  + CaptureObj captureObj
+  + VissObj vissObj
+  + LdcObj ldcObj
+  + ImgMosaicObj mosaicObj
+  + DisplayObj displayObj
+  --
+  + vx_context context
+  + vx_graph graph
+  + app_params params
+}
+
+'=====================================
+' Sensor モジュール
+'=====================================
+class SensorObj {
+  + SensorParams params
+  + I2CConfig i2c_cfg
+  + vx_node sensor_node
+  + vx_reference out_image
+}
+
+class SensorParams {
+  + int width
+  + int height
+  + int fps
+  + int num_channels
+  + char sensor_name[ ]
+}
+
+class I2CConfig {
+  + uint8 slave_addr
+  + uint8 reg_addr
+  + uint8 value
+}
+
+'=====================================
+' Capture モジュール
+'=====================================
+class CaptureObj {
+  + CaptureParams params
+  + vx_node capture_node
+  + vx_image raw_output[4]
+}
+
+class CaptureParams {
+  + int csi2_lane
+  + int num_buf
+  + int data_format(Bayer)
+  + int width
+  + int height
+}
+
+'=====================================
+' VISS (ISP) モジュール
+'=====================================
+class VissObj {
+  + VissParams params
+  + vx_node viss_node
+  + vx_image yuv_output
+  + dcc_buf
+  + aewb_params
+}
+
+class VissParams {
+  + int use_aewb
+  + int use_dcc
+  + int output_format
+}
+
+'=====================================
+' LDC (歪み補正) モジュール
+'=====================================
+class LdcObj {
+  + LdcParams params
+  + vx_node ldc_node
+  + vx_image ldc_output
+  + ldc_lut
+}
+
+class LdcParams {
+  + int warp_mode
+  + int out_width
+  + int out_height
+  + int enable
+}
+
+'=====================================
+' Mosaic モジュール
+'=====================================
+class ImgMosaicObj {
+  + MosaicParams params
+  + vx_node mosaic_node
+  + vx_image mosaic_output
+  + MosaicWindow windows[]
+}
+
+class MosaicParams {
+  + int num_inputs
+  + int out_width
+  + int out_height
+}
+
+class MosaicWindow {
+  + int ch
+  + int start_x
+  + int start_y
+  + int width
+  + int height
+}
+
+'=====================================
+' Display モジュール
+'=====================================
+class DisplayObj {
+  + DisplayParams params
+  + display_node
+  + vx_image input
+}
+
+class DisplayParams {
+  + int out_width
+  + int out_height
+  + int pipeline
+}
+
+'=====================================
+' RTOS Target Kernels (MCU2_0)
+'=====================================
+class CaptureKernel <<RTOS>> {
+  + capture_run()
+}
+class VissKernel <<RTOS>> {
+  + viss_run()
+}
+class LdcKernel <<RTOS>> {
+  + ldc_run()
+}
+class MosaicKernel <<RTOS>> {
+  + mosaic_run()
+}
+class DisplayKernel <<RTOS>> {
+  + display_run()
+}
+
+'=====================================
+' 関係のひもづけ
+'=====================================
+
+' AppObj owns modules
+AppObj --> SensorObj
+AppObj --> CaptureObj
+AppObj --> VissObj
+AppObj --> LdcObj
+AppObj --> ImgMosaicObj
+AppObj --> DisplayObj
+
+' 子構造体
+SensorObj --> SensorParams
+SensorObj --> I2CConfig
+
+CaptureObj --> CaptureParams
+
+VissObj --> VissParams
+VissObj --> "AE/AWB Params"
+VissObj --> "DCC Data"
+
+LdcObj --> LdcParams
+
+ImgMosaicObj --> MosaicParams
+ImgMosaicObj --> MosaicWindow
+
+DisplayObj --> DisplayParams
+
+' A72 → RTOS の実行
+CaptureObj --> CaptureKernel : used by
+VissObj --> VissKernel : used by
+LdcObj --> LdcKernel : used by
+ImgMosaicObj --> MosaicKernel : used by
+DisplayObj --> DisplayKernel : used by
+
+' STM-like explanations
+note top of AppObj
+A72 側アプリが保持する中枢オブジェクト\n
+全モジュール構造体・Graph・Context を集中管理
+end note
+
+note right of VissObj
+ISP処理（デモザイク・色補正・NR）\n
+AE/AWBとDCCを参照してリアルタイムパイプラインを生成
+end note
+
+note bottom of ImgMosaicObj
+2x2表示などのレイアウト情報を管理\n
+各カメラのウィンドウ配置がここに入る
+end note
+
+note bottom of DisplayKernel
+MCU2_0 側が DSS を制御し\n
+最終フレームをパネルへ出力
+end note
+
+@enduml

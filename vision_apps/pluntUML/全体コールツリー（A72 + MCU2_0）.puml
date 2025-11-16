@@ -1,0 +1,122 @@
+@startuml
+title A72(Linux) + MCU2_0(RTOS) 全体コールツリー（概略）
+
+skinparam packageStyle rectangle
+skinparam defaultTextAlignment left
+
+'-----------------------------
+' A72 Linux 側 アプリ(main.c)
+'-----------------------------
+package "A72 Linux\n(app_multi_cam_codec / app_multi_cam)" {
+
+  class "main()\n// A72アプリのエントリ" as A72_main
+  class "appInit()\n// アプリ全体の初期化" as A72_appInit
+  class "appRegisterCallbacks()\n// 各種コールバック登録" as A72_cbReg
+  class "appRun()\n// フレーム処理メインループ" as A72_appRun
+  class "appDeInit()\n// 終了処理・解放" as A72_appDeInit
+
+  ' appInit 内部
+  class "appDefaultConfig()\n// 設定構造体のデフォルト値セット" as appDefaultConfig
+  class "appParseCfgFile()\n// cfgファイル読込" as appParseCfgFile
+  class "appUpdateParamSet()\n// CFG内容をパラメータ反映" as appUpdateParamSet
+
+  class "appInitSensor()\n// センサ制御モジュール初期化" as appInitSensor
+  class "appInitCapture()\n// キャプチャノード初期化" as appInitCapture
+  class "appInitVISS()\n// ISP(VISS)ノード初期化" as appInitVISS
+  class "appInitLDC()\n// 歪み補正(LDC)ノード初期化" as appInitLDC
+  class "appInitImgMosaic()\n// ImgMosaicノード初期化" as appInitImgMosaic
+  class "appInitDisplay()\n// Display(DSS/GPU)初期化" as appInitDisplay
+  class "appInitGraph()\n// OpenVXグラフ構築" as appInitGraph
+
+  ' appRun 内部
+  class "vxProcessGraph()\n// OpenVXグラフ1フレーム実行" as vxProcessGraph
+  class "appRunScreenTaskDelete()\n// 画面更新タスクの破棄/終了" as appRunScreenTaskDelete
+
+  ' コールバック登録まわり
+  class "tivxCaptureRegisterErrorFrame()\n// キャプチャエラーフレームCB登録" as tivxCaptureRegisterErrorFrame
+  class "app_send_error_frame()\n// エラーフレーム発生時に呼ばれるCB" as app_send_error_frame
+
+  class "appDctrlDpHpdCbRegister()\n// DP HotPlug検出CB登録" as appDctrlDpHpdCbRegister
+  class "appDctrlDpHpdCbFxn()\n// DP/HDMI接続状態変化CB" as appDctrlDpHpdCbFxn
+
+  class "enet_register_interrupt()\n// Eth DMA割り込みハンドラ登録" as enet_register_interrupt
+  class "EthApp_openDmaCb()\n// Ethernet DMAオープン完了CB" as EthApp_openDmaCb
+
+  ' 関数呼び出し関係 (A72)
+  A72_main --> A72_appInit
+  A72_main --> A72_cbReg
+  A72_main --> A72_appRun
+  A72_main --> A72_appDeInit
+
+  A72_appInit --> appDefaultConfig
+  A72_appInit --> appParseCfgFile
+  A72_appInit --> appUpdateParamSet
+
+  A72_appInit --> appInitSensor
+  A72_appInit --> appInitCapture
+  A72_appInit --> appInitVISS
+  A72_appInit --> appInitLDC
+  A72_appInit --> appInitImgMosaic
+  A72_appInit --> appInitDisplay
+  A72_appInit --> appInitGraph
+
+  A72_appRun --> vxProcessGraph
+  A72_appRun --> appRunScreenTaskDelete
+
+  A72_cbReg --> tivxCaptureRegisterErrorFrame
+  tivxCaptureRegisterErrorFrame --> app_send_error_frame : «callback»
+
+  A72_cbReg --> appDctrlDpHpdCbRegister
+  appDctrlDpHpdCbRegister --> appDctrlDpHpdCbFxn : «callback»
+
+  A72_cbReg --> enet_register_interrupt
+  enet_register_interrupt --> EthApp_openDmaCb : «IRQ callback»
+}
+
+'--------------------------------
+' MCU2_0 RTOS 側 (Vision Apps)
+'--------------------------------
+package "MCU2_0 RTOS\n(platform/j722s/rtos/mcu2_0)" {
+
+  class "main()\n// MCU2_0側エントリ" as R5_main
+  class "appInit()\n// RTOS/IPC/カーネル登録 初期化" as R5_appInit
+  class "appLoop()\n// IPCイベント待ち & フレーム処理ループ" as R5_appLoop
+  class "appDeInit()\n// カーネル/リソース解放" as R5_appDeInit
+
+  class "appIpcInit()\n// RPMsg/IPC初期化" as appIpcInit
+  class "appRegisterTargetKernels()\n// C7x/C66x/R5F向けOpenVXカーネル登録" as appRegisterTargetKernels
+
+  class "tivxEventWait()\n// A72からのイベント待ち" as tivxEventWait
+  class "appProcessRequest()\n// Capture/VISS/LDC/Mosaic/Display 実行" as appProcessRequest
+
+  class "capture_run()\n// HWキャプチャ起動" as capture_run
+  class "viss_run()\n// ISP(VISS)処理実行" as viss_run
+  class "ldc_run()\n// 歪み補正(LDC)処理実行" as ldc_run
+  class "mosaic_run()\n// ImgMosaic処理実行" as mosaic_run
+  class "display_run()\n// フレームをDSSへ出力" as display_run
+
+  R5_main --> R5_appInit
+  R5_main --> R5_appLoop
+  R5_main --> R5_appDeInit
+
+  R5_appInit --> appIpcInit
+  R5_appInit --> appRegisterTargetKernels
+
+  R5_appLoop --> tivxEventWait
+  R5_appLoop --> appProcessRequest
+
+  appProcessRequest --> capture_run
+  appProcessRequest --> viss_run
+  appProcessRequest --> ldc_run
+  appProcessRequest --> mosaic_run
+  appProcessRequest --> display_run
+}
+
+'--------------------------------
+' A72 ↔ MCU2_0 の論理的なつながり
+'--------------------------------
+A72_appInit .. R5_appInit : «IPC 初期化要求/応答»
+vxProcessGraph .. appProcessRequest : «vxGraph 実行要求»
+A72_appDeInit .. R5_appDeInit : «終了・解放要求»
+
+@enduml
