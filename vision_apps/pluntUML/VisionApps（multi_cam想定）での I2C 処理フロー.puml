@@ -1,0 +1,85 @@
+@startuml
+title VisionApps 内の I2C 処理シーケンス（J722S / MCU2_0 / FPD-Link カメラ）
+
+actor "A72 Linux\n(app_launcher / vx_app_multi_cam)" as A72
+participant "MCU2_0\n(VisionApps R5F)" as MCU2_0
+participant "SYSFW\n(TI System Firmware)" as SYSFW
+participant "I2C Driver\n(app_i2c + MCU+SDK I2C" as I2C
+participant "UB960\n(Deserializer)" as UB960
+participant "UB953\n(Serializer)" as UB953
+participant "Image Sensor\n(e.g. IMX219)" as SENSOR
+
+== アプリ起動・カメラ開始要求 ==
+
+A72 -> MCU2_0 : IPC: APP_CMD_CREATE / START\n(マルチカメラアプリ開始)
+activate MCU2_0
+
+MCU2_0 -> MCU2_0 : app_init()\n・ボード初期化\n・カメラドライバ登録
+
+== I2C バス利用準備 ==
+
+MCU2_0 -> SYSFW : TISCI: I2C0 の電源・クロック要求\n+ ピンマルチ設定要求
+activate SYSFW
+SYSFW --> MCU2_0 : OK（I2C0 使用権限付与）
+deactivate SYSFW
+
+MCU2_0 -> I2C : appI2cInit()\n(I2C_open / パラメータ設定)
+activate I2C
+I2C --> MCU2_0 : I2C ハンドル取得
+deactivate I2C
+
+== UB960 (Deserializer) 初期化 ==
+
+loop 各カメラポート分
+  MCU2_0 -> I2C : appI2cWrite(UB960_ADDR, reg, val)\n・リセット解除\n・リンクモード設定\n・ビデオパイプ設定\n・I2C パススルー有効化
+  activate I2C
+  I2C -> UB960 : I2C Write\n(レジスタ設定)
+  deactivate I2C
+  UB960 --> MCU2_0 : ACK（I2C ACK）
+end
+
+== UB953 (Serializer) 初期化 ==
+
+loop 各カメラポート分
+  MCU2_0 -> I2C : appI2cWrite(UB953_ALIAS, reg, val)\n・シリアライザ設定\n・I2C フォワード設定\n・GPIO 経由でセンサーリセット制御など
+  activate I2C
+  I2C -> UB960 : I2C Write (UB953 Alias 宛)\n→ FPD-Link 経由で UB953 へ転送
+  I2C --> MCU2_0 : 完了
+  deactivate I2C
+  UB960 -> UB953 : I2C フレームを FPD-Link 上で転送
+  UB953 --> MCU2_0 : ACK（経由で戻る）
+end
+
+== Image Sensor 初期化 (I2C シリアライズ経由) ==
+
+loop 各カメラポート分
+  group センサー基本設定
+    MCU2_0 -> I2C : appI2cWrite(SENSOR_ALIAS, reg, val)\n・スタンバイ解除\n・PLL設定\n・フレームサイズ/フォーマット設定\n・露光/ゲイン初期値
+    activate I2C
+    I2C -> UB960 : I2C Write (Sensor Alias)\n→ UB953 → SENSOR へ
+    deactivate I2C
+    UB960 -> UB953 : I2C 転送
+    UB953 -> SENSOR : I2C 転送（レジスタ書き込み）
+    SENSOR --> UB953 : ACK
+    UB953 --> UB960 : ACK
+    UB960 --> MCU2_0 : ACK
+  end
+
+  group センサー ストリーミング ON
+    MCU2_0 -> I2C : appI2cWrite(SENSOR_ALIAS, STREAMING_REG, 0x01)\n（ストリーミング開始）
+    activate I2C
+    I2C -> UB960 : I2C Write → UB953 → SENSOR
+    deactivate I2C
+    SENSOR --> MCU2_0 : ACK（I2C 経由）
+  end
+end
+
+== キャプチャパイプライン開始 ==
+
+MCU2_0 -> MCU2_0 : キャプチャグラフ作成\n・CSI2 RX 設定\n・VISS, LDC, Mosaic ノード構成
+MCU2_0 -> A72 : IPC: APP_CMD_START_DONE\n「カメラ準備完了」
+deactivate MCU2_0
+
+A72 -> A72 : vx_app_multi_cam 実行\n・フレーム取得開始\n・表示/処理ループ
+
+@enduml

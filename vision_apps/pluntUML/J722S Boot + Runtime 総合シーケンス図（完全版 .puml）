@@ -1,0 +1,136 @@
+@startuml
+title "TI J722S Boot + Runtime 全体シーケンス図"
+
+'--------------------------------------------
+' 参加者定義
+'--------------------------------------------
+actor "ROM Boot\n(SoC内蔵)" as ROM
+participant "SBL\n(tiboot3.bin / MCU1_0)" as SBL
+participant "SPL\n(tispl.bin / A72)" as SPL
+participant "U-Boot\n(u-boot.img / A72)" as UBOOT
+participant "Linux Kernel\n(Image / A72)" as LINUX
+participant "RTOS\n(MCU2_0)" as MCU2
+participant "RTOS\n(MCU3_0)" as MCU3
+participant "DSP\n(C7x)" as DSP
+participant "VPAC / DSS\n(HW)" as VPAC
+
+'--------------------------------------------
+== Stage 1 : Bootloader ==
+'--------------------------------------------
+
+ROM -> SBL : Load tiboot3.bin\n(OSPI / SD / eMMC)
+note right of ROM
+【ROM Boot】
+- ブートメディア判定
+- SBL の読み込み
+- 最初に実行される固定ROMコード
+end note
+
+activate SBL
+SBL -> SBL : DDR / Clock / PMIC 初期化
+SBL -> SPL : Load tispl.bin (SPL)
+deactivate SBL
+
+note right of SBL
+【SBL (MCU1_0)】
+- DDR初期化
+- 電源/クロック準備
+- A72起動のための最小セットアップ
+- DTB/DTBOは扱わない
+end note
+
+activate SPL
+SPL -> SPL : Storage(MMC/OSPI) 初期化
+SPL -> UBOOT : Load u-boot.img → DDR
+deactivate SPL
+
+note right of SPL
+【SPL (A72)】
+- U-Boot本体をRAMへ展開
+- 小型U-Boot
+end note
+
+activate UBOOT
+UBOOT -> UBOOT : Load Device Tree (DTB)
+UBOOT -> UBOOT : Load & apply DTBO (overlay)
+UBOOT -> LINUX : Load Linux Kernel Image → DDR
+deactivate UBOOT
+
+note right of UBOOT
+【U-Boot】
+- DTB + DTBO の合成
+- Kernel(Image) を RAM にロード
+- Linux を起動
+end note
+
+'--------------------------------------------
+== Stage 2 : Linux Kernel Boot ==
+'--------------------------------------------
+
+activate LINUX
+LINUX -> LINUX : Device Tree解析\nKernel Modules(.ko)ロード
+LINUX -> LINUX : rootfs マウント
+
+note right of LINUX
+【Linux Kernel】
+- デバイスツリーを元に各ドライバ初期化
+- /lib/firmware 内の RTOS/DSP ファームをロード
+end note
+
+'--------------------------------------------
+== Stage 3 : Remoteproc (RTOS/DSP起動) ==
+'--------------------------------------------
+
+LINUX -> MCU2 : remoteproc load\nvision_apps_mcu2_0.xer5f
+activate MCU2
+
+note right of MCU2
+【MCU2_0 RTOS】
+- Camera制御 (CSI2RX, I2C)
+- フレームバッファ管理
+- VPAC (VISS/LDC/MSC) 制御
+- DSS Display処理
+- TIOVX Graph制御
+- RPMsg (Linux↔MCU2)
+end note
+
+LINUX -> MCU3 : remoteproc load\nvision_apps_mcu3_0.xer5f
+activate MCU3
+
+note right of MCU3
+【MCU3_0 RTOS】
+- CAN / Ethernet / SPI / UART
+- LiDAR / Radar / IMU
+- センサ同期
+- MCU2との協調処理
+end note
+
+MCU2 -> DSP : remoteproc load\nvision_apps_c7x_1.xe64T
+activate DSP
+
+note right of DSP
+【DSP (C7x)】
+- ISP高速処理（RAW→YUV）
+- LDC / MSC
+- TIDL (DNN推論)
+- 高性能画像/AI演算
+end note
+
+'--------------------------------------------
+== Stage 4 : Runtime 動作 ==
+'--------------------------------------------
+
+MCU2 -> VPAC : Start VPAC Processing\n(VISS / LDC / MSC)
+activate VPAC
+
+VPAC -> DSP : HWアクセラ + DSPコラボレーション
+DSP -> MCU2 : Frame Processed 通知
+VPAC -> MCU2 : Frame Complete Interrupt
+
+deactivate VPAC
+deactivate DSP
+deactivate MCU3
+deactivate MCU2
+deactivate LINUX
+
+@enduml
