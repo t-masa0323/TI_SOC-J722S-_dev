@@ -1,0 +1,39 @@
+source ./setup.sh
+※コンソールが落ちるならexitを全てコメントアウト
+
+
+
+
+
+git clone https://git.ti.com/git/arago-project/oe-layersetup.git yocto-build
+cd yocto-build
+
+./oe-layertool-setup.sh -f \
+  configs/processor-sdk-analytics/processor-sdk-analytics-11.01.00-config.txt
+
+
+cd yocto-build/build
+
+. conf/setenv
+
+MACHINE=j722s-evm bitbake -k tisdk-adas-image
+
+sudo chown -R user:user /opt/ti/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/yocto-build
+
+cd /opt/ti/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/yocto-build/build
+MACHINE=j722s-evm bitbake tisdk-adas-image
+
+
+https://e2e.ti.com/support/processors-group/processors/f/processors-forum
+＝＝＝＝＝＝＝＝＝＝＝＝
+Hi TI team,
+
+We are using PROCESSOR-SDK-LINUX-ADAS for J722S (version 11.01.00.03).
+We have installed the EVM SDK binary package, but Yocto source package
+"processor-sdk-linux-adas-yocto-src-11.01.00.03.tar.gz"
+is not available on the download page.
+
+Could you please provide download link for the Yocto source package?
+We need to build the Linux image using bitbake.
+
+Thanks.
