@@ -1,0 +1,33 @@
+# This uEnv.txt file can contain additional environment settings that you
+# want to set in U-Boot at boot time.  This can be simple variables such
+# as the serverip or custom variables.  The format of this file is:
+#    variable=value
+# NOTE: This file will be evaluated after the bootcmd is run and the
+#       bootcmd must be set to load this file if it exists (this is the
+#       default on all newer U-Boot images.  This also means that some
+#       variables such as bootdelay cannot be changed by this file since
+#       it is not evaluated until the bootcmd is run.
+
+# Update the Linux hostname based on board_name
+# The SK also requires an additional dtbo to boot. Prepend it to name_overlays depending on board_name
+uenvcmd=if test "$board_name" = "am67-sk"; then ; setenv args_all $args_all systemd.hostname=am67a-sk ; fi
+
+# Setting the right U-Boot environment variables
+# ===== remoteprocはU-Bootでやる =====
+dorprocboot=0
+name_overlays=ti/k3-j722s-vision-apps.dtbo
+
+console=ttyS2,115200n8
+args_mmc=setenv bootargs console=${console} root=/dev/nfs rw nfsroot=192.168.10.1:/home/user/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/targetNFS,vers=3,proto=tcp,nolock ip=192.168.10.2::192.168.10.1:255.255.255.0:j721e:eth0:off loglevel=8
+
+# ===== remoteproc前倒し起動 =====
+
+rproc_preboot=rproc init; \
+load mmc 1:1 0x82000000 vx_app_rtos_linux_mcu2_0.out; \
+rproc load 2 0x82000000 ${filesize}; \
+rproc start 2
+
+# ===== 実行順序 =====
+
+uenvcmd=run rproc_preboot; run uenvcmd_original
+
