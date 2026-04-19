@@ -1,0 +1,236 @@
+■linux-kernelビルド
+user@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/board-support/ti-linux-kernel-6.12.35+git-ti$ vim arch/arm64/boot/dts/ti/k3-j722s-evm.dts
+user@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/board-support/ti-linux-kernel-6.12.35+git-ti$ make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- dtbs
+  DTC     arch/arm64/boot/dts/ti/k3-j722s-evm.dtb
+user@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/board-support/ti-linux-kernel-6.12.35+git-ti$ sudo cp arch/arm64/boot/dts/ti/k3-j722s-evm.dtb ../../targetNFS/boot/dtb/ti/
+user@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03user@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/board-support/ti-linux-kernel-6.user@user:~/ti-puser@user:~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/board-support/ti-linux-kernel-6.1user@user:~/ti-process
+
+■u-bootビルド
+k3-j722s-evm-u-boot.dtsi
+
+make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- j722s_evm_a53_defconfig
+make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- -j
+
+■uEnv.txt
+○SD
+root@j722s-evm:~# cat /run/media/boot-mmcblk1p1/uEnv.txt
+# This uEnv.txt file can contain additional environment settings that you
+# want to set in U-Boot at boot time.  This can be simple variables such
+# as the serverip or custom variables.  The format of this file is:
+#    variable=value
+# NOTE: This file will be evaluated after the bootcmd is run and the
+#       bootcmd must be set to load this file if it exists (this is the
+#       default on all newer U-Boot images.  This also means that some
+#       variables such as bootdelay cannot be changed by this file since
+#       it is not evaluated until the bootcmd is run.
+
+# Update the Linux hostname based on board_name
+# The SK also requires an additional dtbo to boot. Prepend it to name_overlays depending on board_name
+uenvcmd=if test "$board_name" = "am67-sk"; then ; setenv args_all $args_all systemd.hostname=am67a-sk ; fi
+
+# Setting the right U-Boot environment variables
+dorprocboot=0
+name_overlays=ti/k3-j722s-vision-apps.dtbo
+
+# ===== remoteproc前倒し起動 =====
+
+rproc_preboot=rproc init; \
+load mmc 1:1 0x82000000 vx_app_rtos_linux_mcu2_0.out; \
+rproc load 2 0x82000000 ${filesize}; \
+rproc start 2; \
+load mmc 1:1 0x83000000 vx_app_rtos_linux_c7x_1.out; \
+rproc load 3 0x83000000 ${filesize}; \
+rproc start 3
+
+# ===== bootargs =====
+
+console=ttyS2,115200n8
+args_mmc=setenv bootargs console=${console} root=/dev/mmcblk1p2 rw rootwait loglevel=3
+
+# ===== 実行 =====
+
+uenvcmd=run args_mmc; run rproc_preboot
+
+○NFS
+root@j722s-evm:/run/media/boot-mmcblk1p1# cat uEnv.txt_nfs_dash
+# This uEnv.txt file can contain additional environment settings that you
+# want to set in U-Boot at boot time.  This can be simple variables such
+# as the serverip or custom variables.  The format of this file is:
+#    variable=value
+# NOTE: This file will be evaluated after the bootcmd is run and the
+#       bootcmd must be set to load this file if it exists (this is the
+#       default on all newer U-Boot images.  This also means that some
+#       variables such as bootdelay cannot be changed by this file since
+#       it is not evaluated until the bootcmd is run.
+
+# Update the Linux hostname based on board_name
+# The SK also requires an additional dtbo to boot. Prepend it to name_overlays depending on board_name
+uenvcmd=if test "$board_name" = "am67-sk"; then ; setenv args_all $args_all systemd.hostname=am67a-sk ; fi
+
+# Setting the right U-Boot environment variables
+# ===== remoteprocはU-Bootでやる =====
+dorprocboot=0
+name_overlays=ti/k3-j722s-vision-apps.dtbo
+
+console=ttyS2,115200n8
+args_mmc=setenv bootargs console=${console} root=/dev/nfs rw nfsroot=192.168.10.1:/home/user/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/targetNFS,vers=3,proto=tcp,nolock ip=192.168.10.2::192.168.10.1:255.255.255.0:j721e:eth0:off loglevel=3
+
+# ===== remoteproc前倒し起動 =====
+
+rproc_preboot=rproc init; \
+load mmc 1:1 0x82000000 vx_app_rtos_linux_mcu2_0.out; \
+rproc load 2 0x82000000 ${filesize}; \
+rproc start 2
+
+# ===== 実行順序 =====
+
+uenvcmd=run rproc_preboot; run uenvcmd_original
+
+■SD起動時のDTファイル参照パス
+/boot/dtb/ti
+
+■サービスファイル
+
+○無効化対象
+systemctl disable bluetooth.service
+systemctl disable bt-enable.service
+systemctl disable lldpd.service
+systemctl disable mstpd.service
+systemctl disable ofono.service
+systemctl disable strongswan-starter.service
+systemctl disable telnetd.service
+systemctl disable psplash-start.service
+systemctl disable psplash-systemd.service
+systemctl disable systemd-networkd-wait-online.service
+systemctl disable systemd-timesyncd.service
+systemctl disable kdump.service
+
+※NFS起動ではない
+systemctl disable nfs-statd.service
+systemctl disable rpcbind.service
+systemctl disable systemd-networkd.service
+systemctl disable systemd-resolved.service
+
+※追加削除
+systemctl disable getty@tty1.service
+systemctl disable telnetd.service
+
+
+○削除コマンド前
+root@j722s-evm:~# systemctl list-unit-files --type=service --state=enabled
+UNIT FILE                            STATE   PRESET
+atd.service                          enabled enabled
+bluetooth.service                    enabled enabled
+bt-enable.service                    enabled enabled
+crond.service                        enabled enabled
+dbus-broker.service                  enabled enabled
+emptty.service                       enabled enabled
+getty@.service                       enabled enabled
+gplv3-notice.service                 enabled enabled
+ip6tables.service                    enabled enabled
+iptables.service                     enabled enabled
+irqbalanced.service                  enabled enabled
+kdump.service                        enabled enabled
+lldpd.service                        enabled enabled
+mstpd.service                        enabled enabled
+nfs-statd.service                    enabled enabled
+ofono.service                        enabled enabled
+psplash-start.service                enabled enabled
+psplash-systemd.service              enabled enabled
+resize_rootfs.service                enabled enabled
+rpcbind.service                      enabled enabled
+strongswan-starter.service           enabled enabled
+systemd-network-generator.service    enabled enabled
+systemd-networkd-wait-online.service enabled enabled
+systemd-networkd.service             enabled enabled
+systemd-resolved.service             enabled enabled
+systemd-timesyncd.service            enabled enabled
+telnetd.service                      enabled enabled
+var-volatile-cache.service           enabled enabled
+var-volatile-lib.service             enabled enabled
+var-volatile-spool.service           enabled enabled
+var-volatile-srv.service             enabled enabled
+vision_apps.service                  enabled disabled
+
+○削除コマンド後
+root@j722s-evm:~# systemctl list-unit-files --type=service --state=enabled UNIT FILE STATE PRESET 
+ atd.service enabled enabled
+ crond.service enabled enabled
+ dbus-broker.service enabled enabled
+ emptty.service enabled enabled
+ getty@.service enabled enabled
+ gplv3-notice.service enabled enabled
+ ip6tables.service enabled enabled
+ iptables.service enabled enabled
+ irqbalanced.service enabled enabled
+ nfs-statd.service enabled enabled
+ resize_rootfs.service enabled enabled
+ rpcbind.service enabled enabled
+ systemd-network-generator.service enabled enabled
+ systemd-networkd.service enabled enabled
+ systemd-resolved.service enabled enabled
+ telnetd.service enabled enabled
+ var-volatile-cache.service enabled enabled
+ var-volatile-lib.service enabled enabled
+ var-volatile-spool.service enabled enabled
+ var-volatile-srv.service enabled enabled
+ vision_apps.service enabled disabled
+
+■サービスファイル
+root@j722s-evm:~# cat /etc/systemd/system/vision_apps.service
+[Unit]
+Description=Vision Apps Fast Boot
+
+[Service]
+Type=simple
+
+ExecStartPre=/bin/sh -c 'until dmesg | grep -q "rpmsg host is online"; do sleep 0.02; done'
+ExecStartPre=/bin/sh -c 'sleep 0.5'
+
+ExecStart=/opt/vision_apps/vx_app_multi_cam.out --cfg /opt/vision_apps/app_multi_cam.cfg
+
+Restart=on-failure
+RestartSec=0.2
+StartLimitIntervalSec=0
+StartLimitBurst=0
+
+[Install]
+WantedBy=multi-user.target
+
+
+■RTOSソフト格納先
+root@j722s-evm:/run/media/boot-mmcblk1p1# ls -al
+total 28055
+drwxrwx--- 4 root disk     1536 Jan  1  1970  .
+drwxr-xr-x 5 root root      100 May 29 18:48  ..
+-rwxrwx--- 1 root disk     1536 Jan  1  1980  FSCK0000.REC
+drwxrwx--- 2 root disk      512 Jan  7  2026 'System Volume Information'
+drwxrwx--- 3 root disk      512 May 29  2025  dtb
+-rwxrwx--- 1 root disk   381754 Jan  6  2026  tiboot3.bin
+-rwxrwx--- 1 root disk  1273763 Jan  6  2026  tispl.bin
+-rwxrwx--- 1 root disk  1248291 Apr 18  2026  u-boot.img
+-rwxrwx--- 1 root disk  1243459 Jan  6  2026  u-boot.img_org
+-rwxrwx--- 1 root disk     1428 May 29 18:49  uEnv.txt
+-rwxrwx--- 1 root disk      941 Jan 12  2026  uEnv.txt_SD
+-rwxrwx--- 1 root disk     1428 May 30  2025  uEnv.txt_SD_dash
+-rwxrwx--- 1 root disk     1084 May 29  2025  uEnv.txt_eMMC
+-rwxrwx--- 1 root disk      430 May 29  2025  uEnv.txt_eMMC_old
+-rwxrwx--- 1 root disk      606 Jan 12  2026  uEnv.txt_emmc_custom
+-rwxrwx--- 1 root disk     1212 Jan 10  2026  uEnv.txt_nfs
+-rwxrwx--- 1 root disk     1511 May 29  2025  uEnv.txt_nfs_dash
+-rwxrwx--- 1 root disk 19581952 May 29  2025  vx_app_rtos_linux_c7x_1.out
+-rwxrwx--- 1 root disk  4981276 May 29  2025  vx_app_rtos_linux_mcu2_0.out
+
+
+■ipc_test(ping-pong)無効化
+/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils/utils/ipc_test/src/concerto.mak　リネーム
+app_utilsのout libフォルダ削除
+
+vision_apps/platform/j722s/rtos/concerto_c7x_inc.mak:44:APP_UTILS_LIBS += app_utils_ipc_test
+vision_apps/platform/j722s/rtos/concerto_r5f_inc.mak:36:APP_UTILS_LIBS += app_utils_ipc_test
+
+vision_apps/platform/j722s/rtos/common/app_cfg.h
+//#define ENABLE_IPC_ECHO_TEST↲
+
+cp ../vision_apps/out/J722S/C7524/FREERTOS/release/vx_app_rtos_linux_c7x_1.out ~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/targetNFS/usr/lib/firmware/vision_apps_evm/
+cp ../vision_apps/out/J722S/R5F/FREERTOS/release/vx_app_rtos_linux_mcu2_0.out ~/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/targetNFS/usr/lib/firmware/vision_apps_evm/
