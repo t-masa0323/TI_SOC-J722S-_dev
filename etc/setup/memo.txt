@@ -176,6 +176,53 @@ root@j722s-evm:~# systemctl list-unit-files --type=service --state=enabled UNIT 
  var-volatile-srv.service enabled enabled
  vision_apps.service enabled disabled
 
+
+追加削除
+root@j722s-evm:~# systemctl list-units --type=service
+  UNIT                                     LOAD   ACTIVE SUB     DESCRIPTION                                            >
+  alsa-restore.service                     loaded active exited  Save/Restore Sound Card State
+* dbus-broker.service                      loaded failed failed  D-Bus System Message Bus
+  kmod-static-nodes.service                loaded active exited  Create List of Static Device Nodes
+  resize_rootfs.service                    loaded active exited  Expand the rootfs partition to full size of the boot de>
+  rpcbind.service                          loaded active running RPC Bind
+  serial-getty@ttyS2.service               loaded active running Serial Getty on ttyS2
+  systemd-fsck@dev-mmcblk0p1.service       loaded active exited  File System Check on /dev/mmcblk0p1
+  systemd-fsck@dev-mmcblk0p2.service       loaded active exited  File System Check on /dev/mmcblk0p2
+  systemd-fsck@dev-mmcblk1p1.service       loaded active exited  File System Check on /dev/mmcblk1p1
+  systemd-fsck@dev-mmcblk1p2.service       loaded active exited  File System Check on /dev/mmcblk1p2
+  systemd-journal-flush.service            loaded active exited  Flush Journal to Persistent Storage
+  systemd-journald.service                 loaded active running Journal Service
+* systemd-logind.service                   loaded failed failed  User Login Management
+  systemd-modules-load.service             loaded active exited  Load Kernel Modules
+  systemd-network-generator.service        loaded active exited  Generate network units from Kernel command line
+  systemd-networkd.service                 loaded active running Network Configuration
+  systemd-random-seed.service              loaded active exited  Load/Save OS Random Seed
+  systemd-remount-fs.service               loaded active exited  Remount Root and Kernel File Systems
+* systemd-resolved.service                 loaded failed failed  Network Name Resolution
+  systemd-sysctl.service                   loaded active exited  Apply Kernel Variables
+  systemd-tmpfiles-setup-dev-early.service loaded active exited  Create Static Device Nodes in /dev gracefully
+  systemd-tmpfiles-setup-dev.service       loaded active exited  Create Static Device Nodes in /dev
+  systemd-tmpfiles-setup.service           loaded active exited  Create System Files and Directories
+  systemd-udev-trigger.service             loaded active exited  Coldplug All udev Devices
+  
+削除
+systemctl disable rpcbind
+systemctl disable systemd-networkd
+systemctl mask systemd-journal-flush.service
+systemctl disable systemd-resolved
+systemctl disable dbus-broker
+systemctl disable systemd-logind
+systemctl disable systemd-vconsole-setup
+systemctl disable alsa-restore
+systemctl mask systemd-journal-flush.service
+
+systemctl mask systemd-logind
+systemctl mask systemd-vconsole-setup
+systemctl mask dbus
+systemctl mask systemd-resolved
+systemctl mask alsa-restore
+systemctl mask dbus.socket
+
 ■サービスファイル
 root@j722s-evm:~# cat /etc/systemd/system/vision_apps.service
 [Unit]
