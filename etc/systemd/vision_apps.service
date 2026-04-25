@@ -1,0 +1,18 @@
+[Unit]
+Description=Vision Apps Fast Boot
+
+[Service]
+Type=simple
+
+ExecStartPre=/bin/sh -c 'until dmesg | grep -q "rpmsg host is online"; do sleep 0.02; done'
+ExecStartPre=/bin/sh -c 'sleep 0.5'
+
+ExecStart=/opt/vision_apps/vx_app_multi_cam.out --cfg /opt/vision_apps/app_multi_cam.cfg
+
+#Restart=on-failure
+#RestartSec=0.2
+#StartLimitIntervalSec=0
+#StartLimitBurst=0
+Restart=no
+[Install]
+WantedBy=multi-user.target

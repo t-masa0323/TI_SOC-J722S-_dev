@@ -1,0 +1,6 @@
+uenvcmd=if test "$board_name" = "am67-sk"; then ; setenv args_all $args_all systemd.hostname=am67a-sk ; fi
+dorprocboot=1
+rproc_fw_binaries=3 /lib/firmware/j722s-c71_0-fw 4 /lib/firmware/j722s-c71_1-fw 0 /lib/firmware/j722s-mcu-r5f0_0-fw 2 /lib/firmware/j722s-main-r5f0_0-fw
+name_overlays=ti/k3-j722s-vision-apps.dtbo
+console=ttyS2,115200n8
+args_mmc=setenv bootargs console=${console} root=/dev/nfs rw nfsroot=192.168.10.1:/home/user/ti-processor-sdk-linux-adas-j722s-evm-11_01_00_03/targetNFS,vers=3,proto=tcp,nolock ip=192.168.10.2::192.168.10.1:255.255.255.0:j721e:eth0 loglevel=0
