@@ -1,0 +1,94 @@
+@startuml
+title J722S Vision Apps Startup Sequence - Docs Linked
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 220
+skinparam ParticipantPadding 20
+
+actor User as USER
+participant "Linux A53\nvx_app_multi_cam.out" as A53
+participant "Vision Apps Utils\napp_common" as UTILS
+participant "RemoteService / IPC" as IPC
+participant "MCU2_0\nFreeRTOS Target" as MCU
+participant "C7x_1 / C7x_2\nFreeRTOS Targets" as C7X
+participant "ISS / Sensor Service" as ISS
+participant "UB960 / IMX390" as SENSORHW
+participant "TIOVX Host / Graph" as VX
+participant "VPAC / Capture / Display Targets" as TARGETS
+participant "Graphics Overlay\nDraw2D" as GRPX
+
+legend right
+  関数名はクリック可能なリンクです。\n  このpumlと docs/ フォルダを同じ階層に置くと、\n  生成SVGからローカルHTMLへ遷移できます。
+endlegend
+
+== RTOS side boot / target initialization ==
+USER -> MCU: vision_apps_init.sh\nコメント: MCU2_0側Vision Apps target firmware初期化開始
+MCU -> MCU: SCICLIENT / UDMA / MEM Init\nコメント: DMSC/SYSFW通信、DMA、DDR heapを初期化
+MCU -> IPC: [[docs/user_guide/group__group__vision__apps__utils__ipc.html#gaf43fc8949842b04b000a1dd73f3ff489 appIpcInit()]]\nコメント: HLOS ready待ち。Linux A53とのIPC/RPMsg基盤を準備
+MCU -> IPC: [[docs/user_guide/group__group__vision__apps__utils__remote__service.html#ga89852ccbace0410a927ad51be0839693 appRemoteServiceInit()]]\nコメント: LinuxからのRemoteService要求を受けるserver側を初期化
+MCU -> TARGETS: FVID2 / DispApp_init / VHWA VPAC Init\nコメント: Display、VPAC(LDC/MSC/VISS/FC)、Capture/Display targetを準備
+MCU -> ISS: IssSensor_Init / VISS REMOTE SERVICE Init\nコメント: image sensor service handlerとVISS制御serviceを登録
+MCU -> IPC: IPC echo test\nコメント: RTOS target ready状態へ遷移
+
+USER -> C7X: C7x_1/C7x_2 firmware start\nコメント: DSP target側APP/IPC/RemoteService/TIOVX target runtimeを初期化
+C7X -> IPC: [[docs/user_guide/group__group__vision__apps__utils__ipc.html#gaf43fc8949842b04b000a1dd73f3ff489 appIpcInit()]] + RemoteService Init\nコメント: A53とのIPC接続とDSP target kernel登録を完了
+
+== Linux A53 app start ==
+USER -> A53: run_app_multi_cam.sh\nコメント: multi_cam Linuxアプリを起動
+A53 -> A53: C++ static initialization\nコメント: OpenGL/PVRT/GLM系global object初期化
+A53 -> UTILS: [[docs/user_guide/group__group__vision__apps__utils__init.html#ga625f823e306cc7ce6f8a49337e3a9714 appInit()]]\nコメント: Vision Apps共通初期化の入口
+UTILS -> UTILS: [[docs/user_guide/group__group__vision__apps__utils__init.html#ga845e203313e038c29b95ffbd3a230888 appCommonInit()]]\nコメント: MEM/IPC/RemoteService/OpenVX Hostなど共通リソースを初期化
+UTILS -> IPC: [[docs/user_guide/group__group__vision__apps__utils__ipc.html#gaf43fc8949842b04b000a1dd73f3ff489 appIpcInit()]]\nコメント: Linux側IPC初期化。RTOS側のHLOS ready待ちを解除
+UTILS -> IPC: [[docs/user_guide/group__group__vision__apps__utils__remote__service.html#ga89852ccbace0410a927ad51be0839693 appRemoteServiceInit()]]\nコメント: Linux側RemoteService client/server基盤を初期化
+UTILS -> VX: tivxInitLocal\nコメント: MPU target IDを生成し、OpenVX Host runtimeを初期化
+
+A53 -> A53: [[docs/user_guide/016__app__multi__cam_8md.html app_multi_cam_main()]]\nコメント: multi_camデモ本体。パラメータ設定、センサ選択、module init、graph作成を実行
+A53 -> ISS: [[docs/user_guide/group__group__vision__apps__modules__sensor.html#gaf258673cfbfa3a6f19d2f177f3184a2c app_querry_sensor()]]\nコメント: 利用可能なセンサ一覧を問い合わせる
+ISS -> IPC: [[docs/user_guide/group__group__vision__apps__utils__remote__service.html#ga943de75897fbb6818e166ea253d26761 appRemoteServiceRun()]] com.ti.image_sensor\nコメント: LinuxからMCU2_0のimage sensor serviceへ問い合わせ
+IPC -> MCU: deliver sensor query\nコメント: RPMsg/RemoteServiceでMCU2_0へ要求配送
+MCU -> SENSORHW: UB960 register access\nコメント: Deserializer確認。ログでは0x3d/0x36 register write失敗が見えている
+MCU --> A53: sensor list response\nコメント: センサ候補一覧をLinuxへ返却
+
+USER -> A53: select IMX390-UB953_D3 / LDC=1 / cameras=1\nコメント: ユーザー入力によりセンサ・LDC・カメラ数を確定
+A53 -> VX: tivxImgMosaicParamsSetDefaults\nコメント: Mosaic配置パラメータのデフォルト設定
+A53 -> VX: tivxFileIOLoadKernels\nコメント: FileIO write系kernel/target callbackを登録
+
+== Module initialization ==
+A53 -> ISS: [[docs/user_guide/group__group__vision__apps__modules__sensor.html#gaccec861b28e278c9d192a5ffcabcdffa app_init_sensor()]]\nコメント: センサPowerOn/ConfigをRemoteService経由で実行
+ISS -> IPC: [[docs/user_guide/group__group__vision__apps__utils__remote__service.html#ga943de75897fbb6818e166ea253d26761 appRemoteServiceRun()]] IM_SENSOR_CMD_PWRON/CONFIG\nコメント: MCU2_0側ISSへセンサ制御要求を送る
+IPC -> MCU: deliver sensor init command\nコメント: RemoteService経由でMCU2_0へ配送
+MCU -> SENSORHW: IMX390_PowerOn / UB960_SetSensorAlias\nコメント: UB960 alias設定。ログではreg 0x4c write/read失敗、return -4
+MCU --> A53: sensor init failed\nコメント: Linux側では Initializing sensor failed として見える
+
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__capture.html#gaa54b5db3f195beb0bd06b5071602f405 app_init_capture()]]\nコメント: Capture moduleのdata object、出力buffer、error frameを準備
+VX -> VX: [[docs/user_guide/group__group__vision__apps__modules__capture.html#ga252dbb78ffec9f07af2bfd44b550c8e8 app_send_error_frame/read_error_image_raw]]\nコメント: センサ失敗時に投入するerror frameを準備
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__viss.html#ga4de5f1fda74253db299c810dc5a6d2a1 app_init_viss()]]\nコメント: VISS/ISP処理用object、DCC、出力imageを準備
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__aewb.html#gab054581d0758306f82026b1f3b8b5bcb app_init_aewb()]]\nコメント: AE/AWB統計・制御用objectを準備
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__ldc.html#gac73967699fffd4f570784c76d2a97dc4 app_init_ldc()]]\nコメント: レンズ歪み補正用mesh/region/outputを準備
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__mosaic.html#gaa9d7e999c15e1ea8412ff5ff7223283b app_init_img_mosaic()]]\nコメント: 複数入力を合成するMosaic出力とkernelを準備
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__display.html#gaf73d57fdb5920bd2bf53ae7933c8689d app_init_display()]]\nコメント: Display node用object/parameterを準備
+A53 -> GRPX: [[docs/user_guide/group__group__vision__apps__utils__grpx.html#ga90938b79feba762f067df1c5c0f0efd5 appGrpxInitParamsInit()]] / [[docs/user_guide/group__group__vision__apps__utils__grpx.html#ga2bf5eb6cf6cff189e9db879cfc1ada4d appGrpxInit()]]\nコメント: overlay/UI描画用Draw2D contextとbufferを初期化
+GRPX -> GRPX: appGrpxDraw -> Draw2D_clearBuf -> Draw2D_drawPixel\nコメント: 初回overlay描画。Draw2D_drawPixelが大量ログ源
+
+== Graph creation / verify / run ==
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__capture.html#ga5b080e590e9fcf319371532267e7702f app_create_graph_capture()]]\nコメント: Capture OpenVX nodeを作成
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__viss.html#ga1a507d591555928b91f66daec2894fb5 app_create_graph_viss()]]\nコメント: VISS OpenVX nodeを作成
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__aewb.html#gaeb43d87d9075beb782c154e4f18b8792 app_create_graph_aewb()]]\nコメント: AEWB OpenVX nodeを作成
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__ldc.html#ga3add601c05d83066ff55a44005dc42b1 app_create_graph_ldc()]]\nコメント: LDC OpenVX nodeを作成
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__mosaic.html#gaa2c257b329b6b1af212414ab61416e58 app_create_graph_img_mosaic()]]\nコメント: ImgMosaic OpenVX nodeを作成
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__display.html#ga7a0ec96c759c0ce5eb5f9279f848746b app_create_graph_display()]]\nコメント: Display OpenVX nodeを作成
+VX -> TARGETS: vxVerifyGraph / target node create\nコメント: graph整合性検証と各targetへのnode createを実行
+A53 -> VX: [[docs/user_guide/group__group__vision__apps__modules__capture.html#ga252dbb78ffec9f07af2bfd44b550c8e8 app_send_error_frame()]]\nコメント: センサ初期化失敗時の代替frameをgraphへ投入
+
+loop frame loop
+  A53 -> VX: app_run_graph_for_one_frame_pipeline\n  コメント: 1フレーム単位のgraph実行。hook側ではLOOPとして間引き
+end
+
+== Cleanup ==
+USER -> A53: x\nコメント: デモ終了入力
+A53 -> ISS: Stop sensor\nコメント: センサ停止要求。初期化失敗時は停止も失敗する場合あり
+A53 -> VX: app_delete_* modules\nコメント: Capture/VISS/AEWB/LDC/Mosaic/Display node削除
+A53 -> GRPX: [[docs/user_guide/group__group__vision__apps__utils__grpx.html#ga50815d4aba38d23299b9ddc81930fafd appGrpxDeInit()]]\nコメント: Graphics overlay/Draw2Dを解放
+A53 -> UTILS: [[docs/user_guide/group__group__vision__apps__utils__init.html#ga2a328db80450787d50bab9d95a92669b appDeInit()]] / [[docs/user_guide/group__group__vision__apps__utils__init.html#gad004510fb876deb723b4a4c45442c78c appCommonDeInit()]]\nコメント: RemoteService、IPC、MEMなど共通リソースを解放
+@enduml
