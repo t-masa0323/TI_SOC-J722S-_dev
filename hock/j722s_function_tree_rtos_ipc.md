@@ -1,0 +1,267 @@
+# Function Tree - A53 Hook Log + RTOS IPC View
+
+Source: run_app_multi_cam hook log. Draw2D pixel-level loops are compressed.
+
+## 1. A53 function tree extracted from hook log
+
+- `_GLOBAL__sub_I_box.cpp+0x59b424`
+  - `_Z41__static_initialization_and_destruction_0v+0x59b398`
+    - `_ZN3glm7tmat4x4IfLNS_9precisionE0EEC1Ev` [LOOP cnt=1]
+      - `_ZN3glm5tvec4IfLNS_9precisionE0EEC2IiiiiEET_T0_T1_T2_` [LOOP cnt=1]
+- `_GLOBAL__sub_I_car.cpp+0x59e778`
+  - `_Z41__static_initialization_and_destruction_0v+0x59e698`
+    - `_ZN3glm7tmat3x3IfLNS_9precisionE0EEC2Ev` [LOOP cnt=1]
+      - `_ZN3glm5tvec3IfLNS_9precisionE0EEC2IiiiEET_T0_T1_` [LOOP cnt=1]
+- `_GLOBAL__sub_I_render.cpp+0x5a4014`
+  - `_Z41__static_initialization_and_destruction_0v+0x5a3eb0`
+- `_GLOBAL__sub_I_srv_lut.cpp+0x5aa9d4`
+  - `_Z41__static_initialization_and_destruction_0v+0x5aa870`
+- `_GLOBAL__sub_I_PVRTPFXParser.cpp+0x5e1718`
+  - `_Z41__static_initialization_and_destruction_0v+0x5e1648`
+- `_GLOBAL__sub_I_PVRTResourceFile.cpp+0x5efc24`
+  - `_Z41__static_initialization_and_destruction_0v+0x5efb60`
+    - `_ZN11CPVRTStringC1Ev`
+- `main`
+  - `appInit`
+    - `appCommonInit`
+      - `appCommonInitLocal+0x2ab6fc`
+  - `app_multi_cam_main`
+    - `0x406b88`
+      - `0x406adc`
+      - `0x4069fc`
+      - `0x406a64`
+    - `0x4046a4`
+      - `0x403c3c`
+      - `0x403d70`
+    - `app_querry_sensor`
+    - `0x406fa0`
+      - `0x406d1c`
+        - `0x406c58`
+        - `tivxImgMosaicParamsSetDefaults`
+    - `0x404cd0`
+      - `tivxFileIOLoadKernels`
+        - `tivxRegisterFileIOKernels`
+        - `publishKernels+0x2d5b1c`
+          - `tivxAddKernelWriteArray`
+          - `tivxAddKernelWriteImage`
+          - `tivxAddKernelWriteRawImage`
+          - `tivxAddKernelWriteTensor`
+          - `tivxAddKernelWriteUserDataObject`
+        - `tivxRegisterFileIOTargetArmKernels`
+          - `tivxAddTargetKernelWriteArray`
+          - `tivxAddTargetKernelWriteImage`
+          - `tivxAddTargetKernelWriteRawImage`
+          - `tivxAddTargetKernelWriteTensor`
+          - `tivxAddTargetKernelWriteUserDataObject`
+      - `app_init_sensor`
+      - `app_init_capture`
+        - `configure_capture_params+0x2ac400`
+        - `create_capture_output+0x2ac7ac`
+        - `create_error_detection_frame+0x2aca80`
+          - `read_error_image_raw`
+        - `configure_capture_output_write+0x2acca0`
+      - `app_init_viss`
+        - `configure_viss_params+0x2ae704`
+        - `configure_dcc_params+0x2aea68`
+        - `create_viss_outputs+0x2aec30`
+      - `app_init_aewb`
+        - `configure_dcc+0x2ad8d4`
+        - `configure_aewb+0x2adaa8`
+        - `create_histogram+0x2add78`
+        - `create_aewb_output+0x2ade98`
+      - `app_init_ldc`
+        - `configure_dcc_params+0x2afdb4`
+        - `configure_mesh_params+0x2aff60`
+        - `configure_region_params+0x2b0204`
+        - `configure_ldc_params+0x2b0348`
+        - `create_ldc_outputs+0x2b0490`
+      - `app_init_img_mosaic`
+        - `configure_params+0x2b4d4c`
+        - `create_output_image+0x2b4f5c`
+        - `create_sw_mosaic_kernel+0x2b4e68`
+          - `tivxAddKernelImgMosaic`
+      - `app_init_display`
+      - `appGrpxInitParamsInit`
+      - `appGrpxInit`
+    - `0x4056cc`
+      - `app_create_graph_capture`
+      - `app_create_graph_viss`
+      - `app_create_graph_aewb`
+      - `app_create_graph_ldc`
+      - `app_create_graph_img_mosaic`
+        - `tivxImgMosaicNode`
+      - `app_create_graph_display`
+      - `0x40711c`
+    - `0x405f98`
+      - `tivxImgMosaicValidate+0x2ce284`
+        - `tivxCheckStatus+0x2ce20c`
+        - `tivxCheckStatus+0x2ce20c`
+        - `tivxCheckStatus+0x2ce20c`
+        - `tivxCheckStatus+0x2ce20c`
+        - `tivxCheckStatus+0x2ce20c`
+      - `app_send_error_frame`
+    - `0x4039d4`
+      - `0x4038a8`
+- `0x403808`
+  - `0x40667c`
+- `0x406a64`
+    - `0x406080` [LOOP cnt=1]
+    - `0x406080` [LOOP cnt=1000]
+      - `0x40394c`
+    - `0x4053ac`
+      - `app_delete_capture`
+      - `app_delete_viss`
+      - `app_delete_aewb`
+      - `app_delete_ldc`
+      - `app_delete_img_mosaic`
+      - `app_delete_display`
+    - `0x4051d4`
+      - `app_deinit_sensor`
+      - `app_deinit_capture`
+      - `app_deinit_viss`
+      - `app_deinit_aewb`
+      - `app_deinit_ldc`
+      - `app_deinit_img_mosaic`
+      - `app_deinit_display`
+      - `appGrpxDeInit`
+      - `tivxFileIOUnLoadKernels`
+        - `unPublishKernels+0x2d5b90`
+          - `tivxRemoveKernelWriteArray`
+          - `tivxRemoveKernelWriteImage`
+          - `tivxRemoveKernelWriteRawImage`
+          - `tivxRemoveKernelWriteTensor`
+          - `tivxRemoveKernelWriteUserDataObject`
+        - `tivxUnRegisterFileIOKernels`
+        - `tivxUnRegisterFileIOTargetArmKernels`
+          - `tivxRemoveTargetKernelWriteArray`
+          - `tivxRemoveTargetKernelWriteImage`
+          - `tivxRemoveTargetKernelWriteRawImage`
+          - `tivxRemoveTargetKernelWriteTensor`
+          - `tivxRemoveTargetKernelWriteUserDataObject`
+  - `appDeInit`
+    - `appCommonDeInit`
+      - `appCommonDeInitLocal+0x2ab9c8`
+- `_ZN21CPVRTMemoryFileSystem7CAtExitD2Ev`
+- `_ZN11CPVRTStringD1Ev`
+
+## 2. RTOS / IPC tree reconstructed from combined log
+
+
+- `vision_apps_init.sh`
+  - `[MCU2_0] CIO Init`
+  - `[MCU2_0] APP Init`
+    - `SCICLIENT Init`
+      - DMSC FW version / revision / ABI確認
+    - `UDMA Init`
+    - `MEM Init`
+      - DDR_LOCAL_MEM heap作成
+    - `IPC Init`
+      - Waiting for HLOS to be ready
+      - HLOS is ready
+      - Syncing with 3 CPUs
+    - `REMOTE_SERVICE Init`
+    - `FVID2 Init`
+    - `DispApp_init`
+      - Display create complete
+      - DSI to EDP bridge enabled
+      - SN65DSI bridge status read
+      - Display create complete
+    - `VHWA VPAC Init`
+      - `LDC Init`
+      - `MSC Init`
+      - `VISS Init`
+      - `FC Init`
+    - `VHWA DMPAC Init`
+      - `DOF Init`
+      - `SDE Init`
+    - `TIOVX target registration`
+      - `ownAddTargetKernelInternal`
+        - test kernels
+        - capture scalar/image kernels
+        - obj_array_split
+      - `tivxPlatformCreateTargetId`
+        - MCU2-0
+        - VPAC_LDC1
+        - VPAC_MSC1 / VPAC_MSC2
+        - VPAC_VISS1
+        - CAPTURE1..4
+        - DISPLAY1 / DISPLAY2
+        - CSITX / CSITX2
+        - DMPAC_SDE / DMPAC_DOF
+        - VPAC_FC
+      - `tivxInitLocal`
+    - `OpenVX Target kernel init`
+    - `UDMA Init for CSITX/CSIRX`
+    - `CSI2RX Init`
+    - `CSI2TX Init`
+      - `Sciclient_pmSetModuleClkFreq`
+    - `ISS Init`
+      - `IssSensor_Init`
+      - `IttRemoteServer_Init`
+      - `VISS REMOTE SERVICE Init`
+    - `UDMA Copy Init`
+    - `APP Run`
+      - IPC echo test
+  - `[C7x_1] APP Init`
+    - `SCICLIENT Init`
+    - `UDMA Init`
+    - `MEM Init`
+    - `IPC Init`
+      - Waiting for HLOS ready
+      - HLOS is ready
+      - Syncing with 0 CPUs
+    - `REMOTE_SERVICE Init`
+    - `TIOVX target kernel registration`
+      - DSP_C7-1 target kernels
+      - DSP_C7-1 PRI_2..PRI_8 target IDs
+    - `OpenVX Target kernel init`
+    - `APP Run`
+      - IPC echo test
+  - `[C7x_2] APP Init`
+    - `SCICLIENT Init`
+    - `UDMA Init`
+    - `MEM Init`
+    - `IPC Init`
+      - Waiting for HLOS ready
+      - HLOS is ready
+      - Syncing with 0 CPUs
+    - `REMOTE_SERVICE Init`
+    - `TIOVX target kernel registration`
+      - DSP_C7-2 target kernels
+      - DSP_C7-2 PRI_2..PRI_8 target IDs
+    - `OpenVX Target kernel init`
+    - `APP Run`
+      - IPC echo test
+
+
+## 3. Sensor RemoteService / IPC failure path
+
+
+- `app_querry_sensor`
+  - Linux A53から `com.ti.image_sensor` RemoteService 問い合わせ
+  - `[MCU2_0]` de-serializer access
+    - write `0x02` to de-serializer `0x3d` reg `0x01` -> failed
+    - write `0x02` to de-serializer `0x36` reg `0x01` -> failed
+- `app_init_sensor`
+  - Linux A53: `IM_SENSOR_CMD_PWRON`
+  - `[MCU2_0] IMX390_PowerOn chId=0`
+  - Linux A53: `IM_SENSOR_CMD_CONFIG`
+  - `[MCU2_0] UB960_SetSensorAlias`
+    - write `0x01` to de-serializer `0x3d` reg `0x4c` -> failed
+    - write `0x01` to de-serializer `0x36` reg `0x4c` -> failed
+    - read from de-serializer `0x3d` reg `0x4c` -> failed
+    - `IMX390_Config Error : UB960_SetSensorAlias for chId 0 returned -4`
+  - Linux A53: `ISS: ERROR: Initializing sensor [IMX390-UB953_D3] failed`
+
+
+## 4. Log explosion points to suppress
+
+
+- `appGrpxDraw`
+  - `Draw2D_updateBufAddr`
+  - `Draw2D_clearBuf`
+    - `Draw2D_clearRegion`
+      - `Draw2D_fillRegion`
+        - `Draw2D_drawPixel` repeated heavily
+- `app_run_graph_for_one_frame_pipeline`
+  - frame loop; currently logged every 1000 calls

@@ -1,0 +1,164 @@
+@startuml
+title J722S Vision Apps Module Configuration from Logs
+
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam packageStyle rectangle
+
+actor "User" as USER
+
+node "Linux / A53 / HLOS" as LINUX {
+  component "vx_app_multi_cam.out\n(app_multi_cam)" as APP
+  component "hook_trace\n__cyg_profile_func_enter" as HOOK
+  component "app_common\nappInit/appCommonInit" as APP_COMMON
+  component "TIOVX Host\nvxContext/vxGraph" as TIOVX_HOST
+  component "RemoteService Client" as RS_CLIENT
+  component "IPC / RPMsg\nHLOS side" as IPC_LINUX
+  component "FileIO Kernels\nwrite image/raw/tensor/array" as FILEIO
+  component "Graphics Overlay\nappGrpx / Draw2D" as GRPX
+
+  package "App Modules" as MODULES {
+    component "Sensor Module\napp_querry_sensor\napp_init_sensor" as MOD_SENSOR
+    component "Capture Module\napp_init_capture\napp_create_graph_capture" as MOD_CAPTURE
+    component "VISS Module\napp_init_viss\napp_create_graph_viss" as MOD_VISS
+    component "AEWB Module\napp_init_aewb\napp_create_graph_aewb" as MOD_AEWB
+    component "LDC Module\napp_init_ldc\napp_create_graph_ldc" as MOD_LDC
+    component "ImgMosaic Module\napp_init_img_mosaic\napp_create_graph_img_mosaic" as MOD_MOSAIC
+    component "Display Module\napp_init_display\napp_create_graph_display" as MOD_DISPLAY
+  }
+}
+
+node "MCU2_0 / FreeRTOS" as MCU2 {
+  component "RTOS APP Init" as MCU_APP
+  component "SCICLIENT\nDMSC/SYSFW" as SCICLIENT
+  component "MEM / UDMA" as MCU_MEM
+  component "IPC / RPMsg\nMCU2_0 side" as IPC_MCU
+  component "RemoteService Server" as RS_SERVER
+  component "TIOVX Target Runtime\nMCU2-0 target" as TIOVX_MCU
+  component "FVID2" as FVID2
+  component "Display App\nDispApp_init" as DISPAPP
+  component "CSI2RX / CSI2TX" as CSI
+  component "ISS\nImage Sensor Service" as ISS
+  component "VISS Remote Service" as VISS_RS
+  component "UDMA Copy" as UDMA_COPY
+}
+
+node "C7x_1 / FreeRTOS" as C7X1 {
+  component "C7x_1 APP Init" as C7X1_APP
+  component "IPC / RemoteService" as C7X1_IPC
+  component "TIOVX Target Runtime\nDSP_C7-1" as TIOVX_C7X1
+}
+
+node "C7x_2 / FreeRTOS" as C7X2 {
+  component "C7x_2 APP Init" as C7X2_APP
+  component "IPC / RemoteService" as C7X2_IPC
+  component "TIOVX Target Runtime\nDSP_C7-2" as TIOVX_C7X2
+}
+
+node "Hardware / SoC blocks" as HW {
+  component "VPAC / VHWA" as VPAC {
+    component "VPAC_LDC1" as HW_LDC
+    component "VPAC_MSC1/2" as HW_MSC
+    component "VPAC_VISS1" as HW_VISS
+    component "VPAC_FC" as HW_FC
+  }
+
+  component "DMPAC" as DMPAC {
+    component "DMPAC_DOF" as HW_DOF
+    component "DMPAC_SDE" as HW_SDE
+  }
+
+  component "Capture Targets\nCAPTURE1..4" as HW_CAPTURE
+  component "Display Targets\nDISPLAY1/2" as HW_DISPLAY
+  component "CSITX / CSIRX" as HW_CSI
+  component "DSI to eDP Bridge\nSN65DSI" as BRIDGE
+  component "UB960 Deserializer\n0x3d / 0x36" as UB960
+  component "IMX390 Sensor\nIMX390-UB953_D3" as IMX390
+}
+
+USER --> APP : run_app_multi_cam.sh
+APP --> HOOK : function enter logs
+APP --> APP_COMMON : appInit()
+APP_COMMON --> IPC_LINUX : IPC Init
+APP_COMMON --> RS_CLIENT : RemoteService Init
+APP_COMMON --> TIOVX_HOST : tivxInitLocal / MPU targets
+
+APP --> MODULES : app_multi_cam_main()
+
+MOD_SENSOR --> RS_CLIENT : query/init/start/stop sensor
+RS_CLIENT <--> IPC_LINUX
+IPC_LINUX <--> IPC_MCU
+IPC_MCU <--> RS_SERVER
+RS_SERVER --> ISS : com.ti.image_sensor
+
+ISS --> UB960 : I2C register access\nreg 0x01 / 0x4c
+UB960 --> IMX390 : sensor alias/config path
+ISS --> VISS_RS : VISS control service
+
+MOD_CAPTURE --> TIOVX_HOST : capture node/object setup
+MOD_VISS --> TIOVX_HOST : VISS node/object setup
+MOD_AEWB --> TIOVX_HOST : AEWB node/object setup
+MOD_LDC --> TIOVX_HOST : LDC node/object setup
+MOD_MOSAIC --> TIOVX_HOST : ImgMosaic kernel/node
+MOD_DISPLAY --> TIOVX_HOST : Display node
+MOD_DISPLAY --> GRPX : overlay/UI draw
+
+TIOVX_HOST --> FILEIO : tivxFileIOLoadKernels
+TIOVX_HOST <--> IPC_LINUX : graph verify/create/process commands
+
+MCU_APP --> SCICLIENT
+MCU_APP --> MCU_MEM
+MCU_APP --> IPC_MCU
+MCU_APP --> RS_SERVER
+MCU_APP --> FVID2
+MCU_APP --> DISPAPP
+MCU_APP --> TIOVX_MCU
+MCU_APP --> CSI
+MCU_APP --> ISS
+MCU_APP --> VISS_RS
+MCU_APP --> UDMA_COPY
+
+TIOVX_MCU --> HW_LDC
+TIOVX_MCU --> HW_MSC
+TIOVX_MCU --> HW_VISS
+TIOVX_MCU --> HW_FC
+TIOVX_MCU --> HW_CAPTURE
+TIOVX_MCU --> HW_DISPLAY
+TIOVX_MCU --> HW_CSI
+TIOVX_MCU --> HW_DOF
+TIOVX_MCU --> HW_SDE
+
+DISPAPP --> BRIDGE
+DISPAPP --> HW_DISPLAY
+CSI --> HW_CSI
+
+C7X1_APP --> C7X1_IPC
+C7X1_APP --> TIOVX_C7X1
+C7X1_IPC <--> IPC_LINUX
+TIOVX_C7X1 <--> TIOVX_HOST : DSP_C7-1 targets
+
+C7X2_APP --> C7X2_IPC
+C7X2_APP --> TIOVX_C7X2
+C7X2_IPC <--> IPC_LINUX
+TIOVX_C7X2 <--> TIOVX_HOST : DSP_C7-2 targets
+
+note right of UB960
+ログ上の失敗点:
+- de-serializer 0x3d/0x36 register write/read failed
+- UB960_SetSensorAlias returned -4
+end note
+
+note bottom of GRPX
+ログ爆発点:
+appGrpxDraw -> Draw2D_clearBuf -> Draw2D_fillRegion -> Draw2D_drawPixel
+end note
+
+note bottom of TIOVX_MCU
+ログで確認できたtarget:
+MCU2-0, VPAC_LDC1, VPAC_MSC1/2, VPAC_VISS1,
+CAPTURE1..4, DISPLAY1/2, CSITX/CSITX2,
+DMPAC_SDE, DMPAC_DOF, VPAC_FC
+end note
+
+@enduml
