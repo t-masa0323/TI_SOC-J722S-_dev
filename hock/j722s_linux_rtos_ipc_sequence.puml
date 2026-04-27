@@ -1,0 +1,273 @@
+@startuml
+title J722S Vision Apps Startup Sequence with RTOS / IPC / RemoteService
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 180
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor User as USER
+participant "Linux A53\nvx_app_multi_cam.out" as A53
+participant "Linux A53\nTIOVX / app_common" as LNX
+participant "IPC / RPMsg\nRemoteService" as IPC
+participant "MCU2_0\nFreeRTOS" as MCU
+participant "C7x_1\nFreeRTOS" as C7X1
+participant "C7x_2\nFreeRTOS" as C7X2
+participant "Display / DSS / DSI-eDP" as DISP
+participant "VPAC / VHWA\nLDC MSC VISS FC" as VPAC
+participant "CSI2RX / CSI2TX\nUDMA" as CSI
+participant "ISS / Image Sensor\nRemote Service" as ISS
+participant "UB960 / Deserializer\n0x3d / 0x36" as UB960
+participant "Graphics Overlay\nDraw2D / appGrpx" as GRPX
+
+== RTOS firmware boot / vision_apps_init.sh ==
+
+USER -> MCU: ./vision_apps_init.sh\nコメント: RTOS側 firmware / vision_apps 初期化開始
+activate MCU
+
+MCU -> MCU: CIO Init\nコメント: FreeRTOSコンソール出力初期化
+MCU -> MCU: APP Init\nコメント: MCU2_0上のVision Apps target側初期化開始
+MCU -> MCU: SCICLIENT Init\nコメント: DMSC/SYSFWとの通信初期化
+MCU -> MCU: UDMA Init\nコメント: DMAエンジン初期化
+MCU -> MCU: MEM Init\nコメント: DDR_LOCAL_MEM heap作成
+MCU -> IPC: IPC Init / Waiting for HLOS ready\nコメント: Linux A53のIPC ready待ち
+
+USER -> C7X1: firmware start\nコメント: C7x_1 FreeRTOS起動
+activate C7X1
+C7X1 -> C7X1: CIO / APP / SCICLIENT / UDMA / MEM Init\nコメント: C7x_1基本リソース初期化
+C7X1 -> IPC: IPC Init / Waiting for HLOS ready\nコメント: Linux A53 ready待ち
+
+USER -> C7X2: firmware start\nコメント: C7x_2 FreeRTOS起動
+activate C7X2
+C7X2 -> C7X2: CIO / APP / SCICLIENT / UDMA / MEM Init\nコメント: C7x_2基本リソース初期化
+C7X2 -> IPC: IPC Init / Waiting for HLOS ready\nコメント: Linux A53 ready待ち
+
+IPC --> C7X1: HLOS is ready\nコメント: Linux側IPC準備完了通知
+C7X1 -> C7X1: APP Syncing with 0 CPUs\nコメント: 同期完了
+C7X1 -> IPC: REMOTE_SERVICE Init\nコメント: C7x側RemoteService初期化
+C7X1 -> C7X1: TIOVX target kernels register\nコメント: DSP_C7-1向けtarget kernel登録
+C7X1 -> C7X1: Add target DSP_C7-1 PRI_2..PRI_8\nコメント: C7x_1ターゲットID生成
+C7X1 -> C7X1: OpenVX Target kernel init\nコメント: C7x_1 target kernel初期化完了
+C7X1 -> IPC: IPC echo test start\nコメント: IPC疎通確認
+deactivate C7X1
+
+IPC --> C7X2: HLOS is ready\nコメント: Linux側IPC準備完了通知
+C7X2 -> C7X2: APP Syncing with 0 CPUs\nコメント: 同期完了
+C7X2 -> IPC: REMOTE_SERVICE Init\nコメント: C7x側RemoteService初期化
+C7X2 -> C7X2: TIOVX target kernels register\nコメント: DSP_C7-2向けtarget kernel登録
+C7X2 -> C7X2: Add target DSP_C7-2 PRI_2..PRI_8\nコメント: C7x_2ターゲットID生成
+C7X2 -> C7X2: OpenVX Target kernel init\nコメント: C7x_2 target kernel初期化完了
+C7X2 -> IPC: IPC echo test start\nコメント: IPC疎通確認
+deactivate C7X2
+
+IPC --> MCU: HLOS is ready\nコメント: Linux側IPC準備完了通知
+MCU -> MCU: APP Syncing with 3 CPUs\nコメント: MCU2_0/C7x等との同期
+MCU -> IPC: REMOTE_SERVICE Init\nコメント: MCU2_0 RemoteService初期化
+MCU -> MCU: FVID2 Init\nコメント: Display/Capture driver framework初期化
+MCU -> DISP: DispApp_init()\nコメント: Display application初期化
+DISP --> MCU: Display create complete\nコメント: Display target生成完了
+MCU -> DISP: DSI to EDP bridge enabled\nコメント: DSI-eDP bridge有効化開始
+MCU -> DISP: SN65DSI bridge status read\nコメント: bridge状態確認
+DISP --> MCU: Display create complete\nコメント: Display生成完了
+
+MCU -> VPAC: VHWA VPAC Init\nコメント: VPACハードウェアアクセラレータ初期化
+VPAC -> VPAC: LDC Init\nコメント: Lens Distortion Correction初期化
+VPAC -> VPAC: MSC Init\nコメント: Multi-Scaler初期化
+VPAC -> VPAC: VISS Init\nコメント: ISP/VISS初期化
+VPAC -> VPAC: FC Init\nコメント: Flex-Connect初期化
+VPAC --> MCU: VPAC Init Done\nコメント: VPAC利用可能
+
+MCU -> MCU: VHWA DMPAC Init\nコメント: DMPAC系アクセラレータ初期化
+MCU -> MCU: DOF Init\nコメント: Optical Flow初期化
+MCU -> MCU: SDE Init\nコメント: Stereo Depth Engine初期化
+
+MCU -> MCU: TIOVX target kernel register\nコメント: MCU2_0 / VPAC / CAPTURE / DISPLAY target kernel登録
+MCU -> MCU: Add targets MCU2-0, VPAC_LDC1, VPAC_MSC1/2,\nVPAC_VISS1, CAPTURE1..4, DISPLAY1/2, CSITX, DMPAC\nコメント: TIOVX target ID生成
+MCU -> MCU: OpenVX Target kernel init\nコメント: target kernel初期化完了
+
+MCU -> CSI: UDMA Init for CSITX/CSIRX\nコメント: CSI入出力用DMA初期化
+MCU -> CSI: CSI2RX Init\nコメント: CSI受信初期化
+MCU -> CSI: CSI2TX Init\nコメント: CSI送信初期化
+CSI -> MCU: Sciclient_pmSetModuleClkFreq\nコメント: CSI2TX関連clock設定
+
+MCU -> ISS: ISS Init\nコメント: Image Sensor Subsystem初期化
+ISS -> ISS: IssSensor_Init\nコメント: センサRemoteService handler登録
+ISS -> ISS: IttRemoteServer_Init\nコメント: Imaging tuning用remote server初期化
+ISS -> ISS: VISS REMOTE SERVICE Init\nコメント: VISS制御用remote service初期化
+MCU -> MCU: UDMA Copy Init\nコメント: 汎用UDMA copy初期化
+MCU -> IPC: APP Run / IPC echo test\nコメント: MCU2_0 target ready状態へ
+deactivate MCU
+
+== Linux A53 application start / run_app_multi_cam.sh ==
+
+USER -> A53: ./run_app_multi_cam.sh\nコメント: Linux側multi_camアプリ起動
+activate A53
+
+A53 -> A53: C++ static initialization\nコメント: box/car/render/srv_lut/PVRT系global object初期化
+A53 -> A53: main()\nコメント: A53アプリのエントリポイント
+
+A53 -> LNX: appInit()\nコメント: Linux側Vision Apps共通初期化開始
+activate LNX
+LNX -> LNX: appCommonInit()\nコメント: 共通リソース初期化
+LNX -> LNX: appCommonInitLocal()\nコメント: Linuxローカル共通初期化
+LNX -> LNX: MEM Init\nコメント: DMA HEAP初期化
+LNX -> IPC: IPC Init\nコメント: Linux-RTOS IPC初期化
+IPC --> LNX: IPC Init Done\nコメント: HLOS readyとしてRTOS側へ通知済み
+LNX -> IPC: REMOTE_SERVICE Init\nコメント: Linux側RemoteService初期化
+LNX -> LNX: tivxInitLocal\nコメント: Linux MPU target ID生成 / TIOVX初期化
+deactivate LNX
+
+A53 -> A53: app_multi_cam_main()\nコメント: multi_camデモ本体開始
+
+A53 -> A53: app_default_param_set / app_parse_cmd_line_args\nコメント: デフォルト設定とCLI引数解析
+A53 -> ISS: app_querry_sensor()\nコメント: センサ一覧取得要求
+activate ISS
+ISS -> IPC: RemoteService request: com.ti.image_sensor\nコメント: LinuxからMCU2_0側image_sensor serviceへ問い合わせ
+IPC -> MCU: deliver image sensor request\nコメント: RPMsg/RemoteService経由でMCU2_0へ配送
+MCU -> UB960: de-serializer register write 0x01\nコメント: センサ検出のためDeserializer初期アクセス
+UB960 --> MCU: write failed\nコメント: 0x3d/0x36へのI2C write失敗
+MCU --> IPC: sensor list response\nコメント: 登録済みセンサリストをLinuxへ返却
+IPC --> ISS: sensor list response\nコメント: Linux側にセンサ候補返却
+ISS --> A53: supported sensor list\nコメント: 10 sensor found
+deactivate ISS
+
+USER -> A53: select sensor 'a'\nコメント: IMX390-UB953_D3選択
+A53 -> ISS: Query IMX390-UB953_D3\nコメント: 選択センサ能力取得
+ISS --> A53: max cameras / LDC option\nコメント: センサ情報返却
+
+USER -> A53: LDC=1, num cameras=1\nコメント: LDC有効、1カメラ指定
+A53 -> A53: app_update_param_set()\nコメント: 入力に基づきパイプラインパラメータ確定
+A53 -> A53: tivxImgMosaicParamsSetDefaults()\nコメント: Mosaic初期パラメータ設定
+
+== Linux kernel load and module init ==
+
+A53 -> LNX: tivxFileIOLoadKernels()\nコメント: FileIO OpenVX kernelをLinux側にロード
+activate LNX
+LNX -> LNX: tivxRegisterFileIOKernels()\nコメント: FileIO host kernel登録
+LNX -> LNX: tivxAddKernelWriteArray/Image/RawImage/Tensor/UserDataObject\nコメント: Write系kernel登録
+LNX -> LNX: tivxRegisterFileIOTargetArmKernels()\nコメント: Linux ARM target側FileIO kernel登録
+LNX -> LNX: tivxAddTargetKernelWrite*\nコメント: FileIO target callback登録
+deactivate LNX
+
+A53 -> ISS: app_init_sensor()\nコメント: 選択センサのPowerOn/Config開始
+activate ISS
+ISS -> IPC: IM_SENSOR_CMD_PWRON / CONFIG\nコメント: LinuxからMCU2_0 image_sensor serviceへ制御要求
+IPC -> MCU: deliver sensor init command\nコメント: RemoteService経由でMCU2_0へ配送
+MCU -> ISS: IMX390_PowerOn chId=0\nコメント: RTOS側IMX390電源ON処理
+ISS -> UB960: UB960_SetSensorAlias / write reg 0x4c\nコメント: UB960でsensor alias設定
+UB960 --> ISS: write/read failed\nコメント: de-serializer 0x3d/0x36 reg 0x4cアクセス失敗
+ISS --> MCU: IMX390_Config Error\nコメント: UB960_SetSensorAlias returned -4
+MCU --> IPC: sensor init failed\nコメント: センサ初期化失敗をLinuxへ返す
+IPC --> ISS: init failed\nコメント: Linux側ISSへ失敗通知
+ISS --> A53: app_init_sensor failed\nコメント: Linuxログ上はInitializing sensor failed
+deactivate ISS
+
+== Linux pipeline object initialization ==
+
+A53 -> A53: app_init_capture()\nコメント: Capture moduleのOpenVX object/param/buffer準備
+A53 -> A53: configure_capture_params()\nコメント: capture入力設定
+A53 -> A53: create_capture_output()\nコメント: capture出力image/object array作成
+A53 -> A53: create_error_detection_frame()\nコメント: センサ失敗時に投入するerror frame準備
+A53 -> A53: read_error_image_raw()\nコメント: error frame rawファイル読込
+A53 -> A53: configure_capture_output_write()\nコメント: capture保存用設定
+
+A53 -> A53: app_init_viss()\nコメント: VISS module object/param準備
+A53 -> A53: configure_viss_params()\nコメント: VISS/ISPパラメータ設定
+A53 -> A53: configure_dcc_params()\nコメント: DCC設定
+A53 -> A53: create_viss_outputs()\nコメント: VISS出力image作成
+
+A53 -> A53: app_init_aewb()\nコメント: AEWB module object/param準備
+A53 -> A53: configure_dcc()\nコメント: AEWB用DCC設定
+A53 -> A53: configure_aewb()\nコメント: AE/AWB制御パラメータ設定
+A53 -> A53: create_histogram()\nコメント: histogram object作成
+A53 -> A53: create_aewb_output()\nコメント: AEWB出力object作成
+
+A53 -> A53: app_init_ldc()\nコメント: LDC module object/param準備
+A53 -> A53: configure_dcc_params()\nコメント: LDC用DCC設定
+A53 -> A53: configure_mesh_params()\nコメント: 歪み補正mesh設定
+A53 -> A53: configure_region_params()\nコメント: LDC処理領域設定
+A53 -> A53: configure_ldc_params()\nコメント: LDC全体パラメータ設定
+A53 -> A53: create_ldc_outputs()\nコメント: LDC出力image作成
+
+A53 -> A53: app_init_img_mosaic()\nコメント: Mosaic module object/param準備
+A53 -> A53: configure_params()\nコメント: Mosaic入力/出力配置設定
+A53 -> A53: create_output_image()\nコメント: Mosaic出力image作成
+A53 -> A53: create_sw_mosaic_kernel()\nコメント: Mosaic user kernel登録準備
+A53 -> LNX: tivxAddKernelImgMosaic()\nコメント: ImgMosaic kernelをTIOVXへ登録
+
+A53 -> A53: app_init_display()\nコメント: Display module object/param準備
+A53 -> GRPX: appGrpxInitParamsInit()\nコメント: Graphics overlay初期パラメータ設定
+A53 -> GRPX: appGrpxInit()\nコメント: overlay用Draw2D buffer/context初期化
+activate GRPX
+GRPX -> GRPX: Draw2D_create()\nコメント: 2D描画コンテキスト作成
+GRPX -> GRPX: Draw2D_setBufInfo()\nコメント: overlay描画先buffer情報設定
+GRPX -> GRPX: appGrpxDraw()\nコメント: 初回overlay描画
+GRPX -> GRPX: Draw2D_clearBuf / fillRegion / drawPixel\nコメント: overlay bufferクリア。drawPixelがログ爆発源
+deactivate GRPX
+
+== OpenVX graph creation / verify / run ==
+
+A53 -> LNX: app_create_graph_capture()\nコメント: Capture node作成
+A53 -> LNX: app_create_graph_viss()\nコメント: VISS node作成
+A53 -> LNX: app_create_graph_aewb()\nコメント: AEWB node作成
+A53 -> LNX: app_create_graph_ldc()\nコメント: LDC node作成
+A53 -> LNX: app_create_graph_img_mosaic()\nコメント: Mosaic node作成
+LNX -> LNX: tivxImgMosaicNode()\nコメント: Mosaic OpenVX node生成
+A53 -> LNX: app_create_graph_display()\nコメント: Display node作成
+
+A53 -> LNX: app_verify_graph()\nコメント: OpenVX graph verify
+LNX -> LNX: tivxImgMosaicValidate()\nコメント: Mosaic node妥当性検証
+LNX -> LNX: tivxCheckStatus()\nコメント: 各parameter status確認
+
+A53 -> A53: app_send_error_frame()\nコメント: センサ初期化失敗のためerror frameをpipelineへ投入
+A53 -> ISS: Start sensor\nコメント: センサ開始要求
+ISS -> IPC: remote sensor start command\nコメント: RemoteServiceでRTOSへ開始要求
+IPC -> MCU: deliver start command\nコメント: MCU2_0へ配送
+MCU --> IPC: Starting sensor failed\nコメント: 実センサ/Deserializer未接続またはI2C失敗により開始失敗
+IPC --> ISS: start failed\nコメント: Linux側へ失敗通知
+
+loop frame processing
+    A53 -> LNX: app_run_graph_for_one_frame_pipeline()\nコメント: 1フレーム分のgraph実行。hookではLOOP間引き
+end
+
+== User exit / cleanup ==
+
+USER -> A53: x\nコメント: デモ終了入力
+A53 -> ISS: Stop sensor\nコメント: センサ停止要求
+ISS -> IPC: remote sensor stop command\nコメント: RemoteServiceでRTOSへ停止要求
+IPC -> MCU: deliver stop command\nコメント: MCU2_0へ配送
+MCU --> IPC: Stopping sensor failed\nコメント: 初期化/開始失敗済みのため停止も失敗
+IPC --> A53: stop failed\nコメント: Linuxへ通知
+
+A53 -> LNX: app_delete_capture()\nコメント: Capture node削除
+A53 -> LNX: app_delete_viss()\nコメント: VISS node削除
+A53 -> LNX: app_delete_aewb()\nコメント: AEWB node削除
+A53 -> LNX: app_delete_ldc()\nコメント: LDC node削除
+A53 -> LNX: app_delete_img_mosaic()\nコメント: Mosaic node削除
+A53 -> LNX: app_delete_display()\nコメント: Display node削除
+
+A53 -> ISS: app_deinit_sensor()\nコメント: センサmodule解放
+A53 -> A53: app_deinit_capture()\nコメント: Capture object解放
+A53 -> A53: app_deinit_viss()\nコメント: VISS object解放
+A53 -> A53: app_deinit_aewb()\nコメント: AEWB object解放
+A53 -> A53: app_deinit_ldc()\nコメント: LDC object解放
+A53 -> A53: app_deinit_img_mosaic()\nコメント: Mosaic object解放
+A53 -> A53: app_deinit_display()\nコメント: Display object解放
+A53 -> GRPX: appGrpxDeInit()\nコメント: overlay/Draw2D解放
+
+A53 -> LNX: tivxFileIOUnLoadKernels()\nコメント: FileIO kernel登録解除
+LNX -> LNX: tivxRemoveKernelWrite*\nコメント: Write系kernel削除
+LNX -> LNX: tivxUnRegisterFileIOKernels()\nコメント: FileIO host kernel登録解除
+LNX -> LNX: tivxUnRegisterFileIOTargetArmKernels()\nコメント: FileIO target kernel登録解除
+
+A53 -> LNX: appDeInit()\nコメント: Linux側アプリ共通終了処理
+LNX -> LNX: appCommonDeInit()\nコメント: 共通リソース解放
+LNX -> IPC: REMOTE_SERVICE Deinit\nコメント: RemoteService終了
+LNX -> IPC: IPC Deinit\nコメント: Linux-RTOS IPC終了
+LNX -> LNX: MEM Deinit\nコメント: DMA HEAP/DDR shared memory解放確認
+
+A53 -> A53: C++ static destructors\nコメント: PVRT/CPVRTString等のglobal object破棄
+deactivate A53
+
+@enduml

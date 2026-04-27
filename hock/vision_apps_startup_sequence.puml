@@ -1,0 +1,267 @@
+@startuml
+' Vision Apps multi_cam startup-to-shutdown sequence
+' Source: hook trace log from run_app_multi_cam.sh
+
+skinparam sequenceMessageAlign center
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+skinparam ResponseMessageBelowArrow true
+autonumber
+
+title J722S vision_apps / app_multi_cam 起動〜終了シーケンス
+
+participant "Loader / C++ static init" as Loader
+participant "main()\nmain_linux_arm.c" as Main
+participant "APP Common\nappInit/appCommonInit" as APP
+participant "app_multi_cam_main()\nmain.c" as MC
+participant "Sensor / ISS" as Sensor
+participant "TIOVX / FileIO" as TIOVX
+participant "Capture Module" as Cap
+participant "VISS Module" as VISS
+participant "AEWB Module" as AEWB
+participant "LDC Module" as LDC
+participant "ImgMosaic Module" as Mosaic
+participant "Display / GRPX" as Display
+participant "Run Loop" as Loop
+
+box "Process load before main()" #LightGray
+    Loader -> Loader : _GLOBAL__sub_I_box.cpp
+    activate Loader
+    Loader -> Loader : __static_initialization_and_destruction_0v
+    Loader -> Loader : glm::tmat4x4 ctor [loop logged once]
+    Loader -> Loader : glm::tvec4 ctor [loop logged once]
+    deactivate Loader
+
+    Loader -> Loader : _GLOBAL__sub_I_car.cpp
+    activate Loader
+    Loader -> Loader : __static_initialization_and_destruction_0v
+    Loader -> Loader : glm::tmat3x3 ctor [loop logged once]
+    Loader -> Loader : glm::tvec3 ctor [loop logged once]
+    deactivate Loader
+
+    Loader -> Loader : _GLOBAL__sub_I_render.cpp
+    Loader -> Loader : _GLOBAL__sub_I_srv_lut.cpp
+    Loader -> Loader : _GLOBAL__sub_I_PVRTPFXParser.cpp
+    Loader -> Loader : _GLOBAL__sub_I_PVRTResourceFile.cpp
+    Loader -> Loader : CPVRTString::CPVRTString()
+end box
+
+box "Common initialization" #AliceBlue
+    Loader -> Main : main()
+    activate Main
+
+    Main -> APP : appInit()
+    activate APP
+    APP -> APP : appCommonInit()
+    APP -> APP : appCommonInitLocal()
+    APP -> APP : MEM Init
+    APP -> APP : IPC Init
+    APP -> APP : REMOTE_SERVICE Init
+    APP -> TIOVX : tivxInitLocal()
+    TIOVX -> TIOVX : Add target MPU-0/1/2/3
+    APP --> Main : APP Init Done
+    deactivate APP
+end box
+
+box "multi_cam setup / user selection" #HoneyDew
+    Main -> MC : app_multi_cam_main()
+    activate MC
+
+    MC -> MC : default/cmdline/interactive setup
+    note right of MC
+      ログでは一部 static 関数が
+      0x406b88 / 0x4046a4 等の
+      アドレス表示になっている
+    end note
+
+    MC -> Sensor : app_querry_sensor()
+    activate Sensor
+    Sensor -> Sensor : Enumerate sensors
+    Sensor -> Sensor : User selects IMX390-UB953_D3
+    Sensor -> Sensor : Query selected sensor
+    Sensor --> MC : sensor params / camera count
+    deactivate Sensor
+
+    MC -> Mosaic : mosaic parameter update
+    activate Mosaic
+    Mosaic -> Mosaic : tivxImgMosaicParamsSetDefaults()
+    Mosaic --> MC : mosaic params ready
+    deactivate Mosaic
+end box
+
+box "Kernel load and module initialization" #MistyRose
+    MC -> TIOVX : tivxFileIOLoadKernels()
+    activate TIOVX
+    TIOVX -> TIOVX : tivxRegisterFileIOKernels()
+    TIOVX -> TIOVX : publishKernels()
+    TIOVX -> TIOVX : tivxAddKernelWriteArray()
+    TIOVX -> TIOVX : tivxAddKernelWriteImage()
+    TIOVX -> TIOVX : tivxAddKernelWriteRawImage()
+    TIOVX -> TIOVX : tivxAddKernelWriteTensor()
+    TIOVX -> TIOVX : tivxAddKernelWriteUserDataObject()
+    TIOVX -> TIOVX : tivxRegisterFileIOTargetArmKernels()
+    TIOVX -> TIOVX : tivxAddTargetKernelWriteArray/Image/RawImage/Tensor/UserDataObject
+    TIOVX --> MC : FileIO kernels loaded
+    deactivate TIOVX
+
+    MC -> Sensor : app_init_sensor()
+    activate Sensor
+    Sensor -> Sensor : IM_SENSOR_CMD_PWRON
+    Sensor -> Sensor : IM_SENSOR_CMD_CONFIG
+    note right of Sensor
+      ログ上は sensor init failed が出るが、
+      アプリ本体は継続して描画・メニューへ進む
+    end note
+    Sensor --> MC : return
+    deactivate Sensor
+
+    MC -> Cap : app_init_capture()
+    activate Cap
+    Cap -> Cap : configure_capture_params()
+    Cap -> Cap : create_capture_output()
+    Cap -> Cap : create_error_detection_frame()
+    Cap -> Cap : read_error_image_raw()
+    Cap -> Cap : configure_capture_output_write()
+    Cap --> MC : capture init done
+    deactivate Cap
+
+    MC -> VISS : app_init_viss()
+    activate VISS
+    VISS -> VISS : configure_viss_params()
+    VISS -> VISS : configure_dcc_params()
+    VISS -> VISS : create_viss_outputs()
+    VISS --> MC : VISS init done
+    deactivate VISS
+
+    MC -> AEWB : app_init_aewb()
+    activate AEWB
+    AEWB -> AEWB : configure_dcc()
+    AEWB -> AEWB : configure_aewb()
+    AEWB -> AEWB : create_histogram()
+    AEWB -> AEWB : create_aewb_output()
+    AEWB --> MC : AEWB init done
+    deactivate AEWB
+
+    MC -> LDC : app_init_ldc()
+    activate LDC
+    LDC -> LDC : configure_dcc_params()
+    LDC -> LDC : configure_mesh_params()
+    LDC -> LDC : configure_region_params()
+    LDC -> LDC : configure_ldc_params()
+    LDC -> LDC : create_ldc_outputs()
+    LDC --> MC : LDC init done
+    deactivate LDC
+
+    MC -> Mosaic : app_init_img_mosaic()
+    activate Mosaic
+    Mosaic -> Mosaic : configure_params()
+    Mosaic -> Mosaic : create_output_image()
+    Mosaic -> Mosaic : create_sw_mosaic_kernel()
+    Mosaic -> TIOVX : tivxAddKernelImgMosaic()
+    Mosaic --> MC : ImgMosaic init done
+    deactivate Mosaic
+
+    MC -> Display : app_init_display()
+    activate Display
+    MC -> Display : appGrpxInitParamsInit()
+    MC -> Display : appGrpxInit()
+    note right of Display
+      GRPX graph verify error はログに出るが、
+      致命停止ではなくアプリは継続
+    end note
+    Display --> MC : display/grpx init path complete
+    deactivate Display
+end box
+
+box "OpenVX graph construction / verify path" #Lavender
+    MC -> Cap : app_create_graph_capture()
+    MC -> VISS : app_create_graph_viss()
+    MC -> AEWB : app_create_graph_aewb()
+    MC -> LDC : app_create_graph_ldc()
+
+    MC -> Mosaic : app_create_graph_img_mosaic()
+    activate Mosaic
+    Mosaic -> TIOVX : tivxImgMosaicNode()
+    Mosaic --> MC : mosaic node created
+    deactivate Mosaic
+
+    MC -> Display : app_create_graph_display()
+
+    MC -> TIOVX : graph verify / validate path
+    activate TIOVX
+    TIOVX -> TIOVX : tivxImgMosaicValidate()
+    loop multiple parameter checks
+        TIOVX -> TIOVX : tivxCheckStatus()
+    end
+    TIOVX --> MC : verify path return
+    deactivate TIOVX
+
+    MC -> Cap : app_send_error_frame()
+end box
+
+box "Interactive run" #LightYellow
+    MC -> Loop : app_run_graph_for_one_frame_pipeline()
+    activate Loop
+    loop periodic frame loop
+        Loop -> Loop : LOOP log every 1000 calls
+    end
+    note right of Loop
+      ユーザー入力 x まで周期実行。
+      0x406080 <- 0x40692c が LOOP 表示。
+    end note
+    Loop --> MC : exit requested
+    deactivate Loop
+end box
+
+box "Delete / deinit" #LightCyan
+    MC -> Sensor : Stop sensor
+
+    MC -> Cap : app_delete_capture()
+    MC -> VISS : app_delete_viss()
+    MC -> AEWB : app_delete_aewb()
+    MC -> LDC : app_delete_ldc()
+    MC -> Mosaic : app_delete_img_mosaic()
+    MC -> Display : app_delete_display()
+
+    MC -> Sensor : app_deinit_sensor()
+    MC -> Cap : app_deinit_capture()
+    MC -> VISS : app_deinit_viss()
+    MC -> AEWB : app_deinit_aewb()
+    MC -> LDC : app_deinit_ldc()
+    MC -> Mosaic : app_deinit_img_mosaic()
+    MC -> Display : app_deinit_display()
+    MC -> Display : appGrpxDeInit()
+
+    MC -> TIOVX : tivxFileIOUnLoadKernels()
+    activate TIOVX
+    TIOVX -> TIOVX : unPublishKernels()
+    TIOVX -> TIOVX : tivxRemoveKernelWriteArray/Image/RawImage/Tensor/UserDataObject
+    TIOVX -> TIOVX : tivxUnRegisterFileIOKernels()
+    TIOVX -> TIOVX : tivxUnRegisterFileIOTargetArmKernels()
+    TIOVX -> TIOVX : tivxRemoveTargetKernelWriteArray/Image/RawImage/Tensor/UserDataObject
+    TIOVX --> MC : FileIO kernels unloaded
+    deactivate TIOVX
+
+    MC --> Main : app_multi_cam_main return
+    deactivate MC
+
+    Main -> APP : appDeInit()
+    activate APP
+    APP -> APP : appCommonDeInit()
+    APP -> APP : appCommonDeInitLocal()
+    APP -> APP : REMOTE_SERVICE Deinit
+    APP -> APP : IPC Deinit
+    APP -> APP : MEM Deinit
+    APP --> Main : APP Deinit Done
+    deactivate APP
+
+    Main --> Loader : process exit
+    deactivate Main
+end box
+
+box "Process exit after main()" #LightGray
+    Loader -> Loader : CPVRTMemoryFileSystem::CAtExit::~CAtExit()
+    Loader -> Loader : CPVRTString::~CPVRTString()
+end box
+
+@enduml
