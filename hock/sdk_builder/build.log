@@ -1,0 +1,928 @@
+make mcu_plus_sdk_build
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15 libs DEVICE=j722s PROFILE=release -s; make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/vhwa -f makefile.j722s.main-r5fss0-0.ti-arm-clang PROFILE=release -s; 
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15'
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/board'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/board'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/self_reset'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/board'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/board'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciclient_direct'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciserver'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciclient_direct/sbl'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/fs/freertos_fat'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/freertos'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/dmautils'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/self_reset'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/nortos'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/freertos'
+# SDK paths OK !!!
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/dmautils'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/safety_checkers'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/fs/freertos_fat'
+# Check and update: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/version/rmpmhal_version.h
+# Check and update: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/version/rmpmhal_version.h
+# Check and update: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/version/sciserver_version.h
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciclient_direct/sbl'
+make[4]: *** No rule to make target '/home/dockeruser/psdk_installer_build_top_workarea/scratch_workarea/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils/src/pdm_utils_pet.c', needed by 'pdm_utils_pet.obj'.  Stop.
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[4]: *** No rule to make target '/home/dockeruser/psdk_installer_build_top_workarea/scratch_workarea/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils/src/pdm_utils_clock.c', needed by 'pdm_utils_clock.obj'.  Stop.
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/dmautils'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[3]: *** [makefile.j722s:437: pdm_utils_main-r5fss0-0.ti-arm-clang] Error 2
+make[3]: *** Waiting for unfinished jobs....
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/dmautils'
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+# Check and update: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/version/sciserver_version.h
+make[4]: *** No rule to make target '/home/dockeruser/psdk_installer_build_top_workarea/scratch_workarea/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils/src/pdm_utils_pet.c', needed by 'pdm_utils_pet.obj'.  Stop.
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/safety_checkers'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[3]: *** [makefile.j722s:437: pdm_utils_mcu-r5fss0-0.ti-arm-clang] Error 2
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[3]: *** [makefile.j722s:437: pdm_utils_wkup-r5fss0-0.ti-arm-clang] Error 2
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/freertos'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/nortos'
+make[4]: *** No rule to make target '/home/dockeruser/psdk_installer_build_top_workarea/scratch_workarea/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils/src/pdm_utils_pet.c', needed by 'pdm_utils_pet.obj'.  Stop.
+make[4]: *** No rule to make target '/home/dockeruser/psdk_installer_build_top_workarea/scratch_workarea/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils/src/pdm_utils_pet.c', needed by 'pdm_utils_pet.obj'.  Stop.
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/pdm_utils'
+make[3]: *** [makefile.j722s:437: pdm_utils_c75ss0-0.ti-c7000] Error 2
+make[3]: *** [makefile.j722s:437: pdm_utils_c75ss1-0.ti-c7000] Error 2
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciclient_direct'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/kernel/freertos'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/device_manager/sciserver'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15'
+make[2]: *** [makefile:71: libs] Error 2
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15'
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/vhwa'
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/source/drivers/vhwa'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make app_utils
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils'
+SHELL=/bin/sh
+TARGET_MAKEFILES=utils/console_io/src/concerto.mak utils/file_io/src/concerto.mak utils/ipc/src/concerto.mak utils/ipc_test/src/concerto.mak utils/mem/src/concerto.mak utils/misc/src/concerto.mak utils/perf_stats/src/concerto.mak utils/remote_service/src/concerto.mak utils/rtos/src/concerto.mak utils/sciclient/src/concerto.mak utils/timer/src/concerto.mak utils/udma/src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:1:release:TIARMCGT_LLVM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils/out/J722S/A53/LINUX/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils/lib/J722S/A53/LINUX/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/app_utils'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make vxlib
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+TARGET_PLATFORM=J722S TARGET_CPU=C7524 TARGET_BUILD=release make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib vxlib
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib'
+PSDK_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04
+TARGET_CPU=C7524
+TARGET_BUILD=release
+make[2]: Nothing to be done for 'vxlib'.
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib'
+TARGET_PLATFORM=J722S TARGET_CPU=C7524 TARGET_BUILD=release make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib cp_to_lib
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib'
+PSDK_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04
+TARGET_CPU=C7524
+TARGET_BUILD=release
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib/out/J722S/C7524/NO_OS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib/lib/J722S/C7524/NO_OS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vxlib'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make tiovx
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx RTOS_SDK=mcu_plus_sdk vision_apps_utils
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx'
+SHELL=/bin/sh
+TARGET_MAKEFILES=conformance_tests/kernels/test_kernels/arm/concerto.mak conformance_tests/kernels/test_kernels/c66/concerto.mak conformance_tests/kernels/test_kernels/host/concerto.mak conformance_tests/kernels/test_kernels/test/concerto.mak conformance_tests/test_conformance/concerto.mak conformance_tests/test_conformance/test_module/concerto.mak conformance_tests/test_engine/concerto.mak conformance_tests/test_executable/concerto.mak conformance_tests/test_internal/concerto.mak conformance_tests/test_tiovx/concerto.mak kernels/common/host/concerto.mak kernels/common/target/concerto.mak kernels/ivision/common/concerto.mak kernels/openvx-core/c66x/bam/concerto.mak kernels/openvx-core/c66x/concerto.mak kernels/openvx-core/host/concerto.mak kernels/openvx-ext/host/concerto.mak kernels/openvx-ext/target/concerto.mak kernels/openvx-ext/test/concerto.mak source/framework/concerto.mak source/platform/board/hlos/concerto.mak source/platform/board/rtos/concerto.mak source/platform/pc/linux/concerto.mak source/vxu/concerto.mak tutorial/ch00_main/concerto.mak tutorial/ch03_graph/c66x/concerto.mak tutorial/concerto.mak utils/source/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:1:release:TIARMCGT_LLVM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+make[2]: Nothing to be done for 'vision_apps_utils'.
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx RTOS_SDK=mcu_plus_sdk
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx'
+SHELL=/bin/sh
+TARGET_MAKEFILES=conformance_tests/kernels/test_kernels/arm/concerto.mak conformance_tests/kernels/test_kernels/c66/concerto.mak conformance_tests/kernels/test_kernels/host/concerto.mak conformance_tests/kernels/test_kernels/test/concerto.mak conformance_tests/test_conformance/concerto.mak conformance_tests/test_conformance/test_module/concerto.mak conformance_tests/test_engine/concerto.mak conformance_tests/test_executable/concerto.mak conformance_tests/test_internal/concerto.mak conformance_tests/test_tiovx/concerto.mak kernels/common/host/concerto.mak kernels/common/target/concerto.mak kernels/ivision/common/concerto.mak kernels/openvx-core/c66x/bam/concerto.mak kernels/openvx-core/c66x/concerto.mak kernels/openvx-core/host/concerto.mak kernels/openvx-ext/host/concerto.mak kernels/openvx-ext/target/concerto.mak kernels/openvx-ext/test/concerto.mak source/framework/concerto.mak source/platform/board/hlos/concerto.mak source/platform/board/rtos/concerto.mak source/platform/pc/linux/concerto.mak source/vxu/concerto.mak tutorial/ch00_main/concerto.mak tutorial/ch03_graph/c66x/concerto.mak tutorial/concerto.mak utils/source/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:1:release:TIARMCGT_LLVM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+Copying Prebuilt libs from prebuilt_libs to lib
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx/out/J722S/A53/LINUX/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx/lib/J722S/A53/LINUX/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/tiovx'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make imaging
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/imaging
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/imaging'
+SHELL=/bin/sh
+TARGET_MAKEFILES=./algos/ae/src/concerto.mak ./algos/dcc/src/concerto.mak ./itt_server_remote/src/concerto.mak ./kernels/aewb/arm/concerto.mak ./kernels/aewb/host/concerto.mak ./kernels/aewb/test/concerto.mak ./kernels/hwa/arm/concerto.mak ./kernels/hwa/dmpac_dof/concerto.mak ./kernels/hwa/dmpac_sde/concerto.mak ./kernels/hwa/host/concerto.mak ./kernels/hwa/test/concerto.mak ./kernels/hwa/vpac_fc/concerto.mak ./kernels/hwa/vpac_ldc/concerto.mak ./kernels/hwa/vpac_msc/concerto.mak ./kernels/hwa/vpac_nf/concerto.mak ./kernels/hwa/vpac_viss/concerto.mak ./sensor_drv/src/concerto.mak ./ti_2a_wrapper/src/concerto.mak ./utils/hwa/src/concerto.mak ./utils/iss/src/concerto.mak ./utils/itt_server/src/concerto.mak ./utils/network_api/src/concerto.mak ./utils/sensors/src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:1:release:TIARMCGT_LLVM
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Build Skipped for sensor_drv.src.J722S.LINUX.A53.release:ti_imaging_sensordrv
+Copying Prebuilt libs from prebuilt_libs to lib
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/imaging/out/J722S/R5F/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/imaging/lib/J722S/R5F/FREERTOS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/imaging'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make video_io
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/video_io RTOS_SDK=mcu_plus_sdk
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/video_io'
+SHELL=/bin/sh
+TARGET_MAKEFILES=kernels/video_io/capture/concerto.mak kernels/video_io/csitx/concerto.mak kernels/video_io/display/concerto.mak kernels/video_io/display_m2m/concerto.mak kernels/video_io/host/concerto.mak kernels/video_io/test/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:1:release:TIARMCGT_LLVM
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/video_io/out/J722S/R5F/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/video_io/lib/J722S/R5F/FREERTOS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/video_io'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make tidl_lib
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl tidl_lib DSP_TOOLS=/home/user/ti/ti-cgt-c7000_5.0.0.LTS TARGET_PLATFORM=TI_DEVICE TARGET_BUILD=release; 
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl'
+======== MAKING TIDL ALGO =================
+make -C ./ti_dl/algo -f makefile
+.
+======== MAKING CUSTOM LIB =================
+make -C ./ti_dl/custom -f makefile
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/ti_dl/algo'
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/ti_dl/custom'
+  ==>  new archive '../lib/J722S/dsp/algo/release/tidl_custom.lib'
+  ==>  building archive '../lib/J722S/dsp/algo/release/tidl_custom.lib'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/ti_dl/custom'
+  ==>  new archive '../lib/J722S/dsp/algo/release/tidl_algo.lib'
+  ==>  building archive '../lib/J722S/dsp/algo/release/tidl_algo.lib'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/ti_dl/algo'
+.
+======== MAKING TIDL AND CUSTOM LIBRARIES =================
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make tidl_tiovx_kernels
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl tidl_tiovx_kernels TARGET_BUILD=release; 
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl'
+.
+======== MAKING TIDL TIOVX KERNELS =================
+make -C ./tiovx_kernels -f makefile all
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tiovx_kernels'
+SHELL=/bin/sh
+TARGET_MAKEFILES=./tidl/dsp/concerto.mak ./tidl/host/concerto.mak ./tidl/mpu/concerto.mak ./tidl/test/concerto.mak ./tvm/dsp/concerto.mak ./tvm/host/concerto.mak ./tvm/test/concerto.mak ./tvm/tvm_dyn_load/concerto.mak
+Keep only release BUILDS in TARGET_COMBOS
+undefined TIARMCGT_ROOT=
+undefined TIARMCGT_LLVM_ROOT=
+undefined GCC_SYSBIOS_ARM_ROOT=
+undefined CGT6X_ROOT=
+file CGT7X_ROOT=/home/user/ti/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tiovx_kernels/out/J722S/C7524/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tiovx_kernels/lib/J722S/C7524/FREERTOS/release
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tiovx_kernels'
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make qnx ptk
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make[1]: Nothing to be done for 'qnx'.
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit TARGET_SOC=J722S RTOS=FREERTOS C7X_TARGET=C7524 BUILD_TARGET_MODE=yes
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit'
+SHELL=/bin/sh
+TARGET_MAKEFILES=src/algos/concerto.mak src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit/out/J722S/C7524/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit/lib/J722S/C7524/FREERTOS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit TARGET_SOC=J722S RTOS=FREERTOS C7X_TARGET=C7524 cp_to_lib BUILD_TARGET_MODE=yes
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit'
+SHELL=/bin/sh
+TARGET_MAKEFILES=src/algos/concerto.mak src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit/out/J722S/C7524/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit/lib/J722S/C7524/FREERTOS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/ti-perception-toolkit'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make vision_apps
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps tivision_apps
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps'
+SHELL=/bin/sh
+TARGET_MAKEFILES=applibs/srv_bowl_lut_gen_applib/concerto.mak applibs/srv_calibration_applib/concerto.mak applibs/test/concerto.mak apps/basic_demos/app_c7x_kernel/c7x/concerto.mak apps/basic_demos/app_c7x_kernel/concerto.mak apps/basic_demos/app_dof/concerto.mak apps/basic_demos/app_fd_exchange/concerto.mak apps/basic_demos/app_linux_arm_opengl_mosaic/concerto.mak apps/basic_demos/app_multi_cam/concerto.mak apps/basic_demos/app_multi_cam_codec/concerto.mak apps/basic_demos/app_single_cam/concerto.mak apps/basic_demos/app_stereo/concerto.mak apps/basic_demos/app_vx_tutorial/concerto.mak apps/cv_demos/app_sfm/concerto.mak apps/dl_demos/app_tidl/concerto.mak apps/dl_demos/app_tidl_avp/concerto.mak apps/dl_demos/app_tidl_avp2/concerto.mak apps/dl_demos/app_tidl_avp3/concerto.mak apps/dl_demos/app_tidl_avp4/concerto.mak apps/dl_demos/app_tidl_bev/concerto.mak apps/dl_demos/app_tidl_cam/concerto.mak apps/dl_demos/app_tidl_front_cam/concerto.mak apps/dl_demos/app_tidl_od/concerto.mak apps/dl_demos/app_tidl_od_cam/concerto.mak apps/dl_demos/app_tidl_seg/concerto.mak apps/dl_demos/app_tidl_seg_cam/concerto.mak apps/dl_demos/app_tidl_vl/concerto.mak apps/srv_demos/app_srv_calibration/concerto.mak apps/srv_demos/app_srv_camera/concerto.mak apps/srv_demos/app_srv_fileio/concerto.mak apps/tests/app_test_framework/concerto.mak apps/tests/app_vx_conformance/concerto.mak apps/tests/app_vx_conformance_core/concerto.mak apps/tests/app_vx_conformance_hwa/concerto.mak apps/tests/app_vx_conformance_tidl/concerto.mak apps/tests/app_vx_conformance_video_io/concerto.mak apps/utilities/app_heap_stats/concerto.mak apps/utilities/app_heterogeneous/concerto.mak apps/utilities/app_ipc/concerto.mak apps/utilities/app_load_test/concerto.mak apps/utilities/app_mem/concerto.mak apps/utilities/app_perf_stats/concerto.mak apps/utilities/app_remote_log/concerto.mak apps/utilities/app_viss/concerto.mak kernels/common/target/concerto.mak kernels/fileio/arm/concerto.mak kernels/fileio/host/concerto.mak kernels/img_proc/a72/concerto.mak kernels/img_proc/c66/concerto.mak kernels/img_proc/c71/concerto.mak kernels/img_proc/host/concerto.mak kernels/img_proc/r5f/concerto.mak kernels/sample/a72/concerto.mak kernels/sample/host/concerto.mak kernels/srv/c66/concerto.mak kernels/srv/gpu/3dsrv/Tools/concerto.mak kernels/srv/gpu/3dsrv/concerto.mak kernels/srv/gpu/concerto.mak kernels/srv/host/concerto.mak kernels/srv/test/concerto.mak kernels/stereo/host/concerto.mak kernels/stereo/target/bam/concerto.mak kernels/stereo/target/concerto.mak kernels/stereo/test/concerto.mak modules/concerto.mak modules/src/concerto.mak platform/j722s/linux/concerto.mak platform/j722s/qnx/concerto.mak platform/j722s/rtos/c7x_1/concerto.mak platform/j722s/rtos/c7x_2/concerto.mak platform/j722s/rtos/common/concerto.mak platform/j722s/rtos/common_linux/concerto.mak platform/j722s/rtos/common_qnx/concerto.mak platform/j722s/rtos/concerto.mak platform/j722s/rtos/mcu1_0/concerto.mak platform/j722s/rtos/mcu2_0/concerto.mak utils/app_init/src/concerto.mak utils/codec_wrapper/src/concerto.mak utils/draw2d/src/concerto.mak utils/dss/src/concerto.mak utils/ethfw/src/concerto.mak utils/grpx/src/concerto.mak utils/gst_wrapper/src/concerto.mak utils/opengl/src/a72/concerto.mak utils/opengl/src/pc/concerto.mak utils/openmax_wrapper/src/concerto.mak utils/sciserver/src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:3:release:TIARMCGT_LLVM
+Build Skipped for kernels.stereo.test.J722S.FREERTOS.R5F.release:vx_kernels_stereo_tests
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Build Skipped for apps.cv_demos.app_sfm.J722S.LINUX.A53.release:vx_app_sfm
+Build Skipped for apps.dl_demos.app_tidl_avp.J722S.LINUX.A53.release:vx_app_tidl_avp
+Build Skipped for apps.dl_demos.app_tidl_avp2.J722S.LINUX.A53.release:vx_app_tidl_avp2
+Build Skipped for apps.dl_demos.app_tidl_avp3.J722S.LINUX.A53.release:vx_app_tidl_avp3
+Build Skipped for apps.dl_demos.app_tidl_avp4.J722S.LINUX.A53.release:vx_app_tidl_avp4
+Build Skipped for apps.dl_demos.app_tidl_cam.J722S.LINUX.A53.release:vx_app_tidl_cam
+Build Skipped for apps.dl_demos.app_tidl_od_cam.J722S.LINUX.A53.release:vx_app_tidl_od_cam
+Build Skipped for apps.dl_demos.app_tidl_seg.J722S.LINUX.A53.release:vx_app_tidl_seg
+Build Skipped for apps.dl_demos.app_tidl_seg_cam.J722S.LINUX.A53.release:vx_app_tidl_seg_cam
+Build Skipped for apps.dl_demos.app_tidl_vl.J722S.LINUX.A53.release:vx_app_tidl_vl
+Build Skipped for apps.tests.app_test_framework.J722S.LINUX.A53.release:vx_app_test_framework
+Build Skipped for kernels.srv.test.J722S.LINUX.A53.release:vx_kernels_srv_tests
+Build Skipped for kernels.stereo.target.bam.J722S.LINUX.A53.release:vx_target_kernels_stereo_bam
+Build Skipped for kernels.stereo.test.J722S.LINUX.A53.release:vx_kernels_stereo_tests
+Required system library libvx_vxu.a
+Required system library libvx_framework.a
+Required system library libvx_kernels_host_utils.a
+Required system library libvx_kernels_target_utils.a
+Required system library libvx_platform_board_hlos.a
+Required system library libvx_kernels_openvx_core.a
+Required system library libvx_kernels_openvx_ext.a
+Required system library libvx_target_kernels_openvx_ext.a
+Required system library libvx_utils.a
+Required system library libvx_tutorial.a
+Required system library libvx_kernels_video_io.a
+Required system library libvx_kernels_hwa.a
+Required system library libvx_kernels_tidl.a
+Required system library libvx_nested_kernels_tidl.a
+Required system library libapp_utils_mem.a
+Required system library libapp_utils_ipc.a
+Required system library libvx_kernels_tvm.a
+Required system library libapp_utils_console_io.a
+Required system library libapp_utils_timer.a
+Required system library libapp_utils_remote_service.a
+Required system library libapp_utils_file_io.a
+Required system library libapp_utils_perf_stats.a
+Required system library libapp_utils_hwa.a
+Required system library libapp_utils_iss.a
+Required system library libvx_kernels_imaging.a
+Required system library libti_2a_wrapper.a
+Required system library libti_imaging_aealg.a
+Required system library libti_imaging_awbalg.a
+Required system library libti_imaging_dcc.a
+Required system library libti_imaging_ittsrvr.a
+Required system library libapp_utils_network_api.a
+Required system library libapp_utils_itt_server.a
+Required system library libptk_base.a
+Required system library libptk_algos.a
+Required system library libvx_tiovx_tests.a
+Required system library libvx_tiovx_internal_tests.a
+Required system library libvx_conformance_tests.a
+Required system library libvx_conformance_engine.a
+Required system library libvx_conformance_tests_testmodule.a
+Required system library libvx_kernels_openvx_ext_tests.a
+Required system library libvx_kernels_test_kernels_tests.a
+Required system library libvx_kernels_test_kernels.a
+Required system library libvx_target_kernels_source_sink.a
+Required system library libvx_kernels_hwa_tests.a
+Required system library libvx_kernels_video_io_tests.a
+Required system library libvx_tiovx_tidl_tests.a
+Required system library libGLESv2.so
+Required system library libEGL.so
+Required system library librt.so
+Required system library libgbm.so
+Required system library libstdc++.so
+Required system library libm.so
+Required system library libti_rpmsg_char.so
+Required system library libpthread.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/libtivision_apps.so
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps'
+make edgeai
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+Building EdgeAI Components
+make edgeai_check_paths
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make edgeai_utils
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+------------------------------------
+Building EdgeAI Apps Utils for Linux
+------------------------------------
+cd /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/; \
+mkdir -p LINUX/build; \
+cd LINUX/build; \
+CROSS_COMPILER_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/toolchain/sysroots/x86_64-arago-linux/usr \
+CROSS_COMPILER_PREFIX=aarch64-oe-linux- \
+TARGET_FS=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/targetfs/ \
+TARGET_OS=LINUX \
+cmake -DCMAKE_OUTPUT_DIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils//LINUX \
+-DCMAKE_TOOLCHAIN_FILE=../../cmake/cross_compile_aarch64.cmake ../../; \
+make install DESTDIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-apps-utils
+SOC=j722s
+TARGET_CPU=A53
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+make[5]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+Consolidate compiler generated dependencies of target edgeai-apps-utils
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+[100%] Built target edgeai-apps-utils
+make[5]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-apps-utils.so.0.1.0
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-apps-utils.so
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_arm_neon_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_dl_color_convert_armv8_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_dl_pre_proc_armv8_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_dl_scaler_armv8_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_image_params.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_nv12_drawing_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_nv12_font_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_overlay_perf_stats_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-apps-utils/edgeai_perf_stats_utils.h
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-apps-utils/LINUX/build'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make edgeai_kernels
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+---------------------------------
+Building EdgeAI Kernels for Linux
+---------------------------------
+cd /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/; \
+mkdir -p LINUX/build; \
+cd LINUX/build; \
+CROSS_COMPILER_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/toolchain/sysroots/x86_64-arago-linux/usr \
+CROSS_COMPILER_PREFIX=aarch64-oe-linux- \
+TARGET_FS=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/targetfs/ \
+TARGET_OS=LINUX \
+EDGEAI_INCLUDE_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/ \
+VISION_APPS_LIBS_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/ \
+EDGEAI_LIBS_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib \
+cmake -DCMAKE_OUTPUT_DIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels//LINUX \
+-DCMAKE_TOOLCHAIN_FILE=../../cmake/cross_compile_aarch64.cmake ../../; \
+make install DESTDIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-tiovx-kernels
+SOC=j722s
+TARGET_CPU=A53
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-tiovx-kernels
+SOC=j722s
+TARGET_CPU=A53
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+make[5]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+Consolidate compiler generated dependencies of target edgeai-tiovx-kernels
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+[ 73%] Built target edgeai-tiovx-kernels
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+Consolidate compiler generated dependencies of target edgeai-tiovx-kernels-test
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+[100%] Built target edgeai-tiovx-kernels-test
+make[5]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-tiovx-kernels.so.0.1.0
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-tiovx-kernels.so
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/edgeai_tiovx_img_proc.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/edgeai_tiovx_kernels_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/edgeai_tiovx_nodes.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/edgeai_tiovx_target_kernels.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/tivx_dl_color_convert_armv8_host.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/tivx_dl_post_proc_host.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-kernels/tivx_dl_pre_proc_armv8_host.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/bin/edgeai-tiovx-kernels-test
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-kernels/LINUX/build'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make edgeai_tiovx_apps
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+------------------------------------
+Building EdgeAI TIOVX Apps for Linux
+------------------------------------
+cd /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/; \
+mkdir -p LINUX/build; \
+cd LINUX/build; \
+CROSS_COMPILER_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/toolchain/sysroots/x86_64-arago-linux/usr \
+CROSS_COMPILER_PREFIX=aarch64-oe-linux- \
+TARGET_FS=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/targetfs/ \
+TARGET_OS=LINUX \
+EDGEAI_INCLUDE_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/ \
+VISION_APPS_LIBS_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/ \
+EDGEAI_LIBS_PATH=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib \
+cmake -DCMAKE_OUTPUT_DIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps//LINUX \
+-DCMAKE_TOOLCHAIN_FILE=../../cmake/cross_compile_aarch64.cmake ../../; \
+make install DESTDIR=/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-tiovx-apps
+SOC=j722s
+TARGET_CPU=A53
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-tiovx-apps
+SOC=j722s
+TARGET_CPU=A53
+-- CMAKE_BUILD_TYPE = Release PROJECT_NAME = edgeai-tiovx-apps
+SOC=j722s
+TARGET_CPU=A53
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build
+make[4]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+make[5]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+Consolidate compiler generated dependencies of target edgeai-tiovx-apps
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+[ 46%] Built target edgeai-tiovx-apps
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+make[6]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+Consolidate compiler generated dependencies of target edgeai-tiovx-apps-main
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+[ 56%] Built target edgeai-tiovx-apps-main
+Consolidate compiler generated dependencies of target edgeai-tiovx-apps-test
+make[6]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+[100%] Built target edgeai-tiovx-apps-test
+make[5]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+Install the project...
+-- Install configuration: ""
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-tiovx-apps.so.0.1.0
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/lib/libedgeai-tiovx-apps.so
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_utils.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/yaml_parser.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_modules.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_modules_cbs.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_modules_types.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/codec_input_demuxer.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/kms_display_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/linux_aewb_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/omx_decode_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/omx_encode_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/qnx_display_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_aewb_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_capture_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_color_convert_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_delay_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_display_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_dl_color_convert_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_dl_post_proc_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_dl_pre_proc_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_dof_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_dof_viz_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_fakesink_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_fakesrc_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_ldc_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_lut_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_mosaic_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_multi_scaler_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_obj_array_split_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_pixelwise_add_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_pixelwise_multiply_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_pyramid_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_sde_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_sde_viz_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_sensor_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_tee_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_tidl_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/tiovx_viss_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/v4l2_capture_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/v4l2_decode_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/include/edgeai-tiovx-apps/v4l2_encode_module.h
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/bin/edgeai-tiovx-apps-test
+-- Up-to-date: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/LINUX/usr/bin/edgeai-tiovx-apps-main
+make[4]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/edgeai/edgeai-tiovx-apps/LINUX/build'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+Generating SysConfig files for mcu2_0 vision_apps
+/home/user/ti/sysconfig_1.20.0/nodejs/node /home/user/ti/sysconfig_1.20.0/dist/cli.js --product /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/.metadata/product.json --context main-r5fss0-0 --part Default --package AMW --output /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/example.syscfg
+Running script...
+Validating...
+Generating Code (example.syscfg)...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_dpl_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_dpl_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_drivers_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_drivers_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_drivers_open_close.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_pinmux_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_power_clock_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_board_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_board_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_board_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/mcu2_0/generated/ti_board_open_close.h...
+Generating SysConfig files for c7x_1 vision_apps
+/home/user/ti/sysconfig_1.20.0/nodejs/node /home/user/ti/sysconfig_1.20.0/dist/cli.js --product /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/.metadata/product.json --context c75ss0-0 --part Default --package AMW --output /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/example.syscfg
+Running script...
+Validating...
+Generating Code (example.syscfg)...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_dpl_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_dpl_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_drivers_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_drivers_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_drivers_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_drivers_open_close.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_pinmux_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_power_clock_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_board_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_board_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_board_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_1/generated/ti_board_open_close.h...
+Generating SysConfig files for c7x_2 vision_apps
+/home/user/ti/sysconfig_1.20.0/nodejs/node /home/user/ti/sysconfig_1.20.0/dist/cli.js --product /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/mcu_plus_sdk_j722s_11_01_00_15/.metadata/product.json --context c75ss1-0 --part Default --package AMW --output /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/example.syscfg
+Running script...
+Validating...
+Generating Code (example.syscfg)...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_dpl_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_dpl_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_drivers_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_drivers_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_drivers_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_drivers_open_close.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_pinmux_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_power_clock_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_board_config.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_board_config.h...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_board_open_close.c...
+Unchanged /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/platform/j722s/rtos/c7x_2/generated/ti_board_open_close.h...
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps'
+SHELL=/bin/sh
+TARGET_MAKEFILES=applibs/srv_bowl_lut_gen_applib/concerto.mak applibs/srv_calibration_applib/concerto.mak applibs/test/concerto.mak apps/basic_demos/app_c7x_kernel/c7x/concerto.mak apps/basic_demos/app_c7x_kernel/concerto.mak apps/basic_demos/app_dof/concerto.mak apps/basic_demos/app_fd_exchange/concerto.mak apps/basic_demos/app_linux_arm_opengl_mosaic/concerto.mak apps/basic_demos/app_multi_cam/concerto.mak apps/basic_demos/app_multi_cam_codec/concerto.mak apps/basic_demos/app_single_cam/concerto.mak apps/basic_demos/app_stereo/concerto.mak apps/basic_demos/app_vx_tutorial/concerto.mak apps/cv_demos/app_sfm/concerto.mak apps/dl_demos/app_tidl/concerto.mak apps/dl_demos/app_tidl_avp/concerto.mak apps/dl_demos/app_tidl_avp2/concerto.mak apps/dl_demos/app_tidl_avp3/concerto.mak apps/dl_demos/app_tidl_avp4/concerto.mak apps/dl_demos/app_tidl_bev/concerto.mak apps/dl_demos/app_tidl_cam/concerto.mak apps/dl_demos/app_tidl_front_cam/concerto.mak apps/dl_demos/app_tidl_od/concerto.mak apps/dl_demos/app_tidl_od_cam/concerto.mak apps/dl_demos/app_tidl_seg/concerto.mak apps/dl_demos/app_tidl_seg_cam/concerto.mak apps/dl_demos/app_tidl_vl/concerto.mak apps/srv_demos/app_srv_calibration/concerto.mak apps/srv_demos/app_srv_camera/concerto.mak apps/srv_demos/app_srv_fileio/concerto.mak apps/tests/app_test_framework/concerto.mak apps/tests/app_vx_conformance/concerto.mak apps/tests/app_vx_conformance_core/concerto.mak apps/tests/app_vx_conformance_hwa/concerto.mak apps/tests/app_vx_conformance_tidl/concerto.mak apps/tests/app_vx_conformance_video_io/concerto.mak apps/utilities/app_heap_stats/concerto.mak apps/utilities/app_heterogeneous/concerto.mak apps/utilities/app_ipc/concerto.mak apps/utilities/app_load_test/concerto.mak apps/utilities/app_mem/concerto.mak apps/utilities/app_perf_stats/concerto.mak apps/utilities/app_remote_log/concerto.mak apps/utilities/app_viss/concerto.mak kernels/common/target/concerto.mak kernels/fileio/arm/concerto.mak kernels/fileio/host/concerto.mak kernels/img_proc/a72/concerto.mak kernels/img_proc/c66/concerto.mak kernels/img_proc/c71/concerto.mak kernels/img_proc/host/concerto.mak kernels/img_proc/r5f/concerto.mak kernels/sample/a72/concerto.mak kernels/sample/host/concerto.mak kernels/srv/c66/concerto.mak kernels/srv/gpu/3dsrv/Tools/concerto.mak kernels/srv/gpu/3dsrv/concerto.mak kernels/srv/gpu/concerto.mak kernels/srv/host/concerto.mak kernels/srv/test/concerto.mak kernels/stereo/host/concerto.mak kernels/stereo/target/bam/concerto.mak kernels/stereo/target/concerto.mak kernels/stereo/test/concerto.mak modules/concerto.mak modules/src/concerto.mak platform/j722s/linux/concerto.mak platform/j722s/qnx/concerto.mak platform/j722s/rtos/c7x_1/concerto.mak platform/j722s/rtos/c7x_2/concerto.mak platform/j722s/rtos/common/concerto.mak platform/j722s/rtos/common_linux/concerto.mak platform/j722s/rtos/common_qnx/concerto.mak platform/j722s/rtos/concerto.mak platform/j722s/rtos/mcu1_0/concerto.mak platform/j722s/rtos/mcu2_0/concerto.mak utils/app_init/src/concerto.mak utils/codec_wrapper/src/concerto.mak utils/draw2d/src/concerto.mak utils/dss/src/concerto.mak utils/ethfw/src/concerto.mak utils/grpx/src/concerto.mak utils/gst_wrapper/src/concerto.mak utils/opengl/src/a72/concerto.mak utils/opengl/src/pc/concerto.mak utils/openmax_wrapper/src/concerto.mak utils/sciserver/src/concerto.mak
+undefined TIARMCGT_ROOT=
+file TIARMCGT_LLVM_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-armllvm_4.0.1.LTS
+undefined GCC_SYSBIOS_ARM_ROOT=
+file CGT6X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c6000_8.3.7
+file CGT7X_ROOT=$(PSDK_TOOLS_PATH)/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr/
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:R5F:3:release:TIARMCGT_LLVM
+Build Skipped for kernels.stereo.test.J722S.FREERTOS.R5F.release:vx_kernels_stereo_tests
+#######################################################################
+TARGET_COMBO=J722S:FREERTOS:C7524:1:release:CGT7X
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Build Skipped for apps.cv_demos.app_sfm.J722S.LINUX.A53.release:vx_app_sfm
+Build Skipped for apps.dl_demos.app_tidl_avp.J722S.LINUX.A53.release:vx_app_tidl_avp
+Build Skipped for apps.dl_demos.app_tidl_avp2.J722S.LINUX.A53.release:vx_app_tidl_avp2
+Build Skipped for apps.dl_demos.app_tidl_avp3.J722S.LINUX.A53.release:vx_app_tidl_avp3
+Build Skipped for apps.dl_demos.app_tidl_avp4.J722S.LINUX.A53.release:vx_app_tidl_avp4
+Build Skipped for apps.dl_demos.app_tidl_cam.J722S.LINUX.A53.release:vx_app_tidl_cam
+Build Skipped for apps.dl_demos.app_tidl_od_cam.J722S.LINUX.A53.release:vx_app_tidl_od_cam
+Build Skipped for apps.dl_demos.app_tidl_seg.J722S.LINUX.A53.release:vx_app_tidl_seg
+Build Skipped for apps.dl_demos.app_tidl_seg_cam.J722S.LINUX.A53.release:vx_app_tidl_seg_cam
+Build Skipped for apps.dl_demos.app_tidl_vl.J722S.LINUX.A53.release:vx_app_tidl_vl
+Build Skipped for apps.tests.app_test_framework.J722S.LINUX.A53.release:vx_app_test_framework
+Build Skipped for kernels.srv.test.J722S.LINUX.A53.release:vx_kernels_srv_tests
+Build Skipped for kernels.stereo.target.bam.J722S.LINUX.A53.release:vx_target_kernels_stereo_bam
+Build Skipped for kernels.stereo.test.J722S.LINUX.A53.release:vx_kernels_stereo_tests
+Required system library app_utils_mem.lib
+Required system library app_utils_rtos.lib
+Required system library app_utils_console_io.lib
+Required system library app_utils_timer.lib
+Required system library app_utils_file_io.lib
+Required system library app_utils_ipc.lib
+Required system library app_utils_ipc_test.lib
+Required system library app_utils_remote_service.lib
+Required system library app_utils_udma.lib
+Required system library app_utils_misc.lib
+Required system library app_utils_perf_stats.lib
+Required system library app_utils_hwa.lib
+Required system library vx_conformance_engine.lib
+Required system library vx_conformance_tests.lib
+Required system library vx_conformance_tests_testmodule.lib
+Required system library vx_tiovx_tests.lib
+Required system library vx_tiovx_internal_tests.lib
+Required system library vx_tutorial.lib
+Required system library vx_utils.lib
+Required system library vx_framework.lib
+Required system library vx_vxu.lib
+Required system library vx_platform_board_rtos.lib
+Required system library vx_kernels_target_utils.lib
+Required system library vx_kernels_test_kernels_tests.lib
+Required system library vx_target_kernels_openvx_ext.lib
+Required system library vx_kernels_test_kernels.lib
+Required system library vx_target_kernels_source_sink.lib
+Required system library vx_kernels_hwa_tests.lib
+Required system library vx_kernels_hwa.lib
+Required system library vx_target_kernels_vpac_viss.lib
+Required system library vx_target_kernels_vpac_msc.lib
+Required system library vx_target_kernels_vpac_ldc.lib
+Required system library vx_target_kernels_vpac_fc.lib
+Required system library vx_target_kernels_dmpac_dof.lib
+Required system library vx_target_kernels_dmpac_sde.lib
+Required system library vx_target_kernels_capture.lib
+Required system library vx_target_kernels_csitx.lib
+Required system library vx_target_kernels_j7_arm.lib
+Required system library vx_target_kernels_display.lib
+Required system library ti_imaging_awbalg.lib
+Required system library ti_imaging_dcc.lib
+Required system library vx_kernels_imaging.lib
+Required system library vx_target_kernels_imaging_aewb.lib
+Required system library ti_imaging_aealg.lib
+Required system library ti_imaging_sensordrv.lib
+Required system library app_utils_sensors.lib
+Required system library ti_imaging_ittsrvr.lib
+Required system library app_utils_iss.lib
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/R5F/FREERTOS/release/app_rtos_common_mcu2_0.lib
+Required system library app_utils_sciclient.lib
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/R5F/FREERTOS/release/vx_app_rtos_linux_mcu2_0.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/C7524/FREERTOS/release/vx_app_rtos_linux_c7x_1.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/C7524/FREERTOS/release/vx_app_rtos_linux_c7x_2.out
+Required system library libvx_framework.a
+Required system library libvx_vxu.a
+Required system library libvx_kernels_target_utils.a
+Required system library libvx_kernels_host_utils.a
+Required system library libvx_platform_board_hlos.a
+Required system library libvx_kernels_openvx_core.a
+Required system library libvx_kernels_openvx_ext.a
+Required system library libvx_utils.a
+Required system library libvx_target_kernels_openvx_ext.a
+Required system library libvx_tutorial.a
+Required system library libvx_kernels_video_io.a
+Required system library libvx_kernels_hwa.a
+Required system library libvx_kernels_tidl.a
+Required system library libvx_nested_kernels_tidl.a
+Required system library libvx_kernels_tvm.a
+Required system library libapp_utils_mem.a
+Required system library libapp_utils_ipc.a
+Required system library libapp_utils_console_io.a
+Required system library libapp_utils_timer.a
+Required system library libapp_utils_file_io.a
+Required system library libapp_utils_perf_stats.a
+Required system library libapp_utils_remote_service.a
+Required system library libapp_utils_hwa.a
+Required system library libapp_utils_iss.a
+Required system library libvx_kernels_imaging.a
+Required system library libti_2a_wrapper.a
+Required system library libti_imaging_aealg.a
+Required system library libti_imaging_awbalg.a
+Required system library libti_imaging_dcc.a
+Required system library libapp_utils_network_api.a
+Required system library libti_imaging_ittsrvr.a
+Required system library libapp_utils_itt_server.a
+Required system library libptk_algos.a
+Required system library libptk_base.a
+Required system library libvx_tiovx_tests.a
+Required system library libvx_tiovx_internal_tests.a
+Required system library libvx_conformance_tests.a
+Required system library libvx_conformance_engine.a
+Required system library libvx_conformance_tests_testmodule.a
+Required system library libvx_kernels_openvx_ext_tests.a
+Required system library libvx_kernels_test_kernels_tests.a
+Required system library libvx_kernels_test_kernels.a
+Required system library libvx_target_kernels_source_sink.a
+Required system library libvx_kernels_hwa_tests.a
+Required system library libvx_kernels_video_io_tests.a
+Required system library libvx_tiovx_tidl_tests.a
+Required system library libGLESv2.so
+Required system library libEGL.so
+Required system library librt.so
+Required system library libstdc++.so
+Required system library libgbm.so
+Required system library libm.so
+Required system library libti_rpmsg_char.so
+Required system library libpthread.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/libtivision_apps.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_c7x_kernel.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_dense_optical_flow.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_fd_exchange_producer.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_fd_exchange_consumer.out
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_opengl_mosaic.out
+[GCC] Compiling C99 hook_trace.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_multi_cam.out
+Required system library libgstreamer-1.0.so
+Required system library libgstapp-1.0.so
+Required system library libgstbase-1.0.so
+Required system library libgobject-2.0.so
+Required system library libglib-2.0.so
+[GCC] Compiling C99 main.c
+[GCC] Compiling C99 multi_cam_codec_scaler_module.c
+[GCC] Compiling C99 multi_cam_codec_ldc_module.c
+[GCC] Compiling C99 multi_cam_codec_img_mosaic_module.c
+[GCC] Compiling C99 app_common.c
+[GCC] Compiling C99 main_linux_arm.c
+[GCC] Compiling C99 codec_wrapper_linux.c
+[GCC] Compiling C99 gst_wrapper.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/libapp_utils_gst_wrapper.a
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/libapp_utils_codec_wrapper.a
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_multi_cam_codec.out
+[GCC] Compiling C99 app_single_cam_common.c
+[GCC] Compiling C99 app_single_cam_main.c
+[GCC] Compiling C99 main_linux_arm.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_single_cam.out
+[GCC] Compiling C99 main.c
+[GCC] Compiling C99 main_linux_arm.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_stereo_depth.out
+[GCC] Compiling C99 main_vx_tutorial.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_tutorial.out
+Required system library libedgeai-apps-utils.so
+Required system library libedgeai-tiovx-kernels.so
+[GCC] Compiling C99 imagenet_class_labels.c
+[GCC] Compiling C99 main_linux_arm.c
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_tidl.out
+[GCC] Compiling C99 main.c
+[GCC] Compiling C99 app_scaler_module.c
+[GCC] Compiling C99 app_pre_proc_module.c
+[GCC] Compiling C99 app_post_proc_module.c
+[GCC] Compiling C99 main_linux_arm.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_tidl_front_cam.out
+[GCC] Compiling C99 main.c
+[GCC] Compiling C99 app_pre_proc_module.c
+[GCC] Compiling C99 app_post_proc_module.c
+[GCC] Compiling C99 main_linux_arm.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_tidl_od.out
+[GCC] Compiling C99 app_srv_calibration.c
+[GCC] Compiling C99 main_linux_arm.c
+[GCC] Compiling C99 srv_utils.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_srv_calibration.out
+[GCC] Compiling C99 app_srv_camera.c
+[GCC] Compiling C99 main_linux_arm.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_srv_camera.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_srv_fileio.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_conformance.out
+[GCC] Compiling C99 main_conformance.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_conformance_core.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_conformance_hwa.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_conformance_tidl.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_conformance_video_io.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_heap_stats.out
+[GCC] Compiling C99 app_heterogeneous.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_heterogeneous.out
+[GCC] Compiling C99 main_ipc.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_ipc.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_load_test.out
+[GCC] Compiling C99 main_mem.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_mem.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_perf_stats.out
+[GCC] Compiling C99 main_remote_log.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_arm_remote_log.out
+[GCC] Compiling C99 main.c
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/A53/LINUX/release/vx_app_viss.out
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/out/J722S/R5F/FREERTOS/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps/lib/J722S/R5F/FREERTOS/release
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/vision_apps'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make tidl_rt
+make[1]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'
+make -C /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl all TARGET_BUILD=release; 
+make[2]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl'
+.
+======== MAKING TIDL RT =================
+make -C ./rt -f makefile all
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt'
+SHELL=/bin/sh
+TARGET_MAKEFILES=src/armv8/concerto.mak src/pc/concerto.mak test/armv8/concerto.mak test/pc/concerto.mak
+Keep only release BUILDS in TARGET_COMBOS
+undefined TIARMCGT_ROOT=
+undefined TIARMCGT_LLVM_ROOT=
+undefined GCC_SYSBIOS_ARM_ROOT=
+undefined CGT6X_ROOT=
+file CGT7X_ROOT=/home/user/ti/ti-cgt-c7000_5.0.0.LTS
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Required system library libti_rpmsg_char.so
+Required system library libtivision_apps.so
+Required system library librt.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt/out/J722S/A53/LINUX/release/libvx_tidl_rt.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt/out/J722S/A53/LINUX/release/TI_DEVICE_armv8_test_dl_algo_host_rt.out
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt/out/J722S/A53/LINUX/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt/lib/J722S/A53/LINUX/release
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/rt'
+.
+.
+======== MAKING TIDL TFLITE DELEGATE =================
+make -C ./tfl_delegate -f makefile all
+======== MAKING TIDL ONNXRT EP =================
+make -C ./onnxrt_ep -f makefile all
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tfl_delegate'
+make[3]: Entering directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/onnxrt_ep'
+SHELL=/bin/sh
+SHELL=/bin/sh
+TARGET_MAKEFILES=src/armv8/concerto.mak src/pc/concerto.mak
+Keep only release BUILDS in TARGET_COMBOS
+undefined TIARMCGT_ROOT=
+undefined TIARMCGT_LLVM_ROOT=
+undefined GCC_SYSBIOS_ARM_ROOT=
+undefined CGT6X_ROOT=
+undefined CGT7X_ROOT=
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+TARGET_MAKEFILES=src/armv8/concerto.mak src/pc/concerto.mak
+Keep only release BUILDS in TARGET_COMBOS
+undefined TIARMCGT_ROOT=
+undefined TIARMCGT_LLVM_ROOT=
+undefined GCC_SYSBIOS_ARM_ROOT=
+undefined CGT6X_ROOT=
+undefined CGT7X_ROOT=
+undefined GCC_WINDOWS_ROOT=
+file GCC_LINUX_ROOT=/usr
+environment GCC_QNX_ROOT=/home/user/qnx800/host/linux/x86_64/usr/bin
+#######################################################################
+TARGET_COMBO=J722S:LINUX:A53:1:release:GCC_LINUX_ARM
+Required system library libdl.so
+Required system library libdl.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/onnxrt_ep/out/J722S/A53/LINUX/release/libtidl_onnxrt_EP.so
+Linking /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tfl_delegate/out/J722S/A53/LINUX/release/libtidl_tfl_delegate.so
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tfl_delegate/out/J722S/A53/LINUX/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tfl_delegate/lib/J722S/A53/LINUX/release
+Copying built libraries: /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/onnxrt_ep/out/J722S/A53/LINUX/release to /home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/onnxrt_ep/lib/J722S/A53/LINUX/release
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/tfl_delegate'
+make[3]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl/onnxrt_ep'
+make[2]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/c7x-mma-tidl/arm-tidl'
+make[1]: Leaving directory '/home/user/ti-processor-sdk-rtos-j722s-evm-11_01_00_04/sdk_builder'

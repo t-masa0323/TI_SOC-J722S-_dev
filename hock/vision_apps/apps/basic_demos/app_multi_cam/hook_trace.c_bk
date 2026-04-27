@@ -1,0 +1,65 @@
+#define _GNU_SOURCE
+#include <execinfo.h>
+#include <dlfcn.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
+
+#define BT_DEPTH 32
+
+/* この関数自身は計測対象にしない */
+__attribute__((no_instrument_function))
+static void print_backtrace(void)
+{
+    void *buffer[BT_DEPTH];
+    int nptrs = backtrace(buffer, BT_DEPTH);
+
+    /* シンボル化は重いが、まずは分かりやすさ優先 */
+    backtrace_symbols_fd(buffer, nptrs, STDERR_FILENO);
+}
+
+__attribute__((no_instrument_function))
+static const char *addr_to_symbol(void *addr)
+{
+    static __thread char buf[256];
+    Dl_info info;
+
+    if (dladdr(addr, &info) && info.dli_sname) {
+        snprintf(buf, sizeof(buf), "%s", info.dli_sname);
+        return buf;
+    }
+
+    snprintf(buf, sizeof(buf), "%p", addr);
+    return buf;
+}
+
+/* 再帰防止 */
+static __thread int g_in_hook = 0;
+
+__attribute__((no_instrument_function))
+void __cyg_profile_func_enter(void *this_fn, void *call_site)
+{
+    if (g_in_hook) {
+        return;
+    }
+    g_in_hook = 1;
+
+    dprintf(STDERR_FILENO,
+            "\n[ENTER] func=%s addr=%p caller=%p tid=%lu\n",
+            addr_to_symbol(this_fn),
+            this_fn,
+            call_site,
+            (unsigned long)pthread_self());
+
+    print_backtrace();
+
+    g_in_hook = 0;
+}
+
+__attribute__((no_instrument_function))
+void __cyg_profile_func_exit(void *this_fn, void *call_site)
+{
+    (void)this_fn;
+    (void)call_site;
+    /* exit 側も必要ならここでログ */
+}
